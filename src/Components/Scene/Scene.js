@@ -3,6 +3,10 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
+import color from "./../../textures/grass/mount.jpeg";
+import displacement from "./../../textures/grass/height.gif";
+import alpha from "./../../textures/grass/opacity.png";
+
 export default function Scene() {
   const mountRef = useRef(null);
 
@@ -11,9 +15,9 @@ export default function Scene() {
     const scene = new THREE.Scene();
     scene.add(new THREE.AxesHelper(5));
 
-    const light = new THREE.PointLight(0xffffff, 1);
+    /*     const light = new THREE.PointLight(0xffffff, 1);
     light.position.set(0, 15, 0);
-    scene.add(light);
+    scene.add(light); */
 
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -21,8 +25,39 @@ export default function Scene() {
       0.1,
       1000,
     );
-    camera.position.set(30, 30, 10);
+    camera.position.set(35, 20, 35);
     camera.lookAt(0, 0, 0);
+
+    const light = new THREE.AmbientLight(0xffffff, 30, 50);
+    light.position.set(0, 20, 0);
+
+    scene.add(light);
+
+    const textureLoader = new THREE.TextureLoader();
+    const groundDisplacement = textureLoader.load(displacement);
+    const alphaMat = textureLoader.load(alpha);
+    const colorMat = textureLoader.load(color);
+
+    const planeGeometry = new THREE.PlaneBufferGeometry(60, 60, 140, 140);
+    const planeMaterial = new THREE.MeshPhongMaterial({
+      map: colorMat,
+      displacementMap: groundDisplacement,
+      displacementScale: 12,
+      //bumpMap: groundDisplacement,
+      bumpScale: 1,
+      transparent: true,
+      alphaMap: alphaMat,
+      wireframe: true,
+      depthWrite: false,
+      color: "cyan",
+    });
+    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+
+    /*     plane.receiveShadow = true;
+    plane.castShadow = true; */
+    plane.rotation.x = -Math.PI * 0.5;
+
+    scene.add(plane);
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -32,7 +67,7 @@ export default function Scene() {
     scene.add(axesHelper);
 
     const gridHelper = new THREE.GridHelper(1000, 20);
-    scene.add(gridHelper);
+    //scene.add(gridHelper);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, 0);
@@ -47,14 +82,14 @@ export default function Scene() {
     moon.position.y = 1;
     moon.castShadow = true;
     moon.receiveShadow = true;
-    scene.add(moon);
+    //scene.add(moon);
 
     window.addEventListener("resize", onWindowResize, false);
     function onWindowResize() {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
-      //render();
+      renderer.render(scene, camera);
     }
 
     const clock = new THREE.Clock();
@@ -65,6 +100,8 @@ export default function Scene() {
       moon.position.x = 10 * Math.cos(elapsedTime);
       moon.position.z = 10 * Math.sin(elapsedTime);
       moon.position.y = 10 * Math.sin(elapsedTime);
+
+      plane.rotation.z += 0.001;
       // Update controls
       controls.update();
 

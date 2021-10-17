@@ -14,7 +14,6 @@ export default function Scene() {
   useEffect(() => {
     let temp = mountRef.current;
     const scene = new THREE.Scene();
-    scene.add(new THREE.AxesHelper(5));
 
     /*     const light = new THREE.PointLight(0xffffff, 1);
     light.position.set(0, 15, 0);
@@ -26,7 +25,7 @@ export default function Scene() {
       0.1,
       1000,
     );
-    camera.position.set(25, 10, 25);
+    camera.position.set(22, 10, 28);
     camera.lookAt(0, 0, 0);
 
     const light = new THREE.AmbientLight(0xffffff, 30, 50);
@@ -39,13 +38,13 @@ export default function Scene() {
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(60, 60, 140, 140);
+    const planeGeometry = new THREE.PlaneBufferGeometry(60, 60, 120, 120);
     const planeMaterial = new THREE.MeshPhongMaterial({
-      map: colorMat,
+      //map: colorMat,
       displacementMap: groundDisplacement,
       displacementScale: 1,
       //bumpMap: groundDisplacement,
-      bumpScale: 1,
+      //bumpScale: 1,
       transparent: true,
       alphaMap: alphaMat,
       wireframe: true,
@@ -74,8 +73,8 @@ export default function Scene() {
     controls.target.set(0, 0, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.enableZoom = false;
-    controls.enablePan = false;
+    //controls.enableZoom = false;
+    //controls.enablePan = false;
 
     const moonGeometry = new THREE.SphereGeometry(1, 32, 32);
     const moonMaterial = new THREE.MeshStandardMaterial({
@@ -86,6 +85,25 @@ export default function Scene() {
     moon.castShadow = true;
     moon.receiveShadow = true;
     //scene.add(moon);
+
+    /**
+     * Points of interest
+     */
+    const raycaster = new THREE.Raycaster();
+    const points = [
+      {
+        position: new THREE.Vector3(16, 12, 16),
+        element: document.querySelector(".point-0"),
+      },
+      {
+        position: new THREE.Vector3(-15, 9, 10),
+        element: document.querySelector(".point-1"),
+      },
+      {
+        position: new THREE.Vector3(8, 9, -10),
+        element: document.querySelector(".point-2"),
+      },
+    ];
 
     window.addEventListener("resize", onWindowResize, false);
     function onWindowResize() {
@@ -101,13 +119,38 @@ export default function Scene() {
     const clock = new THREE.Clock();
 
     const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
+      /*       const elapsedTime = clock.getElapsedTime();
 
       moon.position.x = 10 * Math.cos(elapsedTime);
       moon.position.z = 10 * Math.sin(elapsedTime);
       moon.position.y = 10 * Math.sin(elapsedTime);
+ */
+      //if (elapsedTime > 5) plane.rotation.z += 0.001;
 
-      if (elapsedTime > 5) plane.rotation.z += 0.001;
+      for (const point of points) {
+        const screenPosition = point.position.clone();
+        screenPosition.project(camera);
+
+        /*         raycaster.setFromCamera(screenPosition, camera);
+        const intersects = raycaster.intersectObjects(scene.children, true);
+
+        if (intersects.length === 0) {
+          point.element.classList.add("visible");
+        } else {
+          const intersectionDistance = intersects[0].distance;
+          const pointDistance = point.position.distanceTo(camera.position);
+
+          if (intersectionDistance < pointDistance) {
+            point.element.classList.remove("visible");
+          } else {
+            point.element.classList.add("visible");
+          }
+        } */
+
+        const translateX = screenPosition.x * window.innerWidth * 0.5;
+        const translateY = -screenPosition.y * window.innerHeight * 0.5;
+        point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
+      }
       // Update controls
       controls.update();
 
@@ -123,5 +166,38 @@ export default function Scene() {
     return () => temp.removeChild(renderer.domElement);
   }, []);
 
-  return <div ref={mountRef}></div>;
+  return (
+    <div>
+      <div className="point point-0">
+        <div className="label">
+          <i className="fal fa-home"></i>
+        </div>
+        <div className="text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
+          exercitationem corrupti incidunt quis atque consequatur,
+          necessitatibus mollitia unde accusantium harum consequuntur
+          voluptatibus molestiae veritatis error. Ipsa alias inventore ut
+          dolorem.
+        </div>
+      </div>
+      <div className="point point-1">
+        <div className="label">
+          <i className="fal fa-arrow-to-bottom"></i>
+        </div>
+        <div className="text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
+          exercitationem.
+        </div>
+      </div>
+      <div className="point point-2">
+        <div className="label">
+          <i class="fal fa-map-marker-exclamation"></i>
+        </div>
+        <div className="text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </div>
+      </div>
+      <div ref={mountRef}></div>
+    </div>
+  );
 }

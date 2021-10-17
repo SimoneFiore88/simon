@@ -3,3 +3,71 @@
 .font-electrolize {
   font-family: "Electrolize", sans-serif;
 }
+
+.point {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  animation-name: fade;
+  animation-duration: 1s;
+  animation-delay: 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  /* pointer-events: none; */
+}
+
+.point .label {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffff22aa;
+  border: 1px solid #ffffff77;
+  color: black;
+
+  text-align: center;
+  line-height: 40px;
+  font-weight: 500;
+  font-size: 14px;
+
+  transition: transform 0.3s;
+}
+
+.point .text {
+  position: absolute;
+  top: 30px;
+  left: -120px;
+  width: 200px;
+  padding: 20px;
+  border-radius: 4px;
+  background: #000000aa;
+  border: 1px solid #ffffff77;
+  color: #ffffff;
+  line-height: 1.3em;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.point:hover .label {
+  background: #ffff22ff;
+}
+
+.point:hover .text {
+  opacity: 1;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

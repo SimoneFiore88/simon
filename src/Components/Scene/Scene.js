@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
@@ -25,7 +26,7 @@ export default function Scene() {
       0.1,
       1000,
     );
-    camera.position.set(35, 20, 35);
+    camera.position.set(0, 20, 0);
     camera.lookAt(0, 0, 0);
 
     const light = new THREE.AmbientLight(0xffffff, 30, 50);
@@ -42,7 +43,7 @@ export default function Scene() {
     const planeMaterial = new THREE.MeshPhongMaterial({
       map: colorMat,
       displacementMap: groundDisplacement,
-      displacementScale: 12,
+      displacementScale: 0,
       //bumpMap: groundDisplacement,
       bumpScale: 1,
       transparent: true,
@@ -92,6 +93,9 @@ export default function Scene() {
       renderer.render(scene, camera);
     }
 
+    gsap.to(camera.position, { duration: 2, delay: 2, x: 35, y: 20, z: 35 });
+    gsap.to(plane.material, { duration: 2, delay: 3, displacementScale: 12 });
+
     const clock = new THREE.Clock();
 
     const tick = () => {
@@ -101,7 +105,7 @@ export default function Scene() {
       moon.position.z = 10 * Math.sin(elapsedTime);
       moon.position.y = 10 * Math.sin(elapsedTime);
 
-      plane.rotation.z += 0.001;
+      //plane.rotation.z += 0.001;
       // Update controls
       controls.update();
 

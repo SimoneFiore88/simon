@@ -26,7 +26,7 @@ export default function Scene() {
       0.1,
       1000,
     );
-    camera.position.set(0, 20, 0);
+    camera.position.set(25, 10, 25);
     camera.lookAt(0, 0, 0);
 
     const light = new THREE.AmbientLight(0xffffff, 30, 50);
@@ -43,7 +43,7 @@ export default function Scene() {
     const planeMaterial = new THREE.MeshPhongMaterial({
       map: colorMat,
       displacementMap: groundDisplacement,
-      displacementScale: 0,
+      displacementScale: 1,
       //bumpMap: groundDisplacement,
       bumpScale: 1,
       transparent: true,
@@ -74,6 +74,8 @@ export default function Scene() {
     controls.target.set(0, 0, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
+    controls.enableZoom = false;
+    controls.enablePan = false;
 
     const moonGeometry = new THREE.SphereGeometry(1, 32, 32);
     const moonMaterial = new THREE.MeshStandardMaterial({
@@ -93,8 +95,8 @@ export default function Scene() {
       renderer.render(scene, camera);
     }
 
-    gsap.to(camera.position, { duration: 2, delay: 2, x: 35, y: 20, z: 35 });
-    gsap.to(plane.material, { duration: 2, delay: 3, displacementScale: 12 });
+    gsap.to(camera.position, { duration: 2, delay: 2, x: 25, y: 15, z: 25 });
+    gsap.to(plane.material, { duration: 2, delay: 1, displacementScale: 12 });
 
     const clock = new THREE.Clock();
 
@@ -105,7 +107,7 @@ export default function Scene() {
       moon.position.z = 10 * Math.sin(elapsedTime);
       moon.position.y = 10 * Math.sin(elapsedTime);
 
-      //plane.rotation.z += 0.001;
+      if (elapsedTime > 5) plane.rotation.z += 0.001;
       // Update controls
       controls.update();
 

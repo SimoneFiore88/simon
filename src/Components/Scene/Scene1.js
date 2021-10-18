@@ -30,7 +30,16 @@ export default function Scene1() {
       0.1,
       1000,
     );
-    camera.position.set(22, 10, 28);
+
+    const axesHelper = new THREE.AxesHelper(5);
+    //scene.add(axesHelper);
+
+    /*     const gridHelper = new THREE.GridHelper(100, 120);
+    gridHelper.position.set(0, 60, 0);
+    scene.add(gridHelper); */
+
+    camera.position.set(22, 15, 28);
+
     camera.lookAt(0, 0, 0);
 
     const textureLoader = new THREE.TextureLoader();
@@ -38,17 +47,16 @@ export default function Scene1() {
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(60, 60, 80, 80);
+    const planeGeometry = new THREE.PlaneBufferGeometry(60, 60, 120, 120);
     const planeMaterial = new THREE.MeshStandardMaterial({
       map: textureLoader.load(color),
       displacementMap: groundDisplacement,
       displacementScale: 1,
-      //bumpMap: groundDisplacement,
-      //bumpScale: 1,
       transparent: true,
       alphaMap: alphaMat,
       depthWrite: false,
       color: "#BB430E",
+      //color: "#2771CC",
       wireframe: false,
     });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -69,14 +77,12 @@ export default function Scene1() {
     labelRenderer.domElement.style.top = "0px";
     mountRef.current.appendChild(labelRenderer.domElement);
 
-    const axesHelper = new THREE.AxesHelper(5);
-    //scene.add(axesHelper);
-
-    const gridHelper = new THREE.GridHelper(1000, 20);
-    //scene.add(gridHelper);
-
     //const controls = new OrbitControls(camera, renderer.domElement);
     const controls = new OrbitControls(camera, labelRenderer.domElement);
+    controls.minDistance = 20;
+    controls.maxDistance = 50;
+    controls.minPolarAngle = Math.PI / 4;
+    controls.maxPolarAngle = (Math.PI * 3) / 8;
 
     controls.target.set(0, 0, 0);
     controls.enableDamping = true;
@@ -90,16 +96,24 @@ export default function Scene1() {
 
     let points = [
       {
-        position: new THREE.Vector3(16, 12, 16),
-        name: "Lorem 1",
+        position: new THREE.Vector3(2, 1, 4),
+        icon: "<i class='fal fa-user'></i>",
+        name: "Bio",
+        text: "I don't think we've met. \nMy name is Simone Fiore, but everyone calls me Fiore.",
       },
       {
-        position: new THREE.Vector3(-15, 9, 10),
-        name: "Lorem 2",
+        position: new THREE.Vector3(-15, 6, 10),
+        icon: "<i class='fal fa-code'></i>",
+
+        name: "Occupation",
+        text: "Frontend developer and teacher.",
       },
       {
-        position: new THREE.Vector3(8, 9, -10),
-        name: "Lorem 3",
+        position: new THREE.Vector3(8, 6, -10),
+        icon: "<i class='fal fa-telescope'></i>",
+
+        name: "Hobbies",
+        text: "CS, Space&Science and many other things.",
       },
     ];
 
@@ -115,15 +129,18 @@ export default function Scene1() {
       div.innerHTML = `
         <div class="marker">
             <div class="marker-icon">
-                <i class="fal fa-map-marker-exclamation"></i>
+                ${point.icon}
             </div>
     
+            
             <div class="marker-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <p>${point.name}</p>
+            <p>${point.text}</p>
             </div>
         </div>
       `;
       div.style.marginTop = "0em";
+      div.style.opacity = "0";
       div.style.color = "white";
       const label = new CSS2DObject(div);
       label.position.set(0, 0, 0);
@@ -135,7 +152,14 @@ export default function Scene1() {
         y: point.position.y,
         z: point.position.z,
       });
+      gsap.to(div, {
+        duration: 1,
+        delay: 2,
+        opacity: 1,
+      });
     });
+
+    const raycaster = new THREE.Raycaster();
 
     window.addEventListener("resize", onWindowResize, false);
     function onWindowResize() {
@@ -149,18 +173,11 @@ export default function Scene1() {
     //gsap.to(camera.position, { duration: 2, delay: 2, x: 25, y: 15, z: 25 });
     gsap.to(plane.material, { duration: 2, delay: 1, displacementScale: 12 });
 
-    //const clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const tick = () => {
-      /*  for (const point of points) {
-        const screenPosition = point.position.clone();
-        screenPosition.project(camera);
-
-        const translateX = screenPosition.x * window.innerWidth * 0.5;
-        const translateY = -screenPosition.y * window.innerHeight * 0.5;
-        point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
-      } */
-      // Update controls
+      const elapsedTime = clock.getElapsedTime();
+      //if (elapsedTime > 0) plane.rotation.z += 0.002;
       controls.update();
 
       // Render

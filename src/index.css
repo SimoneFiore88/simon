@@ -3,6 +3,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.text-main {
+  color: #bb430e;
+}
+
+.border-r-main {
+  border-color: #bb430e;
+}
+
 .marker {
   display: flex;
   flex-direction: column;
@@ -18,16 +26,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(10px);
 }
 
 .marker-text {
-  position: relative;
-  top: 20px;
-  width: 100px;
+  width: 200px;
   font-size: 10px;
   padding: 10px;
   border: 1px solid #bb430e;
   transform: scale(0, 0);
+  margin-top: 10px;
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
 }
 
 .marker-icon:hover + .marker-text {

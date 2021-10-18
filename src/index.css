@@ -2,3 +2,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.marker {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #bb430e;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker-text {
+  position: relative;
+  top: 20px;
+  width: 100px;
+  font-size: 10px;
+  padding: 10px;
+  border: 1px solid #bb430e;
+  transform: scale(0, 0);
+}
+
+.marker-icon:hover + .marker-text {
+  transform: scale(1, 1);
+}

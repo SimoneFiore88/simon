@@ -32,8 +32,6 @@
   line-height: 40px;
   font-weight: 500;
   font-size: 14px;
-
-  transition: transform 0.3s;
 }
 
 .point .text {

@@ -9,7 +9,7 @@ import Test from "./Components/Test/Test";
 import Cube from "./Components/Cube/Cube";
 import Navbar from "./Components/Navbar/Navbar";
 
-function App() {
+export default function App() {
   return (
     <Router>
       {/* <Navbar /> */}
@@ -30,17 +30,6 @@ function App() {
         >
           home
         </Link>
-        <Link
-          style={{
-            position: "absolute",
-            left: "120px",
-            zIndex: "999",
-            color: "white",
-          }}
-          to="/cube"
-        >
-          Cube
-        </Link>
       </div>
       <Switch>
         <Route path="/cube">
@@ -54,5 +43,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

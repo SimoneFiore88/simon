@@ -11,11 +11,22 @@ import {
 
 import color from "./../../textures/grass/mount.jpeg";
 import displacement from "./../../textures/grass/height.gif";
-import alpha from "./../../textures/grass/opacity.png";
 
+import alpha from "./../../textures/grass/test_b_alpha.jpeg";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+} from "react-router-dom";
 //const gui = new dat.GUI();
 
 export default function Scene1() {
+  let history = useHistory();
+
+  console.log(history);
   const mountRef = useRef(null);
 
   useEffect(() => {
@@ -40,6 +51,7 @@ export default function Scene1() {
       75,
       window.innerWidth / window.innerHeight,
       0.1,
+      //100,
       1000,
     );
 
@@ -71,9 +83,9 @@ export default function Scene1() {
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(240, 240, 240, 240);
+    const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 120, 120);
     const planeMaterial = new THREE.MeshStandardMaterial({
-      //map: textureLoader.load(color),
+      map: textureLoader.load(color),
       displacementMap: groundDisplacement,
       displacementScale: 1,
       transparent: true,
@@ -142,18 +154,23 @@ export default function Scene1() {
       scene.add(cube); */
 
       const div = document.createElement("div");
+      div.classList = "marker";
 
-      div.innerHTML = `
-        <div class="marker">
-            <div class="marker-icon"  onclick="(() => alert ('hi'))()">
-                ${point.icon}
-            </div>
-            <div class="marker-text btn">
-            <p>${point.name}</p>
-            <p>${point.text}</p>
-            </div>
-        </div>
+      const icon = document.createElement("div");
+      icon.classList = "marker-icon";
+      icon.innerHTML = `${point.icon}`;
+
+      div.appendChild(icon);
+
+      const text = document.createElement("div");
+      text.classList = "marker-text btn";
+      text.innerHTML = `
+        <p>${point.name}</p>
+        <p>${point.text}</p>
       `;
+
+      div.appendChild(text);
+
       div.style.marginTop = "0em";
       div.style.opacity = "0";
       div.style.color = "white";
@@ -172,6 +189,10 @@ export default function Scene1() {
         delay: 3,
         opacity: 1,
       });
+
+      icon.addEventListener("pointerdown", () =>
+        history.push(`/cube/${point.name}`),
+      );
     });
 
     window.addEventListener("resize", onWindowResize, false);
@@ -221,5 +242,9 @@ export default function Scene1() {
     }; */
   }, []);
 
-  return <div ref={mountRef}></div>;
+  return (
+    <>
+      <div ref={mountRef}></div>
+    </>
+  );
 }

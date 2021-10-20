@@ -46,7 +46,7 @@
   border-radius: 5px;
 }
 
-.marker-icon:hover + .marker-text {
+.marker:hover .marker-text {
   transform: scale(1, 1);
 }
 

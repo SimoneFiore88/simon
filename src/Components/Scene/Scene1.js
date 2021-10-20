@@ -13,8 +13,6 @@ import color from "./../../textures/grass/mount.jpeg";
 import displacement from "./../../textures/grass/height.gif";
 import alpha from "./../../textures/grass/opacity.png";
 
-import * as dat from "dat.gui";
-
 //const gui = new dat.GUI();
 
 export default function Scene1() {
@@ -23,6 +21,13 @@ export default function Scene1() {
   useEffect(() => {
     let temp = mountRef.current;
     const scene = new THREE.Scene();
+
+    {
+      const color = 0x333333;
+      const near = 4;
+      const far = 100;
+      scene.fog = new THREE.Fog(color, near, far);
+    }
 
     const light1 = new THREE.PointLight(0xffffff, 1);
     light1.position.set(0, 15, 0);
@@ -37,6 +42,18 @@ export default function Scene1() {
       0.1,
       1000,
     );
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    mountRef.current.appendChild(renderer.domElement);
+
+    //renderer.setClearColor("#111");
+
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.domElement.style.position = "absolute";
+    labelRenderer.domElement.style.top = "0px";
+    mountRef.current.appendChild(labelRenderer.domElement);
 
     const axesHelper = new THREE.AxesHelper(5);
     //scene.add(axesHelper);
@@ -54,9 +71,9 @@ export default function Scene1() {
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(240, 240, 320, 320);
+    const planeGeometry = new THREE.PlaneBufferGeometry(240, 240, 240, 240);
     const planeMaterial = new THREE.MeshStandardMaterial({
-      map: textureLoader.load(color),
+      //map: textureLoader.load(color),
       displacementMap: groundDisplacement,
       displacementScale: 1,
       transparent: true,
@@ -76,18 +93,6 @@ export default function Scene1() {
     plane.rotation.x = -Math.PI * 0.5;
 
     scene.add(plane);
-
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    mountRef.current.appendChild(renderer.domElement);
-
-    //renderer.setClearColor("#111");
-
-    const labelRenderer = new CSS2DRenderer();
-    labelRenderer.setSize(window.innerWidth, window.innerHeight);
-    labelRenderer.domElement.style.position = "absolute";
-    labelRenderer.domElement.style.top = "0px";
-    mountRef.current.appendChild(labelRenderer.domElement);
 
     //const controls = new OrbitControls(camera, renderer.domElement);
     const controls = new OrbitControls(camera, labelRenderer.domElement);
@@ -140,7 +145,7 @@ export default function Scene1() {
 
       div.innerHTML = `
         <div class="marker">
-            <div class="marker-icon">
+            <div class="marker-icon"  onclick="(() => alert ('hi'))()">
                 ${point.icon}
             </div>
             <div class="marker-text btn">
@@ -167,27 +172,6 @@ export default function Scene1() {
         delay: 3,
         opacity: 1,
       });
-
-      /*  const curve = new THREE.CatmullRomCurve3([
-        new THREE.Vector3(0, 5, 0),
-        new THREE.Vector3(
-          Math.random() * 5,
-          Math.random() * 15,
-          Math.random() * 5,
-        ),
-        new THREE.Vector3(...point.position),
-      ]);
-
-      const coords = curve.getPoints(50);
-
-      const material = new THREE.LineBasicMaterial({
-        color: "#BB430E",
-        linewidth: 1,
-      });
-      const geometry = new THREE.BufferGeometry().setFromPoints(coords);
-
-      const line = new THREE.Line(geometry, material);
-      scene.add(line); */
     });
 
     window.addEventListener("resize", onWindowResize, false);

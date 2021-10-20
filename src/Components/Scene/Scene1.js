@@ -13,6 +13,10 @@ import color from "./../../textures/grass/mount.jpeg";
 import displacement from "./../../textures/grass/height.gif";
 import alpha from "./../../textures/grass/opacity.png";
 
+import * as dat from "dat.gui";
+
+//const gui = new dat.GUI();
+
 export default function Scene1() {
   const mountRef = useRef(null);
 
@@ -22,7 +26,10 @@ export default function Scene1() {
 
     const light1 = new THREE.PointLight(0xffffff, 1);
     light1.position.set(0, 15, 0);
-    scene.add(light1);
+    //scene.add(light1);
+
+    const light = new THREE.AmbientLight(0x559cc5, 1); // soft white light
+    scene.add(light);
 
     const camera = new THREE.PerspectiveCamera(
       75,
@@ -38,7 +45,7 @@ export default function Scene1() {
     gridHelper.position.set(0, 60, 0);
     scene.add(gridHelper); */
 
-    camera.position.set(22, 15, 28);
+    camera.position.set(40, 15, 40);
 
     camera.lookAt(0, 0, 0);
 
@@ -47,7 +54,7 @@ export default function Scene1() {
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(60, 60, 120, 120);
+    const planeGeometry = new THREE.PlaneBufferGeometry(240, 240, 320, 320);
     const planeMaterial = new THREE.MeshStandardMaterial({
       map: textureLoader.load(color),
       displacementMap: groundDisplacement,
@@ -55,11 +62,14 @@ export default function Scene1() {
       transparent: true,
       alphaMap: alphaMat,
       depthWrite: false,
-      color: "#BB430E",
+      //color: "#BB430E",
       //color: "#2771CC",
-      wireframe: false,
+      color: "white",
+      wireframe: true,
     });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+
+    //gui.add(plane.material, "wireframe");
 
     /*     plane.receiveShadow = true;
     plane.castShadow = true; */
@@ -71,6 +81,8 @@ export default function Scene1() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 
+    //renderer.setClearColor("#111");
+
     const labelRenderer = new CSS2DRenderer();
     labelRenderer.setSize(window.innerWidth, window.innerHeight);
     labelRenderer.domElement.style.position = "absolute";
@@ -79,10 +91,10 @@ export default function Scene1() {
 
     //const controls = new OrbitControls(camera, renderer.domElement);
     const controls = new OrbitControls(camera, labelRenderer.domElement);
-    controls.minDistance = 20;
+    /*     controls.minDistance = 20;
     controls.maxDistance = 50;
     controls.minPolarAngle = Math.PI / 4;
-    controls.maxPolarAngle = (Math.PI * 3) / 8;
+    controls.maxPolarAngle = (Math.PI * 3) / 8; */
 
     controls.target.set(0, 0, 0);
     controls.enableDamping = true;
@@ -96,20 +108,20 @@ export default function Scene1() {
 
     let points = [
       {
-        position: new THREE.Vector3(2, 1, 4),
+        position: new THREE.Vector3(8, 4, 4),
         icon: "<i class='fal fa-user'></i>",
         name: "Bio",
         text: "I don't think we've met. \nMy name is Simone Fiore, but everyone calls me Fiore.",
       },
       {
-        position: new THREE.Vector3(-15, 6, 10),
+        position: new THREE.Vector3(-15, 10, 10),
         icon: "<i class='fal fa-code'></i>",
 
         name: "Occupation",
         text: "Frontend developer and teacher.",
       },
       {
-        position: new THREE.Vector3(8, 6, -10),
+        position: new THREE.Vector3(8, 8, -10),
         icon: "<i class='fal fa-telescope'></i>",
 
         name: "Hobbies",
@@ -131,9 +143,7 @@ export default function Scene1() {
             <div class="marker-icon">
                 ${point.icon}
             </div>
-    
-            
-            <div class="marker-text">
+            <div class="marker-text btn">
             <p>${point.name}</p>
             <p>${point.text}</p>
             </div>
@@ -147,19 +157,38 @@ export default function Scene1() {
       scene.add(label);
       gsap.to(label.position, {
         duration: 1,
-        delay: 2,
+        delay: 3,
         x: point.position.x,
         y: point.position.y,
         z: point.position.z,
       });
       gsap.to(div, {
         duration: 1,
-        delay: 2,
+        delay: 3,
         opacity: 1,
       });
-    });
 
-    const raycaster = new THREE.Raycaster();
+      /*  const curve = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(0, 5, 0),
+        new THREE.Vector3(
+          Math.random() * 5,
+          Math.random() * 15,
+          Math.random() * 5,
+        ),
+        new THREE.Vector3(...point.position),
+      ]);
+
+      const coords = curve.getPoints(50);
+
+      const material = new THREE.LineBasicMaterial({
+        color: "#BB430E",
+        linewidth: 1,
+      });
+      const geometry = new THREE.BufferGeometry().setFromPoints(coords);
+
+      const line = new THREE.Line(geometry, material);
+      scene.add(line); */
+    });
 
     window.addEventListener("resize", onWindowResize, false);
     function onWindowResize() {
@@ -170,14 +199,16 @@ export default function Scene1() {
       labelRenderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    //gsap.to(camera.position, { duration: 2, delay: 2, x: 25, y: 15, z: 25 });
-    gsap.to(plane.material, { duration: 2, delay: 1, displacementScale: 12 });
+    gsap.to(camera.position, { duration: 2, delay: 0, x: 22, y: 15, z: 28 });
+    gsap.to(plane.material, { duration: 2, delay: 1, displacementScale: 22 });
+
+    //camera.position.set(22, 15, 28);
 
     const clock = new THREE.Clock();
 
     const tick = () => {
       const elapsedTime = clock.getElapsedTime();
-      //if (elapsedTime > 0) plane.rotation.z += 0.002;
+
       controls.update();
 
       // Render

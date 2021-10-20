@@ -3,12 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* #bb430e */
+  --main: #559cc5;
+}
+
 .text-main {
-  color: #bb430e;
+  color: var(--main);
 }
 
 .border-r-main {
-  border-color: #bb430e;
+  border-color: var(--main);
 }
 
 .marker {
@@ -21,25 +26,47 @@
 .marker-icon {
   width: 40px;
   height: 40px;
-  border: 1px solid #bb430e;
+  border: 1px solid var(--main);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .marker-text {
   width: 200px;
   font-size: 10px;
   padding: 10px;
-  border: 1px solid #bb430e;
-  transform: scale(0, 0);
+  border: 1px solid var(--main);
+  transform: scale(1, 0);
   margin-top: 10px;
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
   border-radius: 5px;
 }
 
 .marker-icon:hover + .marker-text {
   transform: scale(1, 1);
+}
+
+.btn {
+  /* border: 4px solid #13d0ca; */
+  display: inline-block;
+  font-weight: 400;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 0px;
+  border-image-source: url("./Assets/btn.png");
+  border-image-slice: 45% fill;
+  border-image-width: 19px;
+  border-image-repeat: repeat stretch;
+  border-image-outset: 0;
+  border-color: transparent;
+  padding: 5px 10px;
+  color: cyan !important;
+  font-size: 12px;
+  transition: 0.4s;
+  filter: drop-shadow(0px 0px 0px cyan);
+  position: relative;
 }

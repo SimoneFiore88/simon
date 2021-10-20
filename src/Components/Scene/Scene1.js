@@ -14,6 +14,13 @@ import displacement from "./../../textures/grass/height.gif";
 
 import alpha from "./../../textures/grass/test_b_alpha.jpeg";
 
+import bkg1_front from "./bkg1_front.png";
+import bkg1_back from "./bkg1_back.png";
+import bkg1_top from "./bkg1_top.png";
+import bkg1_left from "./bkg1_left.png";
+import bkg1_right from "./bkg1_right.png";
+import bkg1_bot from "./bkg1_bot.png";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -55,7 +62,28 @@ export default function Scene1() {
       1000,
     );
 
+    {
+      const loader = new THREE.CubeTextureLoader();
+      const texture = loader.load([
+        /*         "./img/corona_ft.png",
+        "./img/corona_bk.png",
+        "./img/corona_up.png",
+        "./img/corona_dn.png",
+        "./img/corona_rt.png",
+        "./img/corona_lf.png", */
+        bkg1_front,
+        bkg1_back,
+        bkg1_top,
+        bkg1_bot,
+        bkg1_left,
+        bkg1_right,
+      ]);
+      scene.background = texture;
+      console.log("asdf");
+    }
+
     const renderer = new THREE.WebGLRenderer();
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 

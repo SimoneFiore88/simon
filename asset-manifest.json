@@ -1,24 +1,30 @@
 {
   "files": {
-    "main.css": "/simon/static/css/main.e7e6251a.chunk.css",
-    "main.js": "/simon/static/js/main.e67e5e9d.chunk.js",
-    "main.js.map": "/simon/static/js/main.e67e5e9d.chunk.js.map",
+    "main.css": "/simon/static/css/main.67e50080.chunk.css",
+    "main.js": "/simon/static/js/main.c0ed7812.chunk.js",
+    "main.js.map": "/simon/static/js/main.c0ed7812.chunk.js.map",
     "runtime-main.js": "/simon/static/js/runtime-main.2297595e.js",
     "runtime-main.js.map": "/simon/static/js/runtime-main.2297595e.js.map",
-    "static/js/2.126c61b7.chunk.js": "/simon/static/js/2.126c61b7.chunk.js",
-    "static/js/2.126c61b7.chunk.js.map": "/simon/static/js/2.126c61b7.chunk.js.map",
+    "static/js/2.096c1a00.chunk.js": "/simon/static/js/2.096c1a00.chunk.js",
+    "static/js/2.096c1a00.chunk.js.map": "/simon/static/js/2.096c1a00.chunk.js.map",
     "static/js/3.fb277ba4.chunk.js": "/simon/static/js/3.fb277ba4.chunk.js",
     "static/js/3.fb277ba4.chunk.js.map": "/simon/static/js/3.fb277ba4.chunk.js.map",
     "index.html": "/simon/index.html",
-    "static/css/main.e7e6251a.chunk.css.map": "/simon/static/css/main.e7e6251a.chunk.css.map",
-    "static/js/2.126c61b7.chunk.js.LICENSE.txt": "/simon/static/js/2.126c61b7.chunk.js.LICENSE.txt",
+    "static/css/main.67e50080.chunk.css.map": "/simon/static/css/main.67e50080.chunk.css.map",
+    "static/js/2.096c1a00.chunk.js.LICENSE.txt": "/simon/static/js/2.096c1a00.chunk.js.LICENSE.txt",
+    "static/media/bkg1_back.9ee98680.png": "/simon/static/media/bkg1_back.9ee98680.png",
+    "static/media/bkg1_bot.43f4617a.png": "/simon/static/media/bkg1_bot.43f4617a.png",
+    "static/media/bkg1_front.de35df39.png": "/simon/static/media/bkg1_front.de35df39.png",
+    "static/media/bkg1_left.0fa93eb4.png": "/simon/static/media/bkg1_left.0fa93eb4.png",
+    "static/media/bkg1_right.9f645003.png": "/simon/static/media/bkg1_right.9f645003.png",
+    "static/media/bkg1_top.4fa19dea.png": "/simon/static/media/bkg1_top.4fa19dea.png",
     "static/media/height.0109da19.gif": "/simon/static/media/height.0109da19.gif",
     "static/media/mount.1db678b9.jpeg": "/simon/static/media/mount.1db678b9.jpeg"
   },
   "entrypoints": [
     "static/js/runtime-main.2297595e.js",
-    "static/js/2.126c61b7.chunk.js",
-    "static/css/main.e7e6251a.chunk.css",
-    "static/js/main.e67e5e9d.chunk.js"
+    "static/js/2.096c1a00.chunk.js",
+    "static/css/main.67e50080.chunk.css",
+    "static/js/main.c0ed7812.chunk.js"
   ]
 }

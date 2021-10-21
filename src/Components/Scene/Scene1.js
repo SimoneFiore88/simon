@@ -51,7 +51,7 @@ export default function Scene1() {
     light1.position.set(0, 15, 0);
     //scene.add(light1);
 
-    const light = new THREE.AmbientLight(0x559cc5, 1); // soft white light
+    const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
     scene.add(light);
 
     const camera = new THREE.PerspectiveCamera(
@@ -96,7 +96,7 @@ export default function Scene1() {
     mountRef.current.appendChild(labelRenderer.domElement);
 
     const axesHelper = new THREE.AxesHelper(5);
-    //scene.add(axesHelper);
+    scene.add(axesHelper);
 
     /*     const gridHelper = new THREE.GridHelper(100, 120);
     gridHelper.position.set(0, 60, 0);
@@ -113,33 +113,29 @@ export default function Scene1() {
 
     const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 120, 120);
     const planeMaterial = new THREE.MeshStandardMaterial({
-      map: textureLoader.load(color),
+      //map: colorMat,
       displacementMap: groundDisplacement,
       displacementScale: 1,
       transparent: true,
       alphaMap: alphaMat,
       depthWrite: false,
       //color: "#BB430E",
-      //color: "#2771CC",
-      color: "white",
+      color: "#559cc5",
+
       wireframe: true,
     });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
-    //gui.add(plane.material, "wireframe");
-
-    /*     plane.receiveShadow = true;
-    plane.castShadow = true; */
     plane.rotation.x = -Math.PI * 0.5;
 
     scene.add(plane);
 
     //const controls = new OrbitControls(camera, renderer.domElement);
     const controls = new OrbitControls(camera, labelRenderer.domElement);
-    /*     controls.minDistance = 20;
-    controls.maxDistance = 50;
+    controls.minDistance = 20;
+    controls.maxDistance = 90;
     controls.minPolarAngle = Math.PI / 4;
-    controls.maxPolarAngle = (Math.PI * 3) / 8; */
+    controls.maxPolarAngle = (Math.PI * 3) / 8;
 
     controls.target.set(0, 0, 0);
     controls.enableDamping = true;
@@ -201,7 +197,6 @@ export default function Scene1() {
 
       div.style.marginTop = "0em";
       div.style.opacity = "0";
-      div.style.color = "white";
       const label = new CSS2DObject(div);
       label.position.set(0, 0, 0);
       scene.add(label);
@@ -218,9 +213,35 @@ export default function Scene1() {
         opacity: 1,
       });
 
-      icon.addEventListener("pointerdown", () =>
+      /*       icon.addEventListener("pointerdown", () =>
         history.push(`/cube/${point.name}`),
-      );
+      ); */
+
+      icon.addEventListener("pointerdown", () => {
+        gsap.to(camera.lookAt, {
+          duration: 2,
+          delay: 0,
+          x: 0,
+          y: 0,
+          z: 0,
+        });
+
+        gsap.to(controls.target, {
+          duration: 2,
+          delay: 0,
+          x: 0,
+          y: 0,
+          z: 0,
+        });
+
+        gsap.to(camera.position, {
+          duration: 2,
+          delay: 0,
+          x: point.position.x * 1.2,
+          y: point.position.y * 1.2,
+          z: point.position.z * 1.2,
+        });
+      });
     });
 
     window.addEventListener("resize", onWindowResize, false);
@@ -233,7 +254,7 @@ export default function Scene1() {
     }
 
     gsap.to(camera.position, { duration: 2, delay: 0, x: 22, y: 15, z: 28 });
-    gsap.to(plane.material, { duration: 2, delay: 1, displacementScale: 22 });
+    gsap.to(plane.material, { duration: 2, delay: 1, displacementScale: 12 });
 
     //camera.position.set(22, 15, 28);
 

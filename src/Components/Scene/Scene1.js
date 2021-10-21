@@ -96,15 +96,9 @@ export default function Scene1() {
     mountRef.current.appendChild(labelRenderer.domElement);
 
     const axesHelper = new THREE.AxesHelper(5);
-    scene.add(axesHelper);
-
-    /*     const gridHelper = new THREE.GridHelper(100, 120);
-    gridHelper.position.set(0, 60, 0);
-    scene.add(gridHelper); */
+    //scene.add(axesHelper);
 
     camera.position.set(40, 15, 40);
-
-    camera.lookAt(0, 0, 0);
 
     const textureLoader = new THREE.TextureLoader();
     const groundDisplacement = textureLoader.load(displacement);
@@ -142,7 +136,7 @@ export default function Scene1() {
     controls.dampingFactor = 0.05;
     //controls.enableZoom = false;
     //controls.enablePan = false;
-
+    //controls.enableRotate = false
     /**
      * Points of interest
      */
@@ -167,6 +161,13 @@ export default function Scene1() {
 
         name: "Hobbies",
         text: "CS, Space&Science and many other things.",
+      },
+      {
+        position: new THREE.Vector3(-12, 2, 4),
+        icon: "<i class='fab fa-node-js'></i>",
+
+        name: "JavaScript",
+        text: "Everywhere!",
       },
     ];
 

@@ -12,7 +12,7 @@ import Navbar from "./Components/Navbar/Navbar";
 export default function App() {
   return (
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
       <div
         style={{
           display: "none",

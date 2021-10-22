@@ -55,7 +55,6 @@
   /* border: 4px solid #13d0ca; */
   display: inline-block;
   font-weight: 400;
-  cursor: pointer;
   background-color: transparent;
   border-radius: 0px;
   border-image-source: url("./Assets/btn.png");

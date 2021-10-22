@@ -33,7 +33,6 @@ import {
 export default function Scene1() {
   let history = useHistory();
 
-  console.log(history);
   const mountRef = useRef(null);
 
   useEffect(() => {
@@ -46,6 +45,49 @@ export default function Scene1() {
       const far = 100;
       scene.fog = new THREE.Fog(color, near, far);
     }
+
+    const loadingManager = new THREE.LoadingManager(
+      // Loaded
+      () => {
+        // Wait a little
+        window.setTimeout(() => {
+          console.log("loaded");
+          console.log(scene.children);
+          gsap.to(camera.position, {
+            duration: 2,
+            delay: 0,
+            x: 22,
+            y: 15,
+            z: 28,
+          });
+
+          gsap.to(plane.material, {
+            duration: 2,
+            delay: 1,
+            displacementScale: 12,
+          });
+        }, 3000);
+
+        setTimeout(() => {
+          labels.forEach((label) => (label.visible = true));
+        }, 4000);
+        /* 
+        gsap.to(sprite1.scale, {
+          duration: 2,
+          delay: 5,
+          x: 22,
+          y: 15,
+          z: 28,
+        }); */
+      },
+
+      // Progress
+      (itemUrl, itemsLoaded, itemsTotal) => {
+        // Calculate the progress and update the loadingBarElement
+        const progressRatio = itemsLoaded / itemsTotal;
+        console.log(progressRatio);
+      },
+    );
 
     const light1 = new THREE.PointLight(0xffffff, 1);
     light1.position.set(0, 15, 0);
@@ -63,14 +105,8 @@ export default function Scene1() {
     );
 
     {
-      const loader = new THREE.CubeTextureLoader();
+      const loader = new THREE.CubeTextureLoader(loadingManager);
       const texture = loader.load([
-        /*         "./img/corona_ft.png",
-        "./img/corona_bk.png",
-        "./img/corona_up.png",
-        "./img/corona_dn.png",
-        "./img/corona_rt.png",
-        "./img/corona_lf.png", */
         bkg1_front,
         bkg1_back,
         bkg1_top,
@@ -79,7 +115,6 @@ export default function Scene1() {
         bkg1_right,
       ]);
       scene.background = texture;
-      console.log("asdf");
     }
 
     const renderer = new THREE.WebGLRenderer();
@@ -100,7 +135,7 @@ export default function Scene1() {
 
     camera.position.set(40, 15, 40);
 
-    const textureLoader = new THREE.TextureLoader();
+    const textureLoader = new THREE.TextureLoader(loadingManager);
     const groundDisplacement = textureLoader.load(displacement);
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
@@ -141,6 +176,18 @@ export default function Scene1() {
      * Points of interest
      */
 
+    /*     const sprite1 = new THREE.Sprite(
+      new THREE.SpriteMaterial({ color: "#69f" }),
+    );
+    sprite1.position.set(6, 5, 5);
+    sprite1.scale.set(0, 0, 0);
+    scene.add(sprite1);
+    let div = document.createElement("div");
+    div.textContent = "boh proviamo";
+
+    const text = new CSS2DObject(div);
+    text.position.set(6, 5, 5); */
+
     let points = [
       {
         position: new THREE.Vector3(8, 4, 4),
@@ -171,6 +218,7 @@ export default function Scene1() {
       },
     ];
 
+    const labels = [];
     points.forEach((point, i) => {
       /*       const geometry = new THREE.BoxGeometry();
       const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
@@ -182,7 +230,7 @@ export default function Scene1() {
       div.classList = "marker";
 
       const icon = document.createElement("div");
-      icon.classList = "marker-icon";
+      icon.classList = "marker-icon cursor-pointer";
       icon.innerHTML = `${point.icon}`;
 
       div.appendChild(icon);
@@ -197,11 +245,16 @@ export default function Scene1() {
       div.appendChild(text);
 
       div.style.marginTop = "0em";
-      div.style.opacity = "0";
+
       const label = new CSS2DObject(div);
-      label.position.set(0, 0, 0);
+
+      label.position.set(point.position.x, point.position.y, point.position.z);
+      label.visible = false;
+
+      labels.push(label);
+
       scene.add(label);
-      gsap.to(label.position, {
+      /*       gsap.to(label.position, {
         duration: 1,
         delay: 3,
         x: point.position.x,
@@ -212,7 +265,7 @@ export default function Scene1() {
         duration: 1,
         delay: 3,
         opacity: 1,
-      });
+      }); */
 
       /*       icon.addEventListener("pointerdown", () =>
         history.push(`/cube/${point.name}`),
@@ -254,9 +307,9 @@ export default function Scene1() {
       labelRenderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    gsap.to(camera.position, { duration: 2, delay: 0, x: 22, y: 15, z: 28 });
+    /*     gsap.to(camera.position, { duration: 2, delay: 0, x: 22, y: 15, z: 28 });
     gsap.to(plane.material, { duration: 2, delay: 1, displacementScale: 12 });
-
+ */
     //camera.position.set(22, 15, 28);
 
     const clock = new THREE.Clock();

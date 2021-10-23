@@ -234,7 +234,7 @@ export default function Scene2() {
       div.classList = "marker";
 
       const icon = document.createElement("div");
-      icon.classList = "marker-icon cursor-pointer";
+      icon.classList = "marker-icon-2";
       icon.innerHTML = `${point.icon}`;
 
       div.appendChild(icon);
@@ -243,7 +243,7 @@ export default function Scene2() {
       text.classList = "marker-text btn";
 
       text.innerHTML = `
-        <p>${point.name}</p>
+        <p class="text-yellow-300">${point.name}</p>
         <p>${point.text}</p>
       `;
 

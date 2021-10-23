@@ -8,6 +8,7 @@ import Scene1 from "./Components/Scene/Scene1";
 import Test from "./Components/Test/Test";
 import Cube from "./Components/Cube/Cube";
 import Navbar from "./Components/Navbar/Navbar";
+import Scene2 from "./Components/Scene/Scene2";
 
 export default function App() {
   return (
@@ -37,7 +38,8 @@ export default function App() {
           <Cube />
         </Route>
         <Route path="/">
-          <Scene1 />
+          {/* <Scene1 /> */}
+          <Scene2 />
         </Route>
       </Switch>
     </Router>

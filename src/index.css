@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.marker-icon {
+/* .marker-icon {
   width: 40px;
   height: 40px;
   border: 1px solid yellow;
@@ -34,12 +34,48 @@
   backdrop-filter: blur(10px);
   background: rgba(0, 0, 0, 0.5);
   color: white;
+} */
+
+.marker-icon {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  color: white;
+}
+
+.marker-icon::after {
+  position: absolute;
+  content: "";
+  top: 0px;
+  left: 0px;
+  width: 40px;
+  height: 40px;
+  background: url("./Components/Scene/circle1.png");
+  background-size: cover;
+  animation-name: spin;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .marker-text {
   width: 200px;
   font-size: 10px;
-  padding: 10px;
+  padding: 0px;
   border: 1px solid var(--main);
   transform: scale(1, 0);
   margin-top: 10px;

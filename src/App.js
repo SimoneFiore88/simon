@@ -13,7 +13,7 @@ import Scene2 from "./Components/Scene/Scene2";
 export default function App() {
   return (
     <Router>
-      {/* <Navbar /> */}
+      <Navbar />
       <div
         style={{
           display: "none",

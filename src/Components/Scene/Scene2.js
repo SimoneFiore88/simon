@@ -40,9 +40,7 @@ export default function Scene2() {
     let temp = mountRef.current;
     const scene = new THREE.Scene();
 
-    let INTERSECTED;
-
-    let raycaster = new THREE.Raycaster();
+    let notTouched = true;
 
     const pointer = new THREE.Vector2();
     document.addEventListener("mousemove", onPointerMove);
@@ -65,13 +63,13 @@ export default function Scene2() {
         window.setTimeout(() => {
           console.log("loaded");
           console.log(scene.children);
-          gsap.to(camera.position, {
+          /* gsap.to(camera.position, {
             duration: 2,
             delay: 0,
             x: 22,
             y: 15,
             z: 28,
-          });
+          }); */
 
           gsap.to(plane.material, {
             duration: 2,
@@ -82,7 +80,7 @@ export default function Scene2() {
 
         setTimeout(() => {
           labels.forEach((label) => (label.visible = true));
-        }, 1000);
+        }, 3000);
       },
 
       // Progress
@@ -144,7 +142,7 @@ export default function Scene2() {
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 120, 120);
+    const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 60, 60);
     const planeMaterial = new THREE.MeshStandardMaterial({
       //map: colorMat,
       displacementMap: groundDisplacement,
@@ -166,7 +164,7 @@ export default function Scene2() {
     //const controls = new OrbitControls(camera, renderer.domElement);
     const controls = new OrbitControls(camera, labelRenderer.domElement);
     controls.minDistance = 20;
-    controls.maxDistance = 90;
+    controls.maxDistance = 60;
     controls.minPolarAngle = Math.PI / 4;
     controls.maxPolarAngle = (Math.PI * 3) / 8;
 
@@ -195,14 +193,14 @@ export default function Scene2() {
         text: "Frontend developer and teacher.",
       },
       {
-        position: new THREE.Vector3(8, 8, -10),
+        position: new THREE.Vector3(12, 8, -12),
         icon: "<i class='fal fa-telescope'></i>",
 
         name: "Hobbies",
         text: "CS, Space&Science and many other things.",
       },
       {
-        position: new THREE.Vector3(-12, 8, 4),
+        position: new THREE.Vector3(-12, 8, -8),
         icon: "<i class='fab fa-node-js'></i>",
 
         name: "JavaScript",
@@ -264,7 +262,8 @@ export default function Scene2() {
       sprite.scale.set(5, 5, 5);
       scene.add(sprite); */
 
-      icon.addEventListener("pointerdown", () => {
+      text.addEventListener("pointerdown", () => {
+        notTouched = false;
         gsap.to(camera.lookAt, {
           duration: 2,
           delay: 0,
@@ -300,6 +299,8 @@ export default function Scene2() {
       labelRenderer.setSize(window.innerWidth, window.innerHeight);
     }
 
+    window.addEventListener("pointerdown", () => (notTouched = false));
+
     /*     gsap.to(camera.position, { duration: 2, delay: 0, x: 22, y: 15, z: 28 });
     gsap.to(plane.material, { duration: 2, delay: 1, displacementScale: 12 });
  */
@@ -308,30 +309,12 @@ export default function Scene2() {
     const clock = new THREE.Clock();
 
     const tick = () => {
-      //const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = clock.getElapsedTime();
 
-      /*  raycaster.setFromCamera(pointer, camera);
-
-      const intersects = raycaster.intersectObjects(scene.children, false);
-
-      if (intersects.length > 0) {
-        if (INTERSECTED !== intersects[0].object) {
-          if (INTERSECTED && intersects[0].object.name) {
-            INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
-            console.log(intersects[0].object.name);
-          }
-
-          INTERSECTED = intersects[0].object;
-
-          INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-          INTERSECTED.material.emissive.setHex(0xff0000);
-        }
-      } else {
-        if (INTERSECTED)
-          INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
-
-        INTERSECTED = null;
-      } */
+      if (notTouched) {
+        camera.position.x = 35 * Math.cos(elapsedTime * 0.1);
+        camera.position.z = 35 * Math.sin(elapsedTime * 0.1);
+      }
 
       controls.update();
 

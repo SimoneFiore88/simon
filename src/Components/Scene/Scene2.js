@@ -35,9 +35,10 @@ export default function Scene2() {
   let history = useHistory();
 
   const mountRef = useRef(null);
+  const overlay = useRef(null);
 
   useEffect(() => {
-    let temp = mountRef.current;
+    let canvas = mountRef.current;
     const scene = new THREE.Scene();
 
     let notTouched = true;
@@ -60,27 +61,22 @@ export default function Scene2() {
       // Loaded
       () => {
         // Wait a little
-        window.setTimeout(() => {
+        setTimeout(() => {
           console.log("loaded");
-          console.log(scene.children);
-          /* gsap.to(camera.position, {
-            duration: 2,
-            delay: 0,
-            x: 22,
-            y: 15,
-            z: 28,
-          }); */
+          console.log(overlay.current.style);
+          overlay.current.style.opacity = 0;
+          overlay.current.style.zIndex = -1;
 
           gsap.to(plane.material, {
             duration: 2,
             delay: 1,
             displacementScale: 12,
           });
-        }, 1000);
+        }, 2000);
 
         setTimeout(() => {
           labels.forEach((label) => (label.visible = true));
-        }, 3000);
+        }, 3500);
       },
 
       // Progress
@@ -88,6 +84,7 @@ export default function Scene2() {
         // Calculate the progress and update the loadingBarElement
         const progressRatio = itemsLoaded / itemsTotal;
         console.log(progressRatio);
+        overlay.current.textContent = progressRatio.toFixed(2) * 100 + "%";
       },
     );
 
@@ -208,16 +205,6 @@ export default function Scene2() {
       },
     ];
 
-    const map = new THREE.TextureLoader().load(mark);
-    const spriteMaterial = new THREE.SpriteMaterial({
-      map: map,
-      alphaMap: map,
-      /* transparent: true, */
-      depthWrite: false,
-      depthTest: true,
-      blending: THREE.AdditiveBlending,
-    });
-
     const labels = [];
     points.forEach((point, i) => {
       /*  const geometry = new THREE.BoxGeometry();
@@ -310,6 +297,8 @@ export default function Scene2() {
 
     const tick = () => {
       const elapsedTime = clock.getElapsedTime();
+      /* console.log(elapsedTime);
+      if (elapsedTime > 10) scene.remove(plane); */
 
       if (notTouched) {
         camera.position.x = 35 * Math.cos(elapsedTime * 0.1);
@@ -329,13 +318,13 @@ export default function Scene2() {
     tick();
 
     return () => {
-      temp.removeChild(renderer.domElement);
-      temp.removeChild(labelRenderer.domElement);
+      canvas.removeChild(renderer.domElement);
+      canvas.removeChild(labelRenderer.domElement);
     };
 
     /*     return () => {
       console.log("remove");
-      temp.removeChild(renderer.domElement);
+      canvas.removeChild(renderer.domElement);
       console.log(document.querySelectorAll(".marker"));
       document
         .querySelectorAll(".marker")
@@ -346,6 +335,7 @@ export default function Scene2() {
 
   return (
     <>
+      <div className="overlay" ref={overlay}></div>
       <div ref={mountRef}></div>
     </>
   );

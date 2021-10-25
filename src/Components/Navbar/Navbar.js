@@ -21,6 +21,9 @@ export default function Navbar() {
         <Link to="/shape/d10" className="mx-2">
           <i className="fal fa-dice-d10 text-yellow-300"></i>
         </Link>
+        <Link to="/moon" className="mx-2 text-white">
+          Moon
+        </Link>
       </div>
       {/* 
       <Link to="/">

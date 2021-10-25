@@ -7,6 +7,7 @@ import "./App.css";
 import Scene1 from "./Components/Scene/Scene1";
 import Test from "./Components/Test/Test";
 import Cube from "./Components/Cube/Cube";
+import Moon from "./Components/Moon/Moon";
 import Navbar from "./Components/Navbar/Navbar";
 import Scene2 from "./Components/Scene/Scene2";
 
@@ -14,28 +15,14 @@ export default function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Navbar />
-      <div
-        style={{
-          display: "none",
-          position: "fixed",
-          top: "120px",
-          background: "#ff0000",
-          zIndex: "999",
-          width: "300px",
-          height: "20px",
-        }}
-      >
-        <Link
-          style={{ position: "absolute", zIndex: "999", color: "white" }}
-          to="/"
-        >
-          home
-        </Link>
-      </div>
+
       <Switch>
         <Route path="/shape/:shape">
           {/* <Test /> */}
           <Cube />
+        </Route>
+        <Route exact path="/moon">
+          <Moon />
         </Route>
         <Route path="/">
           {/* <Scene1 /> */}

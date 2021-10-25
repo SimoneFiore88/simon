@@ -14,6 +14,7 @@ import displacement from "./../../textures/grass/height.gif";
 
 import alpha from "./../../textures/grass/test_b_alpha.jpeg";
 import mark from "./../../textures/grass/flare.png";
+import loader from "./loader.png";
 
 import bkg1_front from "./bkg1_front.png";
 import bkg1_back from "./bkg1_back.png";
@@ -36,6 +37,7 @@ export default function Scene2() {
 
   const mountRef = useRef(null);
   const overlay = useRef(null);
+  const overlayText = useRef(null);
 
   useEffect(() => {
     let canvas = mountRef.current;
@@ -83,8 +85,8 @@ export default function Scene2() {
       (itemUrl, itemsLoaded, itemsTotal) => {
         // Calculate the progress and update the loadingBarElement
         const progressRatio = itemsLoaded / itemsTotal;
-        console.log(progressRatio);
-        overlay.current.textContent = progressRatio.toFixed(2) * 100 + "%";
+        console.log(Math.round(progressRatio * 100));
+        overlayText.current.textContent = Math.round(progressRatio * 100) + "%";
       },
     );
 
@@ -147,8 +149,8 @@ export default function Scene2() {
       transparent: true,
       alphaMap: alphaMat,
       //depthWrite: false,
-      //color: "#BB430E",
       color: "#559cc5",
+      //color: "#BB430E",
 
       wireframe: true,
     });
@@ -169,7 +171,7 @@ export default function Scene2() {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     //controls.enableZoom = false;
-    //controls.enablePan = false;
+    controls.enablePan = false;
     //controls.enableRotate = false
     /**
      * Points of interest
@@ -335,7 +337,13 @@ export default function Scene2() {
 
   return (
     <>
-      <div className="overlay" ref={overlay}></div>
+      <div className="overlay" ref={overlay}>
+        <img src={loader} className="loader" alt="" />
+        <div className="absolute">
+          <p className="">Loading</p>
+          <p className="font-electrolize text-xl" ref={overlayText}></p>
+        </div>
+      </div>
       <div ref={mountRef}></div>
     </>
   );

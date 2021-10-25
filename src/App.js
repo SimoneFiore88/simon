@@ -12,7 +12,7 @@ import Scene2 from "./Components/Scene/Scene2";
 
 export default function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Navbar />
       <div
         style={{
@@ -33,7 +33,7 @@ export default function App() {
         </Link>
       </div>
       <Switch>
-        <Route path="/cube">
+        <Route path="/shape/:shape">
           {/* <Test /> */}
           <Cube />
         </Route>

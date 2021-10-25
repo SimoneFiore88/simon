@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/simon/static/css/main.530d47b5.chunk.css",
-    "main.js": "/simon/static/js/main.8482987c.chunk.js",
-    "main.js.map": "/simon/static/js/main.8482987c.chunk.js.map",
+    "main.js": "/simon/static/js/main.dc887915.chunk.js",
+    "main.js.map": "/simon/static/js/main.dc887915.chunk.js.map",
     "runtime-main.js": "/simon/static/js/runtime-main.2297595e.js",
     "runtime-main.js.map": "/simon/static/js/runtime-main.2297595e.js.map",
-    "static/js/2.5ac9518e.chunk.js": "/simon/static/js/2.5ac9518e.chunk.js",
-    "static/js/2.5ac9518e.chunk.js.map": "/simon/static/js/2.5ac9518e.chunk.js.map",
+    "static/js/2.989faf68.chunk.js": "/simon/static/js/2.989faf68.chunk.js",
+    "static/js/2.989faf68.chunk.js.map": "/simon/static/js/2.989faf68.chunk.js.map",
     "static/js/3.fb277ba4.chunk.js": "/simon/static/js/3.fb277ba4.chunk.js",
     "static/js/3.fb277ba4.chunk.js.map": "/simon/static/js/3.fb277ba4.chunk.js.map",
     "index.html": "/simon/index.html",
     "static/css/main.530d47b5.chunk.css.map": "/simon/static/css/main.530d47b5.chunk.css.map",
-    "static/js/2.5ac9518e.chunk.js.LICENSE.txt": "/simon/static/js/2.5ac9518e.chunk.js.LICENSE.txt",
+    "static/js/2.989faf68.chunk.js.LICENSE.txt": "/simon/static/js/2.989faf68.chunk.js.LICENSE.txt",
     "static/media/index.css": "/simon/static/media/circle1.e0642482.png",
     "static/media/bkg1_back.d519e3d0.png": "/simon/static/media/bkg1_back.d519e3d0.png",
     "static/media/bkg1_bot.0ea02ec0.png": "/simon/static/media/bkg1_bot.0ea02ec0.png",
@@ -19,6 +19,8 @@
     "static/media/bkg1_left.4adedb83.png": "/simon/static/media/bkg1_left.4adedb83.png",
     "static/media/bkg1_right.d06783bf.png": "/simon/static/media/bkg1_right.d06783bf.png",
     "static/media/bkg1_top.afc12ac3.png": "/simon/static/media/bkg1_top.afc12ac3.png",
+    "static/media/bump.f0a3eca8.jpg": "/simon/static/media/bump.f0a3eca8.jpg",
+    "static/media/color.b6c2455f.jpg": "/simon/static/media/color.b6c2455f.jpg",
     "static/media/flare.1c45aacb.png": "/simon/static/media/flare.1c45aacb.png",
     "static/media/height.0109da19.gif": "/simon/static/media/height.0109da19.gif",
     "static/media/loader.817efdff.png": "/simon/static/media/loader.817efdff.png",
@@ -26,8 +28,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.2297595e.js",
-    "static/js/2.5ac9518e.chunk.js",
+    "static/js/2.989faf68.chunk.js",
     "static/css/main.530d47b5.chunk.css",
-    "static/js/main.8482987c.chunk.js"
+    "static/js/main.dc887915.chunk.js"
   ]
 }

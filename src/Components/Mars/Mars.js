@@ -30,6 +30,7 @@ export default function Mars() {
         element: document.querySelector(".point-3"),
       },
     ];
+
     let canvas = mountRef.current;
 
     const scene = new THREE.Scene();
@@ -106,12 +107,11 @@ export default function Mars() {
     // animation loop
     const clock = new THREE.Clock();
 
+    for (const point of points) {
+      point.element.addEventListener("click", () => alert("Ci sono!"));
+    }
+
     const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
-
-      /*       camera.position.x = 15 * Math.cos(elapsedTime * 0.1);
-      camera.position.z = 15 * Math.sin(elapsedTime * 0.1); */
-
       controls.update();
 
       // Go through each point
@@ -154,10 +154,21 @@ export default function Mars() {
 
         if (point.element.classList.contains("visible")) {
           if (translateX > 0) {
-            point.element.children[0].classList = "label marker-right";
+            point.element.children[0].style.right = "-65px";
+            point.element.children[0].style.left = "unset";
+
+            point.element.classList.remove("marker-left");
+            point.element.classList.add("marker-right");
           } else {
-            point.element.children[0].classList = "label marker-left";
+            point.element.children[0].style.left = "-65px";
+            point.element.children[0].style.right = "unset";
+
+            point.element.classList.remove("marker-right");
+            point.element.classList.add("marker-left");
           }
+        } else {
+          point.element.classList.remove("marker-left");
+          point.element.classList.remove("marker-right");
         }
         point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
       }
@@ -179,30 +190,35 @@ export default function Mars() {
   return (
     <>
       <div className="point point-0 ">
-        <div className="label">1</div>
+        <div className="label">
+          <i className="fal fa-user"></i>
+        </div>
         <div className="text">
-          Front and top screen with HUD aggregating terrain and battle
-          informations.
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
         </div>
       </div>
       <div className="point point-1">
-        <div className="label">2</div>
+        <div className="label">
+          <i className="fal fa-code"></i>
+        </div>
         <div className="text">
-          Ventilation with air purifier and detection of environment toxicity.
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
         </div>
       </div>
       <div className="point point-2">
-        <div className="label">3</div>
+        <div className="label">
+          <i className="fal fa-telescope"></i>
+        </div>
         <div className="text">
-          Cameras supporting night vision and heat vision with automatic
-          adjustment.
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
         </div>
       </div>
       <div className="point point-3">
-        <div className="label">4</div>
+        <div className="label">
+          <i class="fab fa-jedi-order"></i>
+        </div>
         <div className="text">
-          Cameras supporting night vision and heat vision with automatic
-          adjustment.
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
         </div>
       </div>
       <div ref={mountRef}></div>

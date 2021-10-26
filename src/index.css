@@ -172,34 +172,31 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  cursor: pointer;
   /* pointer-events: none; */
 }
 
 .point .label {
   position: absolute;
-  top: -20px;
-  left: -20px;
+  top: -52px;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background: #00000077;
-  border: 1px solid #ffffff77;
+  font-size: 12px;
   color: #ffffff;
-  font-family: Helvetica, Arial, sans-serif;
-  text-align: center;
-  line-height: 40px;
-  font-weight: 100;
-  font-size: 14px;
-  cursor: help;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
   transform: scale(0, 0);
-  transition: transform 0.3s;
+  transition: 0.3s;
 }
 
 .marker-left::after {
   position: absolute;
   content: "";
-  top: -14px;
-  left: -14px;
+  top: -65px;
+  left: -77px;
   width: 80px;
   height: 80px;
   background: url("./../src/Components/Mars/marker-left.png");
@@ -209,13 +206,35 @@
 .marker-right::after {
   position: absolute;
   content: "";
-  top: -14px;
-  right: -14px;
+  top: -65px;
+  right: -77px;
   width: 80px;
   height: 80px;
   background: url("./../src/Components/Mars/marker-right.png");
   background-size: cover;
 }
+
+/* .marker-left::after {
+  position: absolute;
+  content: "";
+  top: -45px;
+  left: -56px;
+  width: 80px;
+  height: 80px;
+  background: url("./../src/Components/Mars/marker-left.png");
+  background-size: cover;
+}
+
+.marker-right::after {
+  position: absolute;
+  content: "";
+  top: -45px;
+  right: -56px;
+  width: 80px;
+  height: 80px;
+  background: url("./../src/Components/Mars/marker-right.png");
+  background-size: cover;
+} */
 
 /* .point .label::after {
   position: absolute;

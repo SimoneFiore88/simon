@@ -22,8 +22,9 @@ export default function App() {
           {/* <Test /> */}
           <Cube />
         </Route>
-        <Route exact path="/moon">
-          <Moon />
+        <Route exact path="/surface">
+          {/* <Moon /> */}
+          <Scene2 />
         </Route>
         <Route path="/">
           <Mars />

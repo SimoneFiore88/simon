@@ -148,8 +148,8 @@ export default function Scene2() {
       transparent: true,
       alphaMap: alphaMat,
       //depthWrite: false,
-      color: "#559cc5",
-      //color: "#BB430E",
+      //color: "#559cc5",
+      color: "#BB430E",
 
       wireframe: true,
     });

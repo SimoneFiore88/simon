@@ -8,6 +8,7 @@ import Scene1 from "./Components/Scene/Scene1";
 import Test from "./Components/Test/Test";
 import Cube from "./Components/Cube/Cube";
 import Moon from "./Components/Moon/Moon";
+import Mars from "./Components/Mars/Mars";
 import Navbar from "./Components/Navbar/Navbar";
 import Scene2 from "./Components/Scene/Scene2";
 
@@ -25,8 +26,8 @@ export default function App() {
           <Moon />
         </Route>
         <Route path="/">
-          {/* <Scene1 /> */}
-          <Scene2 />
+          <Mars />
+          {/* <Scene2 /> */}
         </Route>
       </Switch>
     </Router>

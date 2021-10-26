@@ -119,7 +119,6 @@ export default function Scene2() {
     }
 
     const renderer = new THREE.WebGLRenderer();
-
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 

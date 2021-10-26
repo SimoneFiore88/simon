@@ -179,6 +179,7 @@
 .point .label {
   position: absolute;
   top: -52px;
+  left: -65px;
   width: 40px;
   height: 40px;
   font-size: 12px;
@@ -199,7 +200,7 @@
   left: -77px;
   width: 80px;
   height: 80px;
-  background: url("./../src/Components/Mars/marker-left.png");
+  background: url("./../src/Components/Mars/marker-left-2.png");
   background-size: cover;
 }
 

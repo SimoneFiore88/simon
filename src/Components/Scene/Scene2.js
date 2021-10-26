@@ -90,9 +90,9 @@ export default function Scene2() {
       },
     );
 
-    const light1 = new THREE.PointLight(0xffffff, 1);
+    const light1 = new THREE.PointLight(0xffffff, 0.5);
     light1.position.set(0, 15, 0);
-    //scene.add(light1);
+    scene.add(light1);
 
     const light = new THREE.AmbientLight(0xffffff, 0.4); // soft white light
     scene.add(light);
@@ -140,7 +140,7 @@ export default function Scene2() {
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 60, 60);
+    const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 120, 120);
     const planeMaterial = new THREE.MeshStandardMaterial({
       //map: colorMat,
       displacementMap: groundDisplacement,

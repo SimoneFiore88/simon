@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-
+import { useHistory } from "react-router-dom";
 import gsap from "gsap";
 
 import color from "./map2k.jpg";
@@ -9,16 +9,17 @@ import height from "./bump2k.jpg";
 
 export default function Mars() {
   const mountRef = useRef(null);
+  let history = useHistory();
 
   useEffect(() => {
     const raycaster = new THREE.Raycaster();
     const points = [
       {
-        position: new THREE.Vector3(5.1, 0, 0),
+        position: new THREE.Vector3(0, 0, 5.1),
         element: document.querySelector(".point-0"),
       },
       {
-        position: new THREE.Vector3(4, 3, 2),
+        position: new THREE.Vector3(5.1, 0, 0),
         element: document.querySelector(".point-1"),
       },
       {
@@ -26,7 +27,7 @@ export default function Mars() {
         element: document.querySelector(".point-2"),
       },
       {
-        position: new THREE.Vector3(0, 3.8, -3.7),
+        position: new THREE.Vector3(2, -4, 3),
         element: document.querySelector(".point-3"),
       },
     ];
@@ -54,7 +55,7 @@ export default function Mars() {
       0.1,
       1000,
     );
-    camera.position.set(10, 5, 0);
+    camera.position.set(15, 0, 0);
 
     scene.add(camera);
 
@@ -78,6 +79,7 @@ export default function Mars() {
 
     controls.maxDistance = 60;
     controls.enablePan = false;
+    controls.enableZoom = false;
 
     const textureLoader = new THREE.TextureLoader();
     const colorMat = textureLoader.load(color);
@@ -104,16 +106,20 @@ export default function Mars() {
       renderer.render(scene, camera);
     }
 
-    // animation loop
-    const clock = new THREE.Clock();
-
     for (const point of points) {
-      point.element.addEventListener("click", () => alert("Ci sono!"));
+      point.element.addEventListener("pointerdown", () =>
+        //history.push("/surface"),
+        gsap.to(camera.position, {
+          duration: 1,
+          delay: 0,
+          x: point.position.x * 1.2,
+          y: point.position.y * 1.2,
+          z: point.position.z * 1.2,
+        }),
+      );
     }
 
     const tick = () => {
-      controls.update();
-
       // Go through each point
       for (const point of points) {
         // Get 2D screen position
@@ -153,6 +159,12 @@ export default function Mars() {
         const translateY = -screenPosition.y * sizes.height * 0.5;
 
         if (point.element.classList.contains("visible")) {
+          point.element.classList.add("marker-left");
+        } else {
+          point.element.classList.remove("marker-left");
+        }
+
+        /*         if (point.element.classList.contains("visible")) {
           if (translateX > 0) {
             point.element.children[0].style.right = "-65px";
             point.element.children[0].style.left = "unset";
@@ -169,9 +181,11 @@ export default function Mars() {
         } else {
           point.element.classList.remove("marker-left");
           point.element.classList.remove("marker-right");
-        }
+        } */
         point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
       }
+
+      controls.update();
 
       // Render
       renderer.render(scene, camera);
@@ -191,36 +205,37 @@ export default function Mars() {
     <>
       <div className="point point-0 ">
         <div className="label">
-          <i className="fal fa-user"></i>
+          1<i className="fal fa-user"></i>
         </div>
-        <div className="text">
+        {/* <div className="text">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </div>
+        </div> */}
       </div>
       <div className="point point-1">
         <div className="label">
-          <i className="fal fa-code"></i>
+          2<i className="fal fa-code"></i>
         </div>
-        <div className="text">
+        {/* <div className="text">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </div>
+        </div> */}
       </div>
       <div className="point point-2">
         <div className="label">
           <i className="fal fa-telescope"></i>
         </div>
-        <div className="text">
+        {/* <div className="text">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </div>
+        </div> */}
       </div>
       <div className="point point-3">
         <div className="label">
-          <i class="fab fa-jedi-order"></i>
+          <i className="fal fa-cube"></i>
         </div>
-        <div className="text">
+        {/* <div className="text">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </div>
+        </div> */}
       </div>
+
       <div ref={mountRef}></div>
     </>
   );

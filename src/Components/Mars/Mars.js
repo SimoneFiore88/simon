@@ -117,18 +117,7 @@ export default function Mars() {
       );
     }
 
-    const clock = new THREE.Clock();
-
     const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
-      /* console.log(elapsedTime);
-      if (elapsedTime > 10) scene.remove(plane); */
-
-      if (elapsedTime < 5) {
-        camera.position.x = 15 * Math.cos(elapsedTime * 0.1);
-        camera.position.z = 15 * Math.sin(elapsedTime * 0.1);
-      }
-
       // Go through each point
       for (const point of points) {
         // Get 2D screen position
@@ -173,24 +162,6 @@ export default function Mars() {
           point.element.classList.remove("marker-left");
         }
 
-        /*         if (point.element.classList.contains("visible")) {
-          if (translateX > 0) {
-            point.element.children[0].style.right = "-65px";
-            point.element.children[0].style.left = "unset";
-
-            point.element.classList.remove("marker-left");
-            point.element.classList.add("marker-right");
-          } else {
-            point.element.children[0].style.left = "-65px";
-            point.element.children[0].style.right = "unset";
-
-            point.element.classList.remove("marker-right");
-            point.element.classList.add("marker-left");
-          }
-        } else {
-          point.element.classList.remove("marker-left");
-          point.element.classList.remove("marker-right");
-        } */
         point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
       }
 

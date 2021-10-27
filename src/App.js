@@ -12,6 +12,7 @@ import Mars from "./Components/Mars/Mars";
 import Mars2 from "./Components/Mars/Mars2";
 import Navbar from "./Components/Navbar/Navbar";
 import Scene2 from "./Components/Scene/Scene2";
+import Home from "./Components/Home/Home";
 
 export default function App() {
   return (
@@ -28,7 +29,8 @@ export default function App() {
           <Scene2 />
         </Route>
         <Route path="/">
-          <Mars />
+          {/* <Mars /> */}
+          <Home />
           {/* <Scene2 /> */}
         </Route>
       </Switch>

@@ -43,6 +43,8 @@ export default function Scene2() {
     let canvas = mountRef.current;
     const scene = new THREE.Scene();
 
+    let frameId;
+
     let notTouched = true;
 
     const pointer = new THREE.Vector2();
@@ -313,12 +315,14 @@ export default function Scene2() {
       labelRenderer.render(scene, camera);
 
       // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
+      frameId = window.requestAnimationFrame(tick);
     };
 
     tick();
 
     return () => {
+      cancelAnimationFrame(frameId);
+      frameId = null;
       canvas.removeChild(renderer.domElement);
       canvas.removeChild(labelRenderer.domElement);
     };

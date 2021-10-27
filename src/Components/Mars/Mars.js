@@ -13,6 +13,8 @@ export default function Mars() {
 
   useEffect(() => {
     const raycaster = new THREE.Raycaster();
+
+    let frameId;
     const points = [
       {
         position: new THREE.Vector3(0, 0, 5.1),
@@ -191,12 +193,15 @@ export default function Mars() {
       renderer.render(scene, camera);
 
       // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
+      frameId = window.requestAnimationFrame(tick);
     };
 
     tick();
 
     return () => {
+      console.log(frameId);
+      cancelAnimationFrame(frameId);
+      frameId = null;
       canvas.removeChild(renderer.domElement);
     };
   }, []);

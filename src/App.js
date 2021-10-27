@@ -9,6 +9,7 @@ import Test from "./Components/Test/Test";
 import Cube from "./Components/Cube/Cube";
 import Moon from "./Components/Moon/Moon";
 import Mars from "./Components/Mars/Mars";
+import Mars2 from "./Components/Mars/Mars2";
 import Navbar from "./Components/Navbar/Navbar";
 import Scene2 from "./Components/Scene/Scene2";
 

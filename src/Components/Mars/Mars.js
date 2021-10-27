@@ -75,11 +75,6 @@ export default function Mars() {
     //controls.target.set(10, 15, 80);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-
-    //controls.minDistance = 12;
-    controls.minDistance = 10;
-
-    controls.maxDistance = 60;
     controls.enablePan = false;
     controls.enableZoom = false;
 
@@ -111,17 +106,29 @@ export default function Mars() {
     for (const point of points) {
       point.element.addEventListener("pointerdown", () =>
         //history.push("/surface"),
+
         gsap.to(camera.position, {
           duration: 1,
           delay: 0,
-          x: point.position.x * 1.2,
-          y: point.position.y * 1.2,
-          z: point.position.z * 1.2,
+          x: point.position.x * 3,
+          y: point.position.y * 3,
+          z: point.position.z * 3,
         }),
       );
     }
 
+    const clock = new THREE.Clock();
+
     const tick = () => {
+      const elapsedTime = clock.getElapsedTime();
+      /* console.log(elapsedTime);
+      if (elapsedTime > 10) scene.remove(plane); */
+
+      if (elapsedTime < 5) {
+        camera.position.x = 15 * Math.cos(elapsedTime * 0.1);
+        camera.position.z = 15 * Math.sin(elapsedTime * 0.1);
+      }
+
       // Go through each point
       for (const point of points) {
         // Get 2D screen position
@@ -203,6 +210,8 @@ export default function Mars() {
       cancelAnimationFrame(frameId);
       frameId = null;
       canvas.removeChild(renderer.domElement);
+      window.removeEventListener("resize", onWindowResize, false);
+      scene.remove(sphere);
     };
   }, []);
 
@@ -210,7 +219,7 @@ export default function Mars() {
     <>
       <div className="point point-0 ">
         <div className="label">
-          1<i className="fal fa-user"></i>
+          <i className="fal fa-user"></i>
         </div>
         {/* <div className="text">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -218,7 +227,7 @@ export default function Mars() {
       </div>
       <div className="point point-1">
         <div className="label">
-          2<i className="fal fa-code"></i>
+          <i className="fal fa-code"></i>
         </div>
         {/* <div className="text">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit.

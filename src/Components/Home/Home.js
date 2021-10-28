@@ -53,7 +53,7 @@ export default function Home() {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.enablePan = false;
-    //controls.enableZoom = false;
+    controls.enableZoom = false;
 
     const textureLoader = new THREE.TextureLoader();
     const colorMat = textureLoader.load(colorImp);

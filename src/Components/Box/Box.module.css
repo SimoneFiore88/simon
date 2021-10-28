@@ -1,12 +1,79 @@
-.box {
+/* .wrapper {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: url("../../Assets/border-yellow.png");
+  bottom: calc(50% - 100px);
+  perspective: 500px;
+}
+
+.box {
+  position: relative;
+  left: -100px;
+  background: url("../../Assets/border-orange.png");
   background-size: cover;
   background-position: center;
   color: white;
   width: 200px;
   height: 300px;
   padding: 20px;
+  transform: rotateX(0deg) rotateY(64deg);
+  transform-style: preserve-3d;
+  transition: 1s;
+  opacity: 0.5;
+}
+
+.wrapper:hover .box {
+  transform: rotateX(0deg) rotateY(40deg);
+  left: 10px;
+  opacity: 1;
+}
+ */
+
+.pulse {
+  animation-name: pulse;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.slide {
+  animation-name: slide;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes slide {
+  0% {
+    transform: translate(-10px);
+  }
+
+  100% {
+    transform: translate(10px);
+  }
+}
+
+.wrapper {
+  animation-name: fade;
+  animation-duration: 1s;
+  animation-delay: 10s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade {
+  from {
+    transform: scale(1, 1);
+  }
+  to {
+    transform: scale(0, 0);
+  }
 }

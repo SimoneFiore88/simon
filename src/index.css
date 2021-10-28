@@ -84,7 +84,6 @@
   border: 1px solid var(--main);
   transform: scale(1, 0);
   margin-top: 10px;
-
   background-color: transparent;
   border-radius: 0px;
   border-image-source: url("./Assets/btn.png");
@@ -273,12 +272,4 @@
 
 .point.visible .label {
   transform: scale(1, 1);
-}
-
-.vis {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }

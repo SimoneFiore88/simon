@@ -1,0 +1,21 @@
+.nav {
+  perspective: "500px";
+}
+
+.btn {
+  border-image-source: url("../../Assets/border-orange.png");
+  border-image-slice: 15% fill;
+  border-image-width: 19px;
+  border-image-repeat: repeat stretch;
+  border-image-outset: 0;
+  border-color: transparent;
+  color: white;
+  padding: 5px 20px;
+  text-align: center;
+  transition: 1s;
+}
+
+.btn:hover {
+  transform: rotateX(20deg) rotateY(0deg);
+  opacity: 1;
+}

@@ -14,7 +14,7 @@ import displacement from "./../../textures/grass/height.gif";
 
 import alpha from "./../../textures/grass/test_b_alpha.jpeg";
 import mark from "./../../textures/grass/flare.png";
-import loader from "./loader.png";
+import loader from "./loader-1.png";
 
 import bkg1_front from "./bkg1_front.png";
 import bkg1_back from "./bkg1_back.png";
@@ -30,7 +30,6 @@ import {
   Link,
   useHistory,
 } from "react-router-dom";
-//const gui = new dat.GUI();
 
 export default function Scene2() {
   let history = useHistory();
@@ -142,7 +141,7 @@ export default function Scene2() {
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 120, 120);
+    const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 60, 60);
     const planeMaterial = new THREE.MeshStandardMaterial({
       //map: colorMat,
       displacementMap: groundDisplacement,

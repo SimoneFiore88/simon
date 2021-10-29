@@ -7,10 +7,10 @@ export default function Navbar() {
         <span className="text-yellow-300">SimoneFiore</span>
       </Link>
       <div className="flex flex-col h-32 w-20 justify-between self-start pt-4">
-        <Link to="/box/1" className={classes.btn}>
+        <Link to="/" className={classes.btn}>
           <i className="fal fa-signal-stream text-yellow-300"></i>
         </Link>
-        <Link to="/box/2" className={classes.btn}>
+        <Link to="/" className={classes.btn}>
           <i className="fal fa-user text-yellow-300"></i>
         </Link>
         <Link to="/surface" className={classes.btn}>

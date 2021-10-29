@@ -2,17 +2,17 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { useHistory } from "react-router-dom";
 
 import gsap from "gsap";
 
 import colorImp from "./map2k.jpg";
 import heightImp from "./bump2k.jpg";
+import Info from "../Info/Info";
 
 export default function Home() {
   const mount = useRef(null);
 
-  let history = useHistory();
+  const [info, setInfo] = useState(null);
 
   useEffect(() => {
     let canvas = mount.current;
@@ -25,22 +25,22 @@ export default function Home() {
 
     const points = [
       {
-        id: 0,
+        id: 1,
         position: new THREE.Vector3(0, 0, 5.1),
         element: document.querySelector(".point-0"),
       },
       {
-        id: 1,
+        id: 2,
         position: new THREE.Vector3(5.1, 0, 0),
         element: document.querySelector(".point-1"),
       },
       {
-        id: 2,
+        id: 3,
         position: new THREE.Vector3(-3, 4, 2),
         element: document.querySelector(".point-2"),
       },
       {
-        id: 3,
+        id: 4,
         position: new THREE.Vector3(2, -4, 3),
         element: document.querySelector(".point-3"),
       },
@@ -50,6 +50,8 @@ export default function Home() {
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.set(15, 0, 0);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     // controls
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -63,10 +65,10 @@ export default function Home() {
     //scene.add(axesHelper);
 
     const sat = new THREE.Mesh(
-      new THREE.SphereGeometry(0.3, 16, 16),
-      new THREE.MeshStandardMaterial({ color: "green" }),
+      new THREE.SphereGeometry(0.1, 16, 16),
+      new THREE.MeshStandardMaterial({ color: 0xdddddd }),
     );
-    sat.position.set(6, 0, 0);
+
     sat.receiveShadow = true;
     sat.castShadow = true;
     scene.add(sat);
@@ -89,12 +91,36 @@ export default function Home() {
     sphere.castShadow = true;
     scene.add(sphere);
 
-    const light1 = new THREE.PointLight(0xffffff, 1);
-    light1.position.set(10, 0, -130);
+    /*     const light1 = new THREE.PointLight(0xffffff, 1);
+    light1.castShadow = true;
+    light1.position.set(10, 0, -30);
+
+    light1.shadow.mapSize.width = 512; // default
+    light1.shadow.mapSize.height = 512; // default
+    light1.shadow.camera.near = 0.5; // default
+    light1.shadow.camera.far = 500; // default
     scene.add(light1);
 
     const light = new THREE.AmbientLight(0xffffff, 0.1); // soft white light
+    scene.add(light); */
+
+    const light = new THREE.AmbientLight(0xffffff, 0.1); // soft white light
     scene.add(light);
+
+    const spotLight = new THREE.SpotLight(0xffffff, 1);
+    spotLight.position.set(10, 0, -30);
+    spotLight.angle = Math.PI / 4;
+    spotLight.penumbra = 0.1;
+    spotLight.decay = 2;
+    spotLight.distance = 200;
+
+    spotLight.castShadow = true;
+    spotLight.shadow.mapSize.width = 512;
+    spotLight.shadow.mapSize.height = 512;
+    spotLight.shadow.camera.near = 10;
+    spotLight.shadow.camera.far = 200;
+    spotLight.shadow.focus = 1;
+    scene.add(spotLight);
 
     renderer.setClearColor("#000000");
     renderer.setSize(width, height);
@@ -121,7 +147,8 @@ export default function Home() {
           y: point.position.y * 3,
           z: point.position.z * 3,
         });
-        history.push(`/box/${point.id}`);
+        setInfo(point.id);
+        //history.push(`/box/${point.id}`);
       });
     }
 
@@ -129,9 +156,9 @@ export default function Home() {
     const tick = () => {
       const elapsedTime = clock.getElapsedTime();
       sat.position.set(
-        Math.cos(elapsedTime) * 8,
+        Math.cos(elapsedTime) * 12,
         Math.cos(elapsedTime),
-        Math.sin(elapsedTime) * 6,
+        Math.sin(elapsedTime) * 8,
       );
       // Go through each point
       for (const point of points) {
@@ -213,6 +240,7 @@ export default function Home() {
 
   return (
     <>
+      {info > 0 && <Info data={info} />}
       <div className="point point-0 ">
         <div className="label">
           <i className="fal fa-user"></i>

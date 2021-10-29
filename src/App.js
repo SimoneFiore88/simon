@@ -20,19 +20,13 @@ export default function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Navbar />
-      <Home />
       <Switch>
-        <Route exact path="/box/:id">
-          {/* <Test /> */}
-          <Info />
-        </Route>
         <Route exact path="/surface">
           {/* <Moon /> */}
           <Scene2 />
         </Route>
         <Route path="/">
-          {/* <Earth /> */}
-          {/* <Box /> */}
+          <Home />
         </Route>
       </Switch>
     </Router>

@@ -16,12 +16,19 @@ import alpha from "./../../textures/grass/test_b_alpha.jpeg";
 import mark from "./../../textures/grass/flare.png";
 import loader from "./loader-1.png";
 
-import bkg1_front from "./bkg1_front.png";
+/* import bkg1_front from "./bkg1_front.png";
 import bkg1_back from "./bkg1_back.png";
 import bkg1_top from "./bkg1_top.png";
 import bkg1_left from "./bkg1_left.png";
 import bkg1_right from "./bkg1_right.png";
-import bkg1_bot from "./bkg1_bot.png";
+import bkg1_bot from "./bkg1_bot.png"; */
+
+import bkg1_front from "./desertdawn_ft.jpg";
+import bkg1_back from "./desertdawn_bk.jpg";
+import bkg1_top from "./desertdawn_up.jpg";
+import bkg1_left from "./desertdawn_lf.jpg";
+import bkg1_right from "./desertdawn_rt.jpg";
+import bkg1_bot from "./desertdawn_dn.jpg";
 
 import {
   BrowserRouter as Router,
@@ -93,7 +100,7 @@ export default function Scene2() {
 
     const light1 = new THREE.PointLight(0xffffff, 0.5);
     light1.position.set(0, 15, 0);
-    scene.add(light1);
+    //scene.add(light1);
 
     const light = new THREE.AmbientLight(0xffffff, 0.4); // soft white light
     scene.add(light);
@@ -113,8 +120,8 @@ export default function Scene2() {
         bkg1_back,
         bkg1_top,
         bkg1_bot,
-        bkg1_left,
         bkg1_right,
+        bkg1_left,
       ]);
       scene.background = texture;
     }
@@ -151,7 +158,7 @@ export default function Scene2() {
       //depthWrite: false,
       //color: "#559cc5",
       color: "#BB430E",
-
+      color: "#F19D00",
       wireframe: true,
     });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);

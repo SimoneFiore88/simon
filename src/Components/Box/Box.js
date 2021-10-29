@@ -1,4 +1,3 @@
-import { useParams } from "react-router";
 import classes from "./Box.module.css";
 
 export default function Box() {

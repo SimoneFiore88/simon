@@ -6,13 +6,47 @@ import { useHistory } from "react-router-dom";
 
 import gsap from "gsap";
 
-import colorImp from "./map2k.jpg";
-import heightImp from "./bump2k.jpg";
+import colorImp from "./4kcolor.jpeg";
+import heightImp from "./4kdis.jpeg";
 
-export default function Home() {
+import useData from "../Hooks/useData";
+
+export default function Earth() {
   const mount = useRef(null);
 
-  let history = useHistory();
+  const controls = useRef(null);
+
+  const [coords, setCoords] = useState(null);
+  const [sun, setSun] = useState(null);
+  const [data, setData] = useState(null);
+
+  const { dataUse } = useData();
+
+  console.log(dataUse);
+
+  useEffect(() => {
+    fetch("https://api.wheretheiss.at/v1/satellites/25544")
+      .then((data) => data.json())
+      .then((data) => {
+        setData(data);
+        const phi = (90 - data.latitude) * (Math.PI / 180);
+        const theta = (data.longitude + 180) * (Math.PI / 180);
+
+        let x = -(5.3 * Math.sin(phi) * Math.cos(theta));
+        let z = 5.3 * Math.sin(phi) * Math.sin(theta);
+        let y = 5.3 * Math.cos(phi);
+
+        const phiSun = (90 - data.solar_lat) * (Math.PI / 180);
+        const thetaSun = (data.solar_lon + 180) * (Math.PI / 180);
+
+        let xS = -(15.3 * Math.sin(phiSun) * Math.cos(thetaSun));
+        let zS = 15.3 * Math.sin(phiSun) * Math.sin(thetaSun);
+        let yS = 15.3 * Math.cos(phiSun);
+
+        setCoords({ x, z, y });
+        setSun({ xS, zS, yS });
+      });
+  }, []);
 
   useEffect(() => {
     let canvas = mount.current;
@@ -20,27 +54,22 @@ export default function Home() {
     let height = window.innerHeight;
     let frameId;
 
-    console.log(width, height);
     const raycaster = new THREE.Raycaster();
 
     const points = [
       {
-        id: 0,
         position: new THREE.Vector3(0, 0, 5.1),
         element: document.querySelector(".point-0"),
       },
       {
-        id: 1,
         position: new THREE.Vector3(5.1, 0, 0),
         element: document.querySelector(".point-1"),
       },
       {
-        id: 2,
         position: new THREE.Vector3(-3, 4, 2),
         element: document.querySelector(".point-2"),
       },
       {
-        id: 3,
         position: new THREE.Vector3(2, -4, 3),
         element: document.querySelector(".point-3"),
       },
@@ -62,15 +91,15 @@ export default function Home() {
     const axesHelper = new THREE.AxesHelper(15);
     //scene.add(axesHelper);
 
-    const sat = new THREE.Mesh(
-      new THREE.SphereGeometry(0.3, 16, 16),
-      new THREE.MeshStandardMaterial({ color: "green" }),
-    );
-    sat.position.set(6, 0, 0);
-    sat.receiveShadow = true;
-    sat.castShadow = true;
-    scene.add(sat);
+    if (coords) {
+      const sat = new THREE.Mesh(
+        new THREE.SphereGeometry(0.1, 16, 16),
+        new THREE.MeshStandardMaterial({ color: "green" }),
+      );
+      sat.position.set(coords.x, coords.z, coords.y);
 
+      scene.add(sat);
+    }
     const textureLoader = new THREE.TextureLoader();
     const colorMat = textureLoader.load(colorImp);
     const groundMat = textureLoader.load(heightImp);
@@ -81,17 +110,16 @@ export default function Home() {
       bumpMap: groundMat,
       bumpScale: 0.15,
       displacementScale: 0.1,
-
       //wireframe: true,
     });
     const sphere = new THREE.Mesh(geometry, material);
-    sphere.receiveShadow = true;
-    sphere.castShadow = true;
     scene.add(sphere);
 
-    const light1 = new THREE.PointLight(0xffffff, 1);
-    light1.position.set(10, 0, -130);
-    scene.add(light1);
+    if (sun) {
+      const light1 = new THREE.PointLight(0xffffff, 1);
+      light1.position.set(sun.xS, sun.zS, sun.yS);
+      scene.add(light1);
+    }
 
     const light = new THREE.AmbientLight(0xffffff, 0.1); // soft white light
     scene.add(light);
@@ -113,26 +141,27 @@ export default function Home() {
     };
 
     for (const point of points) {
-      point.element.addEventListener("pointerdown", () => {
+      point.element.addEventListener("pointerdown", () =>
+        //history.push("/surface"),
+
         gsap.to(camera.position, {
           duration: 1,
           delay: 0,
           x: point.position.x * 3,
           y: point.position.y * 3,
           z: point.position.z * 3,
-        });
-        history.push(`/box/${point.id}`);
-      });
+        }),
+      );
     }
 
     const clock = new THREE.Clock();
     const tick = () => {
-      const elapsedTime = clock.getElapsedTime();
+      /* const elapsedTime = clock.getElapsedTime();
       sat.position.set(
         Math.cos(elapsedTime) * 8,
         Math.cos(elapsedTime),
         Math.sin(elapsedTime) * 6,
-      );
+      ); */
       // Go through each point
       for (const point of points) {
         // Get 2D screen position
@@ -209,10 +238,15 @@ export default function Home() {
       geometry.dispose();
       material.dispose();
     };
-  }, []);
+  }, [coords, sun]);
 
   return (
     <>
+      <div className="absolute bottom-2 right-2 z-50 text-white">
+        Latitude: {data && data.latitude} <br />
+        Longitude: {data && data.longitude}
+        <p>{dataUse && dataUse.latitude}</p>
+      </div>
       <div className="point point-0 ">
         <div className="label">
           <i className="fal fa-user"></i>

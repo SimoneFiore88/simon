@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/simon/static/css/main.13648313.chunk.css",
-    "main.js": "/simon/static/js/main.0aeb5a69.chunk.js",
-    "main.js.map": "/simon/static/js/main.0aeb5a69.chunk.js.map",
+    "main.css": "/simon/static/css/main.a982187a.chunk.css",
+    "main.js": "/simon/static/js/main.9aca9699.chunk.js",
+    "main.js.map": "/simon/static/js/main.9aca9699.chunk.js.map",
     "runtime-main.js": "/simon/static/js/runtime-main.276c4d90.js",
     "runtime-main.js.map": "/simon/static/js/runtime-main.276c4d90.js.map",
-    "static/js/2.d5d4425d.chunk.js": "/simon/static/js/2.d5d4425d.chunk.js",
-    "static/js/2.d5d4425d.chunk.js.map": "/simon/static/js/2.d5d4425d.chunk.js.map",
+    "static/js/2.781e4c50.chunk.js": "/simon/static/js/2.781e4c50.chunk.js",
+    "static/js/2.781e4c50.chunk.js.map": "/simon/static/js/2.781e4c50.chunk.js.map",
     "static/js/3.5af3e419.chunk.js": "/simon/static/js/3.5af3e419.chunk.js",
     "static/js/3.5af3e419.chunk.js.map": "/simon/static/js/3.5af3e419.chunk.js.map",
     "index.html": "/simon/index.html",
-    "static/css/main.13648313.chunk.css.map": "/simon/static/css/main.13648313.chunk.css.map",
-    "static/js/2.d5d4425d.chunk.js.LICENSE.txt": "/simon/static/js/2.d5d4425d.chunk.js.LICENSE.txt",
+    "static/css/main.a982187a.chunk.css.map": "/simon/static/css/main.a982187a.chunk.css.map",
+    "static/js/2.781e4c50.chunk.js.LICENSE.txt": "/simon/static/js/2.781e4c50.chunk.js.LICENSE.txt",
     "static/media/4kcolor.cee049b6.jpeg": "/simon/static/media/4kcolor.cee049b6.jpeg",
     "static/media/4kdis.9a5c566f.jpeg": "/simon/static/media/4kdis.9a5c566f.jpeg",
     "static/media/index.css": "/simon/static/media/marker-right.57516a4d.png",
@@ -35,8 +35,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.276c4d90.js",
-    "static/js/2.d5d4425d.chunk.js",
-    "static/css/main.13648313.chunk.css",
-    "static/js/main.0aeb5a69.chunk.js"
+    "static/js/2.781e4c50.chunk.js",
+    "static/css/main.a982187a.chunk.css",
+    "static/js/main.9aca9699.chunk.js"
   ]
 }

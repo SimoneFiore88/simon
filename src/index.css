@@ -249,18 +249,17 @@
 
 .point .text {
   position: absolute;
-  top: 30px;
-  left: -120px;
-  width: 200px;
-  padding: 20px;
-  border-radius: 4px;
-  background: #00000077;
-  border: 1px solid #ffffff77;
+  z-index: 10;
+  top: -60px;
+  left: 10px;
+  width: 100px;
+  padding: 10px;
+  border-radius: 2px;
+  /* background: #00000077; */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(252, 211, 77);
   color: #ffffff;
-  line-height: 1.3em;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 14px;
+  font-size: 12px;
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
@@ -272,4 +271,68 @@
 
 .point.visible .label {
   transform: scale(1, 1);
+}
+
+/* 
+
+
+
+ */
+
+.marker-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: -30px;
+}
+
+.marker-icon-3 {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  left: 2px;
+  top: -4px;
+  z-index: 99;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  color: white;
+  cursor: pointer;
+  transition: 0.4s;
+  border: 1px solid red;
+}
+
+.marker-icon-3::after {
+  position: absolute;
+  content: "";
+  width: 60px;
+  height: 60px;
+  background: url("./../src/Components/Mars/marker-left-2.png");
+  background-size: cover;
+  top: -1px;
+  left: -5px;
+}
+
+.mark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background: url("./../src/Components/Mars/marker-left-2.png");
+  background-size: cover;
+  position: relative;
+  left: -42px;
+  top: -20px;
+}
+
+.mark-icon {
+  position: relative;
+  left: -6px;
+  top: -4px;
+  color: white;
+  cursor: pointer;
 }

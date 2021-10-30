@@ -12,6 +12,7 @@ import Mars2 from "./Components/Mars/Mars2";
 import Navbar from "./Components/Navbar/Navbar";
 import Scene2 from "./Components/Scene/Scene2";
 import Home from "./Components/Home/Home";
+import Home2 from "./Components/Home/Home2";
 import Box from "./Components/Box/Box";
 import Earth from "./Components/Home/Earth";
 import Info from "./Components/Info/Info";
@@ -20,12 +21,16 @@ export default function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       {/* <Navbar /> */}
+
       <Switch>
         <Route exact path="/surface">
           {/* <Moon /> */}
           <Scene2 />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
+          <Home2 />
+        </Route>
+        <Route exact path="/test">
           <Home />
         </Route>
       </Switch>

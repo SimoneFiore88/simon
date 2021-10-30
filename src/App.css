@@ -3,3 +3,27 @@
 .font-electrolize {
   font-family: "Electrolize", sans-serif;
 }
+
+* {
+  font-family: "Electrolize", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #f19d00;
+  border: 0px double #ffffff;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f19d00;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #050505;
+}

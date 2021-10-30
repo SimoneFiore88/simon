@@ -19,7 +19,7 @@ import Info from "./Components/Info/Info";
 export default function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
-      <Navbar />
+      {/* <Navbar /> */}
       <Switch>
         <Route exact path="/surface">
           {/* <Moon /> */}

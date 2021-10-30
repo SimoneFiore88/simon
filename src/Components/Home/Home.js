@@ -9,10 +9,12 @@ import colorImp from "./map2k.jpg";
 import heightImp from "./bump2k.jpg";
 import Info from "../Info/Info";
 
+import classes from "./Home.module.css";
+
 export default function Home() {
   const mount = useRef(null);
 
-  const [info, setInfo] = useState(null);
+  const [info, setInfo] = useState(-1);
 
   useEffect(() => {
     let canvas = mount.current;
@@ -25,22 +27,22 @@ export default function Home() {
 
     const points = [
       {
-        id: 1,
+        id: 0,
         position: new THREE.Vector3(0, 0, 5.1),
         element: document.querySelector(".point-0"),
       },
       {
-        id: 2,
+        id: 1,
         position: new THREE.Vector3(5.1, 0, 0),
         element: document.querySelector(".point-1"),
       },
       {
-        id: 3,
+        id: 2,
         position: new THREE.Vector3(-3, 4, 2),
         element: document.querySelector(".point-2"),
       },
       {
-        id: 4,
+        id: 3,
         position: new THREE.Vector3(2, -4, 3),
         element: document.querySelector(".point-3"),
       },
@@ -59,7 +61,7 @@ export default function Home() {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.enablePan = false;
-    //controls.enableZoom = false;
+    controls.enableZoom = false;
 
     const axesHelper = new THREE.AxesHelper(15);
     //scene.add(axesHelper);
@@ -156,9 +158,9 @@ export default function Home() {
     const tick = () => {
       const elapsedTime = clock.getElapsedTime();
       sat.position.set(
-        Math.cos(elapsedTime) * 12,
-        Math.cos(elapsedTime),
-        Math.sin(elapsedTime) * 8,
+        Math.cos(elapsedTime * 0.8) * 12,
+        Math.cos(elapsedTime * 0.8),
+        Math.sin(elapsedTime * 0.8) * 8,
       );
       // Go through each point
       for (const point of points) {
@@ -240,7 +242,26 @@ export default function Home() {
 
   return (
     <>
-      {info > 0 && <Info data={info} />}
+      <div className="w-screen h-16 fixed flex items-center px-2 z-50 justify-between navbar">
+        <button
+          className={classes.btn + " font-electrolize "}
+          onClick={() => setInfo(-1)}
+        >
+          <span className="text-yellow-300">SimoneFiore</span>
+        </button>
+        <div className="flex flex-col h-32 w-20 justify-between self-start pt-4">
+          <button to="/" className={classes.btn}>
+            <i className="fal fa-signal-stream text-yellow-300"></i>
+          </button>
+          <button to="/" className={classes.btn}>
+            <i className="fal fa-user text-yellow-300"></i>
+          </button>
+          <button to="/surface" className={classes.btn}>
+            <i className="fal fa-cube text-yellow-300"></i>
+          </button>
+        </div>
+      </div>
+      {info >= 0 && <Info id={info} />}
       <div className="point point-0 ">
         <div className="label">
           <i className="fal fa-user"></i>

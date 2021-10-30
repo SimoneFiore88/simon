@@ -17,19 +17,6 @@ export default function Navbar() {
           <i className="fal fa-cube text-yellow-300"></i>
         </Link>
       </div>
-
-      {/* <Link to="/shape/d4" className={classes.btn}>
-          <i className="fal fa-dice-d4 text-yellow-300"></i>
-        </Link>
-        <Link to="/shape/d6" className={classes.btn}>
-          <i className="fal fa-dice-d6 text-yellow-300"></i>
-        </Link>
-        <Link to="/shape/d8" className={classes.btn}>
-          <i className="fal fa-dice-d8 text-yellow-300"></i>
-        </Link>
-        <Link to="/shape/d10" className={classes.btn}>
-          <i className="fal fa-dice-d10 text-yellow-300"></i>
-        </Link> */}
     </div>
   );
 }

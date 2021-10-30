@@ -21,14 +21,13 @@ const data = [
   },
 ];
 
-export default function Info({ id }) {
+export default function Info({ id, setInfo }) {
   return (
     <div className="absolute bottom-4 md:right-4 w-screen px-4 md:w-96 h-32">
-      <div
-        className={
-          "h-32 flex flex-col justify-center items-center " + classes.bg
-        }
-      >
+      <div className={"h-32 flex flex-col justify-center  " + classes.bg}>
+        <button className="absolute top-2 right-8" onClick={() => setInfo(-2)}>
+          <i className="fal fa-times-hexagon"></i>
+        </button>
         <h2 className="self-start">{data[id].title}</h2>
         <div className={"h-28 " + classes.scroll}>
           <p>{data[id].description}</p>

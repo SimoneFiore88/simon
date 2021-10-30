@@ -61,7 +61,9 @@ export default function Home() {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.enablePan = false;
-    controls.enableZoom = false;
+    //controls.enableZoom = false;
+    controls.minDistance = 10;
+    controls.maxDistance = 25;
 
     const axesHelper = new THREE.AxesHelper(15);
     //scene.add(axesHelper);
@@ -243,10 +245,7 @@ export default function Home() {
   return (
     <>
       <div className="w-screen h-16 fixed flex items-center px-2 z-50 justify-between navbar">
-        <button
-          className={classes.btn + " font-electrolize "}
-          onClick={() => setInfo(-1)}
-        >
+        <button className={classes.btn + " font-electrolize "}>
           <span className="text-yellow-300">SimoneFiore</span>
         </button>
         <div className="flex flex-col h-32 w-20 justify-between self-start pt-4">
@@ -261,7 +260,7 @@ export default function Home() {
           </button>
         </div>
       </div>
-      {info >= 0 && <Info id={info} />}
+      {info >= 0 && <Info id={info} setInfo={setInfo} />}
       <div className="point point-0 ">
         <div className="label">
           <i className="fal fa-user"></i>

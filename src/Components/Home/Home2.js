@@ -65,7 +65,7 @@ export default function Home2() {
     const cubeLabel = [];
 
     points.forEach((point, i) => {
-      const geometry = new THREE.SphereGeometry(0.05, 16, 16);
+      const geometry = new THREE.SphereGeometry(0.05, 1, 1);
       const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
       const cube = new THREE.Mesh(geometry, material);
       cube.position.set(...point.position);
@@ -104,10 +104,7 @@ export default function Home2() {
     camera.position.set(15, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    /* renderer.setClearColor("#000000"); */
     renderer.setSize(width, height);
-    renderer.shadowMap.enabled = true;
-    /* renderer.shadowMap.type = THREE.PCFSoftShadowMap; */
     canvas.appendChild(renderer.domElement);
 
     const labelRenderer = new CSS2DRenderer();
@@ -143,7 +140,6 @@ export default function Home2() {
       //wireframe: true,
     });
     const sphere = new THREE.Mesh(geometry, material);
-    sphere.receiveShadow = true;
     scene.add(sphere);
 
     const light = new THREE.AmbientLight(0xffffff, 0.1); // soft white light
@@ -151,16 +147,6 @@ export default function Home2() {
 
     const spotLight = new THREE.SpotLight(0xffffff, 1);
     spotLight.position.set(10, 0, -30);
-    spotLight.angle = Math.PI / 4;
-    spotLight.penumbra = 0.1;
-    spotLight.decay = 2;
-    spotLight.distance = 200;
-    spotLight.castShadow = true;
-    spotLight.shadow.mapSize.width = 512;
-    spotLight.shadow.mapSize.height = 512;
-    spotLight.shadow.camera.near = 10;
-    spotLight.shadow.camera.far = 200;
-    spotLight.shadow.focus = 1;
     scene.add(spotLight);
 
     const renderScene = () => {
@@ -251,9 +237,9 @@ export default function Home2() {
           <span className="text-yellow-300">SimoneFiore</span>
         </Link>
         <div className="flex flex-col h-32 w-20 justify-between self-start pt-4">
-          <button to="/" className={classes.btn}>
+          <Link to="/test" className={classes.btn}>
             <i className="fal fa-signal-stream text-yellow-300"></i>
-          </button>
+          </Link>
           <button to="/" className={classes.btn}>
             <i className="fal fa-user text-yellow-300"></i>
           </button>

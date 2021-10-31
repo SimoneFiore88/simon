@@ -105,10 +105,12 @@ export default function Home2() {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     canvas.appendChild(renderer.domElement);
 
     const labelRenderer = new CSS2DRenderer();
-    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     labelRenderer.domElement.style.position = "absolute";
     labelRenderer.domElement.style.top = "0px";
     canvas.appendChild(labelRenderer.domElement);

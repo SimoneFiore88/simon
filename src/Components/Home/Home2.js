@@ -236,7 +236,7 @@ export default function Home2() {
     <>
       <div className="w-screen h-16 fixed flex items-center px-2 z-50 justify-between navbar">
         <Link to="/surface" className={classes.btn + " font-electrolize "}>
-          <span className="text-yellow-300">SimoneFiore</span>
+          <span className="text-yellow-300">Simone Fiore 1.</span>
         </Link>
         <div className="flex flex-col h-32 w-20 justify-between self-start pt-4">
           <Link to="/test" className={classes.btn}>

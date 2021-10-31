@@ -28,7 +28,7 @@ export default function Home2() {
     const scene = new THREE.Scene();
 
     const raycaster = new THREE.Raycaster();
-
+    /* 
     let points = [
       {
         position: new THREE.Vector3(0, 0, 5.1),
@@ -98,7 +98,7 @@ export default function Home2() {
 
         setInfo(i);
       });
-    });
+    }); */
 
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.set(15, 0, 0);
@@ -187,20 +187,13 @@ export default function Home2() {
     const tick = () => {
       controls.update();
 
-      cubeLabel.forEach((el) => {
+      /*       cubeLabel.forEach((el) => {
         if (isOccluded(el[0])) {
           el[1].visible = false;
         } else {
           el[1].visible = true;
         }
-      });
-      /*       for (const cube of cubeLabel) {
-        if (isOccluded(cube[0])) {
-          cube[1].visible = false;
-        } else {
-          cube[1].visible = true;
-        }
-      } */
+      }); */
 
       renderScene();
       frameId = window.requestAnimationFrame(tick);

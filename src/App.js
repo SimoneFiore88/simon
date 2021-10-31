@@ -27,7 +27,6 @@ export default function App() {
           {/* <Moon /> */}
           <Scene2 />
         </Route>
-        <Route exact path="/home3"></Route>
         <Route exact path="/home2">
           <Home2 />
         </Route>

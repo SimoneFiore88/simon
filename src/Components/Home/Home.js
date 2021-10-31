@@ -244,7 +244,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="w-screen h-16 fixed flex items-center px-2 z-50 justify-between navbar">
+      {/*       <div className="w-screen h-16 fixed flex items-center px-2 z-50 justify-between navbar">
         <Link to="/surface" className={classes.btn + " font-electrolize "}>
           <span className="text-yellow-300">SimoneFiore</span>
         </Link>
@@ -259,7 +259,7 @@ export default function Home() {
             <i className="fal fa-cube text-yellow-300"></i>
           </button>
         </div>
-      </div>
+      </div> */}
       {info >= 0 && <Info id={info} setInfo={setInfo} />}
       <div className="point point-0 ">
         <div className="label">

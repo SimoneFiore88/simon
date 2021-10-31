@@ -7,13 +7,13 @@ export default function Navbar() {
         <span className="text-yellow-300">SimoneFiore</span>
       </Link>
       <div className="flex flex-col h-32 w-20 justify-between self-start pt-4">
-        <Link to="/" className={classes.btn}>
+        <Link to="/home1" className={classes.btn}>
           <i className="fal fa-signal-stream text-yellow-300"></i>
         </Link>
-        <Link to="/" className={classes.btn}>
+        <Link to="/home2" className={classes.btn}>
           <i className="fal fa-user text-yellow-300"></i>
         </Link>
-        <Link to="/surface" className={classes.btn}>
+        <Link to="/home3" className={classes.btn}>
           <i className="fal fa-cube text-yellow-300"></i>
         </Link>
       </div>

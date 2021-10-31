@@ -14,7 +14,7 @@ import Info from "../Info/Info";
 
 import classes from "./Home.module.css";
 
-export default function Home2() {
+export default function Home3() {
   const mount = useRef(null);
 
   const [info, setInfo] = useState(-1);
@@ -28,7 +28,7 @@ export default function Home2() {
     const scene = new THREE.Scene();
 
     const raycaster = new THREE.Raycaster();
-
+    /* 
     let points = [
       {
         position: new THREE.Vector3(0, 0, 5.1),
@@ -98,7 +98,7 @@ export default function Home2() {
 
         setInfo(i);
       });
-    });
+    }); */
 
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.set(15, 0, 0);
@@ -187,13 +187,13 @@ export default function Home2() {
     const tick = () => {
       controls.update();
 
-      cubeLabel.forEach((el) => {
+      /*       cubeLabel.forEach((el) => {
         if (isOccluded(el[0])) {
           el[1].visible = false;
         } else {
           el[1].visible = true;
         }
-      });
+      }); */
 
       renderScene();
       frameId = window.requestAnimationFrame(tick);

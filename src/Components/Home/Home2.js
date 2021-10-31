@@ -107,7 +107,7 @@ export default function Home2() {
     /* renderer.setClearColor("#000000"); */
     renderer.setSize(width, height);
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    /* renderer.shadowMap.type = THREE.PCFSoftShadowMap; */
     canvas.appendChild(renderer.domElement);
 
     const labelRenderer = new CSS2DRenderer();
@@ -144,7 +144,6 @@ export default function Home2() {
     });
     const sphere = new THREE.Mesh(geometry, material);
     sphere.receiveShadow = true;
-    sphere.castShadow = true;
     scene.add(sphere);
 
     const light = new THREE.AmbientLight(0xffffff, 0.1); // soft white light

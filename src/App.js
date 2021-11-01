@@ -17,8 +17,11 @@ import Home3 from "./Components/Home/Home3";
 import Box from "./Components/Box/Box";
 import Earth from "./Components/Home/Earth";
 import Info from "./Components/Info/Info";
+import Intro from "./Components/Intro/Intro";
+import { useState } from "react";
 
 export default function App() {
+  const [start, setStart] = useState(true);
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Navbar />
@@ -27,6 +30,8 @@ export default function App() {
         <Route exact path="/">
           {/* <Moon /> */}
           {/* <Scene2 /> */}
+          {/* <Mars2 /> */}
+          {/* {start && <Intro setStart={setStart} />} */}
           <Mars2 />
         </Route>
         <Route exact path="/home1">

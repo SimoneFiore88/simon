@@ -9,6 +9,13 @@ import height from "./bump2k.jpg";
 
 import circle from "./circle-2.png";
 
+import bkg1_front from "./bkg1_front.png";
+import bkg1_back from "./bkg1_back.png";
+import bkg1_top from "./bkg1_top.png";
+import bkg1_left from "./bkg1_left.png";
+import bkg1_right from "./bkg1_right.png";
+import bkg1_bot from "./bkg1_bot.png";
+
 export default function Mars2() {
   const mountRef = useRef(null);
   let history = useHistory();
@@ -18,6 +25,35 @@ export default function Mars2() {
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
     const scene = new THREE.Scene();
+
+    const loadingManager = new THREE.LoadingManager(
+      // Loaded
+      () => {
+        // Wait a little
+
+        console.log("loaded");
+      },
+
+      // Progress
+      (itemUrl, itemsLoaded, itemsTotal) => {
+        // Calculate the progress and update the loadingBarElement
+        const progressRatio = itemsLoaded / itemsTotal;
+        console.log(Math.round(progressRatio * 100));
+      },
+    );
+
+    {
+      const loader = new THREE.CubeTextureLoader(loadingManager);
+      const texture = loader.load([
+        bkg1_front,
+        bkg1_back,
+        bkg1_top,
+        bkg1_bot,
+        bkg1_left,
+        bkg1_right,
+      ]);
+      scene.background = texture;
+    }
 
     const points = [
       {
@@ -159,8 +195,8 @@ export default function Mars2() {
 
       group.children.forEach((el) => (el.material.rotation = elapsedTime));
       // Go through each point
-      light1.position.x = 130 * Math.cos(elapsedTime * 0.5);
-      light1.position.z = 130 * Math.sin(elapsedTime * 0.5);
+      light1.position.x = 130 * Math.cos(elapsedTime * 0.2);
+      light1.position.z = 130 * Math.sin(elapsedTime * 0.2);
 
       controls.update();
 

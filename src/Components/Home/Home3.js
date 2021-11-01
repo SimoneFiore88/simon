@@ -28,7 +28,7 @@ export default function Home3() {
     const scene = new THREE.Scene();
 
     const raycaster = new THREE.Raycaster();
-    /* 
+
     let points = [
       {
         position: new THREE.Vector3(0, 0, 5.1),
@@ -64,10 +64,10 @@ export default function Home3() {
 
     const cubeLabel = [];
 
+    const geometry1 = new THREE.SphereGeometry(0.05, 1, 1);
+    const material1 = new THREE.MeshBasicMaterial({ color: 0xffff00 });
     points.forEach((point, i) => {
-      const geometry = new THREE.SphereGeometry(0.05, 1, 1);
-      const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-      const cube = new THREE.Mesh(geometry, material);
+      const cube = new THREE.Mesh(geometry1, material1);
       cube.position.set(...point.position);
       scene.add(cube);
 
@@ -98,7 +98,7 @@ export default function Home3() {
 
         setInfo(i);
       });
-    }); */
+    });
 
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.set(15, 0, 0);
@@ -166,7 +166,7 @@ export default function Home3() {
     };
 
     function getScreenPos(object) {
-      var pos = object.position.clone();
+      const pos = object.position.clone();
       camera.updateMatrixWorld();
       pos.project(camera);
       return new THREE.Vector2(pos.x, pos.y);
@@ -174,7 +174,7 @@ export default function Home3() {
 
     function isOccluded(object) {
       raycaster.setFromCamera(getScreenPos(object), camera);
-      var intersects = raycaster.intersectObjects(scene.children);
+      const intersects = raycaster.intersectObjects(scene.children);
       if (intersects[0] && intersects[0].object === object) {
         return false;
       } else {
@@ -187,13 +187,13 @@ export default function Home3() {
     const tick = () => {
       controls.update();
 
-      /*       cubeLabel.forEach((el) => {
+      cubeLabel.forEach((el) => {
         if (isOccluded(el[0])) {
           el[1].visible = false;
         } else {
           el[1].visible = true;
         }
-      }); */
+      });
 
       renderScene();
       frameId = window.requestAnimationFrame(tick);

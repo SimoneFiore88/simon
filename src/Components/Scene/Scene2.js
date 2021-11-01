@@ -347,7 +347,7 @@ export default function Scene2() {
 
   return (
     <>
-      <div className="w-screen h-16 fixed flex items-center px-2 z-50 justify-between navbar">
+      {/*       <div className="w-screen h-16 fixed flex items-center px-2 z-50 justify-between navbar">
         <Link to="/surface" className={classes.btn + " font-electrolize "}>
           <span className="text-yellow-300">SimoneFiore</span>
         </Link>
@@ -362,7 +362,7 @@ export default function Scene2() {
             <i className="fal fa-cube text-yellow-300"></i>
           </button>
         </div>
-      </div>
+      </div> */}
       <div className="overlay" ref={overlay}>
         <img src={loader} className="loader" alt="" />
         <div className="absolute">

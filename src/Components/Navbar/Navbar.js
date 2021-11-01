@@ -16,6 +16,9 @@ export default function Navbar() {
         <Link to="/home3" className={classes.btn}>
           <i className="fal fa-cube text-yellow-300"></i>
         </Link>
+        <Link to="/mars2" className={classes.btn}>
+          <i className="fal fa-cube text-yellow-300"></i>
+        </Link>
       </div>
     </div>
   );

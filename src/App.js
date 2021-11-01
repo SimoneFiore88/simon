@@ -26,7 +26,8 @@ export default function App() {
       <Switch>
         <Route exact path="/">
           {/* <Moon /> */}
-          <Scene2 />
+          {/* <Scene2 /> */}
+          <Mars2 />
         </Route>
         <Route exact path="/home1">
           <Home />
@@ -35,6 +36,9 @@ export default function App() {
           <Home2 />
         </Route>
         <Route exact path="/home3">
+          <Home3 />
+        </Route>
+        <Route exact path="/mars2">
           {/* <Home3 /> */}
           <Mars2 />
         </Route>

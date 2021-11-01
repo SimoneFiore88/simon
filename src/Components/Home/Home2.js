@@ -166,7 +166,7 @@ export default function Home2() {
     };
 
     function getScreenPos(object) {
-      var pos = object.position.clone();
+      const pos = object.position.clone();
       camera.updateMatrixWorld();
       pos.project(camera);
       return new THREE.Vector2(pos.x, pos.y);
@@ -174,7 +174,7 @@ export default function Home2() {
 
     function isOccluded(object) {
       raycaster.setFromCamera(getScreenPos(object), camera);
-      var intersects = raycaster.intersectObjects(scene.children);
+      const intersects = raycaster.intersectObjects(scene.children);
       if (intersects[0] && intersects[0].object === object) {
         return false;
       } else {

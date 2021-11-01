@@ -14,29 +14,74 @@ export default function Mars2() {
   let history = useHistory();
 
   useEffect(() => {
+    let selectedObject = null;
     const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    const scene = new THREE.Scene();
+
     const points = [
       {
-        position: new THREE.Vector3(5.3, 0, 0),
-        element: document.querySelector(".point-0"),
+        position: new THREE.Vector3(5.5, 0, 0),
       },
       {
-        position: new THREE.Vector3(0, 0, 5.3),
-        element: document.querySelector(".point-1"),
+        position: new THREE.Vector3(0, 0, 5.5),
       },
       {
-        position: new THREE.Vector3(-3, 4, 2),
-        element: document.querySelector(".point-2"),
+        position: new THREE.Vector3(-3, 4.4, 2),
       },
       {
-        position: new THREE.Vector3(2, -4, 3),
-        element: document.querySelector(".point-3"),
+        position: new THREE.Vector3(2, -4, 3.5),
       },
     ];
 
-    let canvas = mountRef.current;
+    const group = new THREE.Group();
+    scene.add(group);
 
-    const scene = new THREE.Scene();
+    const spriteTexture = new THREE.TextureLoader().load(circle);
+    const spriteMaterial = new THREE.SpriteMaterial({ map: spriteTexture });
+
+    for (const point of points) {
+      const sprite = new THREE.Sprite(spriteMaterial);
+      sprite.position.set(...point.position);
+      sprite.scale.set(1, 1, 1);
+      sprite.name = Math.random();
+      group.add(sprite);
+    }
+
+    document.addEventListener("pointerdown", onPointerDown);
+
+    function onPointerDown(event) {
+      /*       if (selectedObject) {
+        selectedObject.scale.set(2, 2, 2);
+        selectedObject = null;
+      } */
+
+      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(pointer, camera);
+
+      const intersects = raycaster.intersectObject(group, true);
+
+      if (intersects.length > 0) {
+        const res = intersects.filter(function (res) {
+          return res && res.object;
+        })[0];
+
+        if (res && res.object) {
+          selectedObject = res.object;
+          gsap.to(camera.position, {
+            duration: 1.5,
+            delay: 0.2,
+            x: selectedObject.position.x * 3,
+            y: selectedObject.position.y * 3,
+            z: selectedObject.position.z * 3,
+          });
+        }
+      }
+    }
+
+    let canvas = mountRef.current;
 
     const sizes = {
       width: window.innerWidth,
@@ -68,7 +113,7 @@ export default function Mars2() {
     mountRef.current.appendChild(renderer.domElement);
 
     const axesHelper = new THREE.AxesHelper(10);
-    scene.add(axesHelper);
+    //scene.add(axesHelper);
 
     // controls
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -106,18 +151,6 @@ export default function Mars2() {
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.render(scene, camera);
-    }
-
-    const map = new THREE.TextureLoader().load(circle);
-
-    const mat = new THREE.SpriteMaterial({ map: map });
-
-    for (const point of points) {
-      const sprite = new THREE.Sprite(mat);
-      sprite.scale.set(1.0, 1.0, 1.0);
-
-      sprite.position.set(...point.position);
-      scene.add(sprite);
     }
 
     const tick = () => {

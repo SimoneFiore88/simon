@@ -43,8 +43,7 @@ export default function Mars2() {
     for (const point of points) {
       const sprite = new THREE.Sprite(spriteMaterial);
       sprite.position.set(...point.position);
-      sprite.scale.set(1, 1, 1);
-      sprite.name = Math.random();
+      sprite.scale.set(0.8, 0.8, 0.8);
       group.add(sprite);
     }
 
@@ -89,7 +88,7 @@ export default function Mars2() {
     };
 
     const light1 = new THREE.PointLight(0xffffff, 1);
-    light1.position.set(10, 0, -130);
+    light1.position.set(0, 0, -130);
     scene.add(light1);
 
     const light = new THREE.AmbientLight(0xffffff, 0.1); // soft white light
@@ -153,8 +152,15 @@ export default function Mars2() {
       renderer.render(scene, camera);
     }
 
+    const clock = new THREE.Clock();
+
     const tick = () => {
+      const elapsedTime = clock.getElapsedTime();
+
+      group.children.forEach((el) => (el.material.rotation = elapsedTime));
       // Go through each point
+      light1.position.x = 130 * Math.cos(elapsedTime * 0.5);
+      light1.position.z = 130 * Math.sin(elapsedTime * 0.5);
 
       controls.update();
 

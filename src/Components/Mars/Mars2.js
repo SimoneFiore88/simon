@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { useHistory } from "react-router-dom";
 import Intro from "./../Intro/Intro";
+import Intro2 from "./../Intro2/Intro2";
 
 import gsap from "gsap";
 
@@ -240,7 +241,7 @@ export default function Mars2() {
   return (
     <>
       {visible && (
-        <Intro
+        <Intro2
           loaded={loaded}
           setLoaded={setLoaded}
           visible={visible}

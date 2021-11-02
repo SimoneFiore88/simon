@@ -18,12 +18,13 @@ import Box from "./Components/Box/Box";
 import Earth from "./Components/Home/Earth";
 import Info from "./Components/Info/Info";
 import { useState } from "react";
+import Topbar from "./Components/Topbar/Topbar";
 
 export default function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       {/* <Navbar /> */}
-
+      <Topbar />
       <Switch>
         <Route exact path="/">
           {/* <Moon /> */}

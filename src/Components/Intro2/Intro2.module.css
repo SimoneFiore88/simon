@@ -1,0 +1,41 @@
+.circle {
+  width: 160px;
+  height: 160px;
+  background: url("./../../Assets/marker-left-2.png");
+  background-size: cover;
+  position: relative;
+  left: -100px;
+}
+
+.progress {
+  position: absolute;
+  color: white;
+  left: 40px;
+  top: 50px;
+  font-size: 24px;
+}
+
+.label {
+  position: absolute;
+  color: #f19d00;
+  width: 100px;
+  right: -100px;
+  bottom: 10px;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.pulse {
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+  animation-duration: 1.4s;
+}
+
+@keyframes pulse {
+  from {
+    text-shadow: 0px 0px 0px #f19d00;
+  }
+  to {
+    text-shadow: 2px 2px 20px #f19d00;
+  }
+}

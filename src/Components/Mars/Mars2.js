@@ -56,7 +56,7 @@ export default function Mars2() {
       },
     );
 
-    {
+    /*    {
       const loader = new THREE.CubeTextureLoader(loadingManager);
       const texture = loader.load([
         bkg1_front,
@@ -67,7 +67,7 @@ export default function Mars2() {
         bkg1_right,
       ]);
       scene.background = texture;
-    }
+    } */
 
     const points = [
       {

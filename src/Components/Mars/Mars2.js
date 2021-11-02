@@ -188,7 +188,7 @@ export default function Mars2() {
     controls.dampingFactor = 0.05;
 
     //controls.minDistance = 12;
-    controls.minDistance = 5;
+    controls.minDistance = 8;
 
     controls.maxDistance = 60;
     controls.enablePan = false;

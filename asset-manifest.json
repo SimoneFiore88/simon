@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/simon/static/css/main.7059d333.chunk.css",
-    "main.js": "/simon/static/js/main.3442f969.chunk.js",
-    "main.js.map": "/simon/static/js/main.3442f969.chunk.js.map",
-    "runtime-main.js": "/simon/static/js/runtime-main.f72c1317.js",
-    "runtime-main.js.map": "/simon/static/js/runtime-main.f72c1317.js.map",
-    "static/js/2.8be5c97b.chunk.js": "/simon/static/js/2.8be5c97b.chunk.js",
-    "static/js/2.8be5c97b.chunk.js.map": "/simon/static/js/2.8be5c97b.chunk.js.map",
-    "static/js/3.a5e8bb6d.chunk.js": "/simon/static/js/3.a5e8bb6d.chunk.js",
-    "static/js/3.a5e8bb6d.chunk.js.map": "/simon/static/js/3.a5e8bb6d.chunk.js.map",
+    "main.css": "/simon/static/css/main.dfb2cd7f.chunk.css",
+    "main.js": "/simon/static/js/main.7aaeb2d3.chunk.js",
+    "main.js.map": "/simon/static/js/main.7aaeb2d3.chunk.js.map",
+    "runtime-main.js": "/simon/static/js/runtime-main.edd9e7d3.js",
+    "runtime-main.js.map": "/simon/static/js/runtime-main.edd9e7d3.js.map",
+    "static/js/2.07053299.chunk.js": "/simon/static/js/2.07053299.chunk.js",
+    "static/js/2.07053299.chunk.js.map": "/simon/static/js/2.07053299.chunk.js.map",
+    "static/js/3.5cd21f1f.chunk.js": "/simon/static/js/3.5cd21f1f.chunk.js",
+    "static/js/3.5cd21f1f.chunk.js.map": "/simon/static/js/3.5cd21f1f.chunk.js.map",
     "index.html": "/simon/index.html",
-    "static/css/main.7059d333.chunk.css.map": "/simon/static/css/main.7059d333.chunk.css.map",
-    "static/js/2.8be5c97b.chunk.js.LICENSE.txt": "/simon/static/js/2.8be5c97b.chunk.js.LICENSE.txt",
+    "static/css/main.dfb2cd7f.chunk.css.map": "/simon/static/css/main.dfb2cd7f.chunk.css.map",
+    "static/js/2.07053299.chunk.js.LICENSE.txt": "/simon/static/js/2.07053299.chunk.js.LICENSE.txt",
     "static/media/4kcolor.cee049b6.jpeg": "/simon/static/media/4kcolor.cee049b6.jpeg",
     "static/media/4kdis.9a5c566f.jpeg": "/simon/static/media/4kdis.9a5c566f.jpeg",
     "static/media/index.css": "/simon/static/media/marker-right.57516a4d.png",
@@ -34,9 +34,9 @@
     "static/media/mount.1db678b9.jpeg": "/simon/static/media/mount.1db678b9.jpeg"
   },
   "entrypoints": [
-    "static/js/runtime-main.f72c1317.js",
-    "static/js/2.8be5c97b.chunk.js",
-    "static/css/main.7059d333.chunk.css",
-    "static/js/main.3442f969.chunk.js"
+    "static/js/runtime-main.edd9e7d3.js",
+    "static/js/2.07053299.chunk.js",
+    "static/css/main.dfb2cd7f.chunk.css",
+    "static/js/main.7aaeb2d3.chunk.js"
   ]
 }

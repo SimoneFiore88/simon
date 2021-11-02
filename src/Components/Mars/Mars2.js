@@ -12,12 +12,19 @@ import height from "./bump2k.jpg";
 
 import circle from "./circle-2.png";
 
-import bkg1_front from "./bkg1_front.png";
+/* import bkg1_front from "./bkg1_front.png";
 import bkg1_back from "./bkg1_back.png";
 import bkg1_top from "./bkg1_top.png";
 import bkg1_left from "./bkg1_left.png";
 import bkg1_right from "./bkg1_right.png";
-import bkg1_bot from "./bkg1_bot.png";
+import bkg1_bot from "./bkg1_bot.png"; */
+
+import bkg1_front from "./front.png";
+import bkg1_back from "./back.png";
+import bkg1_top from "./top.png";
+import bkg1_left from "./left.png";
+import bkg1_right from "./right.png";
+import bkg1_bot from "./bottom.png";
 
 export default function Mars2() {
   const mountRef = useRef(null);

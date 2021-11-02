@@ -10,7 +10,7 @@ import gsap from "gsap";
 import color from "./map2k.jpg";
 import height from "./bump2k.jpg";
 
-import circle from "./circle-2.png";
+import circle from "./mark.png";
 
 /* import bkg1_front from "./bkg1_front.png";
 import bkg1_back from "./bkg1_back.png";

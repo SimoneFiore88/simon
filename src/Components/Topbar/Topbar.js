@@ -11,7 +11,8 @@ export default function Topbar() {
         classes.navbar
       }
     >
-      <div className={classes.navLogo}></div>
+      <div className={classes.leftBlock}></div>
+      <div className={classes.rightBlock}></div>
 
       <Link to="/" className={classes.home}>
         {/* <span className="text-yellow-300">SimoneFiore</span> */}

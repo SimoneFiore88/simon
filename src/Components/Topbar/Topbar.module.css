@@ -1,8 +1,9 @@
 .navbar {
   background: linear-gradient(
     to right,
-    rgba(18, 55, 55, 1) 30%,
-    rgba(18, 55, 55, 0.5)
+    rgba(18, 55, 55, 1) 25%,
+    rgba(18, 55, 55, 0.5),
+    rgba(18, 55, 55, 1) 85%
   );
 }
 
@@ -13,10 +14,16 @@
   left: 0px;
   height: 1px;
   width: 100%;
-  background: linear-gradient(90deg, transparent 77px, cyan 77px);
+  background: linear-gradient(
+    90deg,
+    transparent 77px,
+    cyan 77px,
+    cyan calc(100% - 77px),
+    transparent calc(100% - 77px)
+  );
 }
 
-.navLogo {
+.leftBlock {
   position: fixed;
   top: 19px;
   left: 0px;
@@ -27,7 +34,7 @@
   z-index: -1;
 }
 
-.navLogo::after {
+.leftBlock::after {
   position: absolute;
   content: "";
   bottom: -2px;
@@ -41,7 +48,7 @@
   z-index: 9;
 }
 
-.navLogo::before {
+.leftBlock::before {
   position: absolute;
   content: "";
   bottom: 2px;
@@ -51,6 +58,43 @@
   height: 18px;
   background-color: rgba(18, 55, 55, 1);
   transform: skew(-50deg);
+}
+
+.rightBlock {
+  position: fixed;
+  top: 19px;
+  right: 0px;
+  width: 60px;
+  height: 36px;
+  background-color: rgba(18, 55, 55, 1);
+  border-bottom: 2px solid cyan;
+  z-index: -1;
+}
+
+.rightBlock::after {
+  position: absolute;
+  content: "";
+  bottom: -2px;
+  left: -9px;
+  width: 4px;
+  height: 15px;
+  background-color: rgb(255, 255, 255);
+  transform: skew(50deg);
+  box-shadow: 0 0 12px 0 rgb(255 255 255 / 100%),
+    0px 0px 5px 1px rgb(12 145 255 / 100%);
+  z-index: 9;
+}
+
+.rightBlock::before {
+  position: absolute;
+  content: "";
+  bottom: 2px;
+  left: -12px;
+  width: 18px;
+  z-index: 0;
+  height: 18px;
+  background-color: rgba(18, 55, 55, 1);
+  transform: skew(50deg);
 }
 
 .home {

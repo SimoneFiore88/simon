@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { useHistory } from "react-router-dom";
+import Intro from "./../Intro/Intro";
+
 import gsap from "gsap";
 
 import color from "./map2k.jpg";
@@ -20,25 +22,29 @@ export default function Mars2() {
   const mountRef = useRef(null);
   let history = useHistory();
 
+  const [loaded, setLoaded] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
-    let selectedObject = null;
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
     const scene = new THREE.Scene();
+    let selectedObject;
 
     const loadingManager = new THREE.LoadingManager(
       // Loaded
       () => {
         // Wait a little
 
-        console.log("loaded");
+        window.setTimeout(() => setLoaded(true), 2000);
       },
 
       // Progress
       (itemUrl, itemsLoaded, itemsTotal) => {
         // Calculate the progress and update the loadingBarElement
         const progressRatio = itemsLoaded / itemsTotal;
-        console.log(Math.round(progressRatio * 100));
+        setProgress(Math.round(progressRatio * 100));
       },
     );
 
@@ -73,7 +79,7 @@ export default function Mars2() {
     const group = new THREE.Group();
     scene.add(group);
 
-    const spriteTexture = new THREE.TextureLoader().load(circle);
+    const spriteTexture = new THREE.TextureLoader(loadingManager).load(circle);
     const spriteMaterial = new THREE.SpriteMaterial({ map: spriteTexture });
 
     for (const point of points) {
@@ -83,14 +89,32 @@ export default function Mars2() {
       group.add(sprite);
     }
 
-    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("pointerdown", (event) => {
+      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    function onPointerDown(event) {
-      /*       if (selectedObject) {
-        selectedObject.scale.set(2, 2, 2);
-        selectedObject = null;
-      } */
+      raycaster.setFromCamera(pointer, camera);
 
+      const intersects = raycaster.intersectObject(group, true);
+      if (intersects.length > 0) {
+        const res = intersects.filter((res) => {
+          return res && res.object;
+        })[0];
+
+        if (res && res.object) {
+          gsap.to(camera.position, {
+            duration: 1.5,
+            delay: 0.2,
+            x: res.object.position.x * 3,
+            y: res.object.position.y * 3,
+            z: res.object.position.z * 3,
+          });
+        }
+      }
+    });
+
+    /*     mountRef.current.addEventListener("mousemove", (event) => {
+      group.children.forEach((el) => el.scale.set(0.8, 0.8, 0.8));
       pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
       pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -104,17 +128,16 @@ export default function Mars2() {
         })[0];
 
         if (res && res.object) {
-          selectedObject = res.object;
-          gsap.to(camera.position, {
-            duration: 1.5,
-            delay: 0.2,
-            x: selectedObject.position.x * 3,
-            y: selectedObject.position.y * 3,
-            z: selectedObject.position.z * 3,
+          gsap.to(res.object.scale, {
+            duration: 0.3,
+            delay: 0,
+            x: 1.2,
+            y: 1.2,
+            z: 1.2,
           });
         }
       }
-    }
+    }); */
 
     let canvas = mountRef.current;
 
@@ -163,7 +186,7 @@ export default function Mars2() {
     controls.enablePan = false;
     //controls.enableZoom = false;
 
-    const textureLoader = new THREE.TextureLoader();
+    const textureLoader = new THREE.TextureLoader(loadingManager);
     const colorMat = textureLoader.load(color);
     const groundMat = textureLoader.load(height);
 
@@ -193,7 +216,7 @@ export default function Mars2() {
     const tick = () => {
       const elapsedTime = clock.getElapsedTime();
 
-      group.children.forEach((el) => (el.material.rotation = elapsedTime));
+      //group.children.forEach((el) => (el.material.rotation = elapsedTime));
       // Go through each point
       light1.position.x = 130 * Math.cos(elapsedTime * 0.2);
       light1.position.z = 130 * Math.sin(elapsedTime * 0.2);
@@ -216,6 +239,15 @@ export default function Mars2() {
 
   return (
     <>
+      {visible && (
+        <Intro
+          loaded={loaded}
+          setLoaded={setLoaded}
+          visible={visible}
+          setVisible={setVisible}
+          progress={progress}
+        />
+      )}
       <div ref={mountRef}></div>
     </>
   );

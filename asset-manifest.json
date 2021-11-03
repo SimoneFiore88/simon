@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/simon/static/css/main.30d604fe.chunk.css",
-    "main.js": "/simon/static/js/main.933b31db.chunk.js",
-    "main.js.map": "/simon/static/js/main.933b31db.chunk.js.map",
+    "main.js": "/simon/static/js/main.05f1ec07.chunk.js",
+    "main.js.map": "/simon/static/js/main.05f1ec07.chunk.js.map",
     "runtime-main.js": "/simon/static/js/runtime-main.47f4ccbb.js",
     "runtime-main.js.map": "/simon/static/js/runtime-main.47f4ccbb.js.map",
     "static/js/2.a3386640.chunk.js": "/simon/static/js/2.a3386640.chunk.js",
@@ -24,6 +24,7 @@
     "static/media/bkg1_top.28cad43d.png": "/simon/static/media/bkg1_top.28cad43d.png",
     "static/media/bottom.d47392c2.png": "/simon/static/media/bottom.d47392c2.png",
     "static/media/bump2k.6ead4b36.jpg": "/simon/static/media/bump2k.6ead4b36.jpg",
+    "static/media/cube.674872bd.glb": "/simon/static/media/cube.674872bd.glb",
     "static/media/desertdawn_bk.35fc5ccc.jpg": "/simon/static/media/desertdawn_bk.35fc5ccc.jpg",
     "static/media/desertdawn_ft.d2c1b4cc.jpg": "/simon/static/media/desertdawn_ft.d2c1b4cc.jpg",
     "static/media/desertdawn_lf.448452e3.jpg": "/simon/static/media/desertdawn_lf.448452e3.jpg",
@@ -37,13 +38,12 @@
     "static/media/mark.f5bfd803.png": "/simon/static/media/mark.f5bfd803.png",
     "static/media/mount.1db678b9.jpeg": "/simon/static/media/mount.1db678b9.jpeg",
     "static/media/right.96ce15c9.png": "/simon/static/media/right.96ce15c9.png",
-    "static/media/s.18698510.glb": "/simon/static/media/s.18698510.glb",
     "static/media/top.e23bc447.png": "/simon/static/media/top.e23bc447.png"
   },
   "entrypoints": [
     "static/js/runtime-main.47f4ccbb.js",
     "static/js/2.a3386640.chunk.js",
     "static/css/main.30d604fe.chunk.css",
-    "static/js/main.933b31db.chunk.js"
+    "static/js/main.05f1ec07.chunk.js"
   ]
 }

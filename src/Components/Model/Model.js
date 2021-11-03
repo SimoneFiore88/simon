@@ -26,7 +26,7 @@ import {
   useHistory,
 } from "react-router-dom";
 
-import model from "./../../iss/source/scene.glb";
+import model from "./../../iss/source/s.glb";
 
 export default function Model() {
   let history = useHistory();
@@ -59,20 +59,17 @@ export default function Model() {
       // Loaded
       () => {
         // Wait a little
-        setTimeout(() => {
-          console.log("loaded");
-
+        /* setTimeout(() => {
           gsap.to(plane.material, {
             duration: 2,
             delay: 1,
             displacementScale: 12,
           });
-        }, 2000);
+        }, 2000); */
       },
 
       // Progress
       (itemUrl, itemsLoaded, itemsTotal) => {
-        console.log(itemUrl);
         // Calculate the progress and update the loadingBarElement
         const progressRatio = itemsLoaded / itemsTotal;
         console.log(Math.round(progressRatio * 100));
@@ -87,10 +84,14 @@ export default function Model() {
         ) {
           // child.material.envMap = environmentMap
           //child.material.envMapIntensity = debugObject.envMapIntensity;
+
+          child.material.depthWrite = false;
+          child.material.depthTest = false;
           child.material.wireframe = true;
 
-          child.material.color = new THREE.Color("rgb(0, 255, 255)");
-          console.log(child.material);
+          child.material.color = new THREE.Color("rgb(255, 255, 255)");
+          child.material.side = THREE.DoubleSide;
+          child.material.shininess = 0;
         }
       });
     };
@@ -98,19 +99,35 @@ export default function Model() {
     const gltfLoader = new GLTFLoader(loadingManager);
 
     gltfLoader.load(model, (gltf) => {
-      gltf.scene.scale.set(0.02, 0.02, 0.02);
-      gltf.scene.position.set(0, -60, 0);
-
+      gltf.scene.scale.set(10, 10, 10);
+      gltf.scene.position.set(0, 0, 0);
+      gltf.scene.rotation.x = 1.57 / 2;
       scene.add(gltf.scene);
 
       updateAllMaterials();
     });
 
-    const light1 = new THREE.PointLight(0xffffff, 1);
-    light1.position.set(0, 15, 0);
+    const light1 = new THREE.PointLight(0xff0000, 4);
+    light1.position.set(60, 0, 0);
     //scene.add(light1);
 
-    const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
+    const spotLight = new THREE.SpotLight(0xffffff);
+    spotLight.position.set(120, 0, 0);
+
+    spotLight.shadow.mapSize.width = 1024;
+    spotLight.shadow.mapSize.height = 1024;
+
+    spotLight.shadow.camera.near = 500;
+    spotLight.shadow.camera.far = 4000;
+    spotLight.shadow.camera.fov = 30;
+
+    scene.add(spotLight);
+
+    /*     const light12 = new THREE.PointLight(0x00ff00, 4);
+    light12.position.set(-60, 0, 0);
+    scene.add(light12); */
+
+    const light = new THREE.AmbientLight(0x00ff00, 12); // soft white light
     scene.add(light);
 
     const camera = new THREE.PerspectiveCamera(
@@ -136,12 +153,14 @@ export default function Model() {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.outputEncoding = THREE.sRGBEncoding;
+
     mountRef.current.appendChild(renderer.domElement);
 
-    const axesHelper = new THREE.AxesHelper(5);
-    scene.add(axesHelper);
+    const axesHelper = new THREE.AxesHelper(55);
+    //scene.add(axesHelper);
 
-    camera.position.set(200, 0, 0);
+    camera.position.set(140, 0, 0);
 
     const textureLoader = new THREE.TextureLoader(loadingManager);
     const groundDisplacement = textureLoader.load(displacement);
@@ -198,8 +217,8 @@ export default function Model() {
       if (elapsedTime > 10) scene.remove(plane); */
 
       if (notTouched) {
-        camera.position.x = 220 * Math.cos(elapsedTime * 0.3);
-        camera.position.z = 220 * Math.sin(elapsedTime * 0.3);
+        camera.position.x = 140 * Math.cos(elapsedTime * 0.3);
+        camera.position.z = 140 * Math.sin(elapsedTime * 0.3);
       }
 
       controls.update();

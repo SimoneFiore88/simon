@@ -26,7 +26,7 @@ import {
   useHistory,
 } from "react-router-dom";
 
-import model from "./../../iss/source/cube.glb";
+import model from "./../../iss/source/merged.glb";
 
 export default function Model() {
   let history = useHistory();
@@ -85,13 +85,13 @@ export default function Model() {
           // child.material.envMap = environmentMap
           //child.material.envMapIntensity = debugObject.envMapIntensity;
 
-          child.material.depthWrite = false;
-          child.material.depthTest = false;
-          child.material.wireframe = true;
+          child.material.depthWrite = true;
+          child.material.depthTest = true;
+          /* child.material.wireframe = true; */
 
           child.material.color = new THREE.Color("rgb(255, 255, 255)");
-          child.material.side = THREE.DoubleSide;
-          child.material.shininess = 0;
+          //child.material.side = THREE.DoubleSide;
+          child.material.shininess = 1;
         }
       });
     };

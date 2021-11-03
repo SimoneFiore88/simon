@@ -28,9 +28,8 @@ export default function App() {
       <Topbar />
       <Switch>
         <Route exact path="/">
-          {/* <Moon /> */}
-          {/* <Scene2 /> */}
-          <Mars2 />
+          <Model />
+          {/* <Mars2 /> */}
         </Route>
         <Route exact path="/home1">
           <Home />

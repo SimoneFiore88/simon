@@ -25,7 +25,7 @@ export default function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       {/* <Navbar /> */}
-      {/* <Topbar /> */}
+      <Topbar />
       <Switch>
         <Route exact path="/">
           {/* <Moon /> */}

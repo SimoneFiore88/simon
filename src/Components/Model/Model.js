@@ -26,7 +26,7 @@ import {
   useHistory,
 } from "react-router-dom";
 
-import model from "./../../iss/source/s.glb";
+import model from "./../../iss/source/cube.glb";
 
 export default function Model() {
   let history = useHistory();
@@ -128,7 +128,7 @@ export default function Model() {
     scene.add(light12); */
 
     const light = new THREE.AmbientLight(0x00ff00, 12); // soft white light
-    scene.add(light);
+    //scene.add(light);
 
     const camera = new THREE.PerspectiveCamera(
       75,

@@ -19,6 +19,7 @@ import Earth from "./Components/Home/Earth";
 import Info from "./Components/Info/Info";
 import { useState } from "react";
 import Topbar from "./Components/Topbar/Topbar";
+import Model from "./Components/Model/Model";
 
 export default function App() {
   return (
@@ -43,6 +44,10 @@ export default function App() {
         <Route exact path="/mars2">
           {/* <Home3 /> */}
           <Mars2 />
+        </Route>
+        <Route exact path="/model">
+          {/* <Home3 /> */}
+          <Model />
         </Route>
       </Switch>
     </Router>

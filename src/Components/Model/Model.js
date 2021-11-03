@@ -26,7 +26,7 @@ import {
   useHistory,
 } from "react-router-dom";
 
-import model from "./../../iss/source/ISS_stationary.glb";
+import model from "./../../iss/source/scene.glb";
 
 export default function Model() {
   let history = useHistory();
@@ -87,8 +87,10 @@ export default function Model() {
         ) {
           // child.material.envMap = environmentMap
           //child.material.envMapIntensity = debugObject.envMapIntensity;
-          /*           child.material.wireframe = true;
-          child.material.transparent = true; */
+          child.material.wireframe = true;
+
+          child.material.color = new THREE.Color("rgb(0, 255, 255)");
+          console.log(child.material);
         }
       });
     };
@@ -96,10 +98,9 @@ export default function Model() {
     const gltfLoader = new GLTFLoader(loadingManager);
 
     gltfLoader.load(model, (gltf) => {
-      gltf.scene.scale.set(1, 1, 1);
-      gltf.scene.rotation.y = Math.PI * 0.5;
+      gltf.scene.scale.set(0.02, 0.02, 0.02);
+      gltf.scene.position.set(0, -60, 0);
 
-      //gltf.scene.position.set(0, 10, -20);
       scene.add(gltf.scene);
 
       updateAllMaterials();
@@ -120,18 +121,18 @@ export default function Model() {
       1000,
     );
 
-    /*     {
+    {
       const loader = new THREE.CubeTextureLoader(loadingManager);
       const texture = loader.load([
         bkg1_front,
         bkg1_back,
         bkg1_top,
         bkg1_bot,
-        bkg1_right,
         bkg1_left,
+        bkg1_right,
       ]);
       scene.background = texture;
-    } */
+    }
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -140,7 +141,7 @@ export default function Model() {
     const axesHelper = new THREE.AxesHelper(5);
     scene.add(axesHelper);
 
-    camera.position.set(220, 0, 0);
+    camera.position.set(200, 0, 0);
 
     const textureLoader = new THREE.TextureLoader(loadingManager);
     const groundDisplacement = textureLoader.load(displacement);
@@ -192,12 +193,13 @@ export default function Model() {
 
     const tick = () => {
       const elapsedTime = clock.getElapsedTime();
+
       /* console.log(elapsedTime);
       if (elapsedTime > 10) scene.remove(plane); */
 
       if (notTouched) {
-        camera.position.x = 220 * Math.cos(elapsedTime * 0.1);
-        camera.position.z = 220 * Math.sin(elapsedTime * 0.1);
+        camera.position.x = 220 * Math.cos(elapsedTime * 0.3);
+        camera.position.z = 220 * Math.sin(elapsedTime * 0.3);
       }
 
       controls.update();

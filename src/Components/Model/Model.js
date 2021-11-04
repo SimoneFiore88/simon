@@ -26,7 +26,7 @@ import {
   useHistory,
 } from "react-router-dom";
 
-import model from "./../../iss/source/merged.glb";
+import model from "./../../iss/source/normal.glb";
 
 export default function Model() {
   let history = useHistory();
@@ -85,13 +85,15 @@ export default function Model() {
           // child.material.envMap = environmentMap
           //child.material.envMapIntensity = debugObject.envMapIntensity;
 
-          child.material.depthWrite = true;
+          /*           child.material.depthWrite = true;
           child.material.depthTest = true;
-          /* child.material.wireframe = true; */
+ */
 
-          child.material.color = new THREE.Color("rgb(255, 255, 255)");
-          //child.material.side = THREE.DoubleSide;
-          child.material.shininess = 1;
+          child.material = new THREE.MeshBasicMaterial();
+
+          child.material.wireframe = true;
+
+          child.material.color = new THREE.Color("rgb(0, 255, 255)");
         }
       });
     };
@@ -106,29 +108,6 @@ export default function Model() {
 
       updateAllMaterials();
     });
-
-    const light1 = new THREE.PointLight(0xff0000, 4);
-    light1.position.set(60, 0, 0);
-    //scene.add(light1);
-
-    const spotLight = new THREE.SpotLight(0xffffff);
-    spotLight.position.set(120, 0, 0);
-
-    spotLight.shadow.mapSize.width = 1024;
-    spotLight.shadow.mapSize.height = 1024;
-
-    spotLight.shadow.camera.near = 500;
-    spotLight.shadow.camera.far = 4000;
-    spotLight.shadow.camera.fov = 30;
-
-    scene.add(spotLight);
-
-    /*     const light12 = new THREE.PointLight(0x00ff00, 4);
-    light12.position.set(-60, 0, 0);
-    scene.add(light12); */
-
-    const light = new THREE.AmbientLight(0x00ff00, 12); // soft white light
-    //scene.add(light);
 
     const camera = new THREE.PerspectiveCamera(
       75,

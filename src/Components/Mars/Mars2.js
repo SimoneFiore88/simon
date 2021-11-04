@@ -40,6 +40,8 @@ export default function Mars2() {
     const scene = new THREE.Scene();
     let selectedObject;
 
+    let frameId;
+
     const loadingManager = new THREE.LoadingManager(
       // Loaded
       () => {
@@ -235,12 +237,14 @@ export default function Mars2() {
       renderer.render(scene, camera);
 
       // Call tick again on the next frame
-      window.requestAnimationFrame(tick);
+      frameId = window.requestAnimationFrame(tick);
     };
 
     tick();
 
     return () => {
+      cancelAnimationFrame(frameId);
+      frameId = null;
       canvas.removeChild(renderer.domElement);
     };
   }, []);

@@ -17,7 +17,7 @@ import displacement from "./t.png";
 
 import alpha from "./../../textures/grass/opacity.png";
 import mark from "./../../textures/grass/flare.png";
-import loader from "./loader-1.png";
+import loader from "./../../Assets/start-quiz.png";
 
 import bkg1_front from "./bkg1_front.png";
 import bkg1_back from "./bkg1_back.png";
@@ -125,11 +125,11 @@ export default function Scene2() {
  */
 
           if (child.name !== "plane") {
-            child.material = new THREE.MeshBasicMaterial();
+            child.material = new THREE.MeshStandardMaterial();
 
             child.material.wireframe = true;
 
-            child.material.color = new THREE.Color("rgb(0, 200, 200)");
+            child.material.color = new THREE.Color("#14496c");
           }
         }
       });
@@ -174,7 +174,7 @@ export default function Scene2() {
       //scene.background = texture;
     }
 
-    const renderer = new THREE.WebGLRenderer();
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 

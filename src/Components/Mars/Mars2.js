@@ -120,7 +120,7 @@ export default function Mars2() {
             z: res.object.position.z * 3,
           });
 
-          gsap.to(camera.position, {
+          /*           gsap.to(camera.position, {
             duration: 0.5,
             delay: 2,
             x: res.object.position.x * 0.1,
@@ -128,7 +128,7 @@ export default function Mars2() {
             z: res.object.position.z * 0.1,
           });
 
-          setTimeout(() => history.push("/surface"), 2200);
+          setTimeout(() => history.push("/surface"), 2200); */
         }
       }
     });

@@ -12,9 +12,10 @@ import {
 } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 
 import color from "./../../textures/grass/mount.jpeg";
-import displacement from "./../../textures/grass/height.gif";
+/* import displacement from "./../../textures/grass/height.gif"; */
+import displacement from "./t.png";
 
-import alpha from "./../../textures/grass/test_b_alpha.jpeg";
+import alpha from "./../../textures/grass/opacity.png";
 import mark from "./../../textures/grass/flare.png";
 import loader from "./loader-1.png";
 
@@ -81,16 +82,24 @@ export default function Scene2() {
           overlay.current.style.opacity = 0;
           overlay.current.style.zIndex = -1;
 
-          gsap.to(plane.material, {
+          gsap.to(camera.position, {
+            duration: 3,
+            delay: 1,
+            x: 40,
+            y: 15,
+            z: 40,
+          });
+
+          /*           gsap.to(plane.material, {
             duration: 2,
             delay: 1,
             displacementScale: 12,
-          });
+          }); */
         }, 2000);
 
-        setTimeout(() => {
+        /*         setTimeout(() => {
           labels.forEach((label) => (label.visible = true));
-        }, 3500);
+        }, 3500); */
       },
 
       // Progress
@@ -120,7 +129,7 @@ export default function Scene2() {
 
             child.material.wireframe = true;
 
-            child.material.color = new THREE.Color("rgb(0, 255, 255)");
+            child.material.color = new THREE.Color("rgb(0, 200, 200)");
           }
         }
       });
@@ -129,15 +138,15 @@ export default function Scene2() {
     const gltfLoader = new GLTFLoader(loadingManager);
 
     gltfLoader.load(model, (gltf) => {
-      gltf.scene.scale.set(2, 2, 2);
-      gltf.scene.position.set(14, 0, 0);
+      gltf.scene.scale.set(1, 1, 1);
+      gltf.scene.position.set(10, 0, 0);
       /* gltf.scene.rotation.x = 1.57 / 2; */
       scene.add(gltf.scene);
 
       updateAllMaterials();
     });
 
-    const light1 = new THREE.PointLight(0xffffff, 0.5);
+    const light1 = new THREE.PointLight(0xffffff, 1);
     light1.position.set(0, 15, 0);
     scene.add(light1);
 
@@ -180,18 +189,18 @@ export default function Scene2() {
     const axesHelper = new THREE.AxesHelper(5);
     //scene.add(axesHelper);
 
-    camera.position.set(40, 15, 40);
+    camera.position.set(600, 255, 40);
 
     const textureLoader = new THREE.TextureLoader(loadingManager);
     const groundDisplacement = textureLoader.load(displacement);
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(300, 300, 60, 60);
+    const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 60, 60);
     const planeMaterial = new THREE.MeshStandardMaterial({
       map: colorMat,
       displacementMap: groundDisplacement,
-      displacementScale: 1,
+      displacementScale: 15,
       transparent: true,
       alphaMap: alphaMat,
       depthWrite: false,
@@ -205,7 +214,7 @@ export default function Scene2() {
     plane.name = "plane";
 
     plane.rotation.x = -Math.PI * 0.5;
-    plane.position.y = -5;
+    plane.position.y = 0;
     scene.add(plane);
 
     //const controls = new OrbitControls(camera, renderer.domElement);
@@ -349,11 +358,6 @@ export default function Scene2() {
       const elapsedTime = clock.getElapsedTime();
       /* console.log(elapsedTime);
       if (elapsedTime > 10) scene.remove(plane); */
-
-      if (notTouched) {
-        camera.position.x = 35 * Math.cos(elapsedTime * 0.1);
-        camera.position.z = 35 * Math.sin(elapsedTime * 0.1);
-      }
 
       controls.update();
 

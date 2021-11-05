@@ -119,6 +119,16 @@ export default function Mars2() {
             y: res.object.position.y * 3,
             z: res.object.position.z * 3,
           });
+
+          gsap.to(camera.position, {
+            duration: 0.5,
+            delay: 2,
+            x: res.object.position.x * 0.1,
+            y: res.object.position.y * 0.1,
+            z: res.object.position.z * 0.1,
+          });
+
+          setTimeout(() => history.push("/surface"), 2200);
         }
       }
     });
@@ -190,7 +200,7 @@ export default function Mars2() {
     controls.dampingFactor = 0.05;
 
     //controls.minDistance = 12;
-    controls.minDistance = 8;
+    //controls.minDistance = 8;
 
     controls.maxDistance = 60;
     controls.enablePan = false;

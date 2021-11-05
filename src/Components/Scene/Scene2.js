@@ -4,6 +4,7 @@ import classes from "./Scene2.module.css";
 
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 import {
   CSS2DRenderer,
@@ -17,19 +18,19 @@ import alpha from "./../../textures/grass/test_b_alpha.jpeg";
 import mark from "./../../textures/grass/flare.png";
 import loader from "./loader-1.png";
 
-/* import bkg1_front from "./bkg1_front.png";
+import bkg1_front from "./bkg1_front.png";
 import bkg1_back from "./bkg1_back.png";
 import bkg1_top from "./bkg1_top.png";
 import bkg1_left from "./bkg1_left.png";
 import bkg1_right from "./bkg1_right.png";
-import bkg1_bot from "./bkg1_bot.png"; */
+import bkg1_bot from "./bkg1_bot.png";
 
-import bkg1_front from "./desertdawn_ft.jpg";
+/* import bkg1_front from "./desertdawn_ft.jpg";
 import bkg1_back from "./desertdawn_bk.jpg";
 import bkg1_top from "./desertdawn_up.jpg";
 import bkg1_left from "./desertdawn_lf.jpg";
 import bkg1_right from "./desertdawn_rt.jpg";
-import bkg1_bot from "./desertdawn_dn.jpg";
+import bkg1_bot from "./desertdawn_dn.jpg"; */
 
 import {
   BrowserRouter as Router,
@@ -38,6 +39,8 @@ import {
   Link,
   useHistory,
 } from "react-router-dom";
+
+import model from "./outpost.glb";
 
 export default function Scene2() {
   let history = useHistory();
@@ -99,11 +102,46 @@ export default function Scene2() {
       },
     );
 
+    const updateAllMaterials = () => {
+      scene.traverse((child) => {
+        if (
+          child instanceof THREE.Mesh &&
+          child.material instanceof THREE.MeshStandardMaterial
+        ) {
+          // child.material.envMap = environmentMap
+          //child.material.envMapIntensity = debugObject.envMapIntensity;
+
+          /*           child.material.depthWrite = true;
+          child.material.depthTest = true;
+ */
+
+          if (child.name !== "plane") {
+            child.material = new THREE.MeshBasicMaterial();
+
+            child.material.wireframe = true;
+
+            child.material.color = new THREE.Color("rgb(0, 255, 255)");
+          }
+        }
+      });
+    };
+
+    const gltfLoader = new GLTFLoader(loadingManager);
+
+    gltfLoader.load(model, (gltf) => {
+      gltf.scene.scale.set(2, 2, 2);
+      gltf.scene.position.set(14, 0, 0);
+      /* gltf.scene.rotation.x = 1.57 / 2; */
+      scene.add(gltf.scene);
+
+      updateAllMaterials();
+    });
+
     const light1 = new THREE.PointLight(0xffffff, 0.5);
     light1.position.set(0, 15, 0);
-    //scene.add(light1);
+    scene.add(light1);
 
-    const light = new THREE.AmbientLight(0xffffff, 0.4); // soft white light
+    const light = new THREE.AmbientLight(0xffffff, 0.5); // soft white light
     scene.add(light);
 
     const camera = new THREE.PerspectiveCamera(
@@ -124,7 +162,7 @@ export default function Scene2() {
         bkg1_right,
         bkg1_left,
       ]);
-      scene.background = texture;
+      //scene.background = texture;
     }
 
     const renderer = new THREE.WebGLRenderer();
@@ -149,37 +187,39 @@ export default function Scene2() {
     const alphaMat = textureLoader.load(alpha);
     const colorMat = textureLoader.load(color);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 60, 60);
+    const planeGeometry = new THREE.PlaneBufferGeometry(300, 300, 60, 60);
     const planeMaterial = new THREE.MeshStandardMaterial({
-      //map: colorMat,
+      map: colorMat,
       displacementMap: groundDisplacement,
       displacementScale: 1,
       transparent: true,
       alphaMap: alphaMat,
-      //depthWrite: false,
+      depthWrite: false,
       //color: "#559cc5",
       color: "#BB430E",
-      color: "#F19D00",
-      wireframe: true,
+      //color: "#F19D00",
+      //wireframe: true,
     });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
-    plane.rotation.x = -Math.PI * 0.5;
+    plane.name = "plane";
 
+    plane.rotation.x = -Math.PI * 0.5;
+    plane.position.y = -5;
     scene.add(plane);
 
     //const controls = new OrbitControls(camera, renderer.domElement);
     const controls = new OrbitControls(camera, labelRenderer.domElement);
-    controls.minDistance = 20;
+    /* controls.minDistance = 20;
     controls.maxDistance = 60;
     controls.minPolarAngle = Math.PI / 4;
-    controls.maxPolarAngle = (Math.PI * 3) / 8;
+    controls.maxPolarAngle = (Math.PI * 3) / 8; */
 
     controls.target.set(0, 0, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     //controls.enableZoom = false;
-    controls.enablePan = false;
+    //controls.enablePan = false;
     //controls.enableRotate = false
     /**
      * Points of interest

@@ -21,6 +21,9 @@ export default function Topbar() {
       <Link to="/model" className={classes.btn}>
         <i className="fal fa-space-station-moon-alt text-white"></i>
       </Link>
+      <Link to="/surface" className={classes.btn}>
+        <i className="fal fa-space-station-moon-alt text-white"></i>
+      </Link>
       <div className="flex flex-col h-32 w-20 justify-between self-start pt-4 hidden ">
         <Link to="/home1" className={classes.btn}>
           <i className="fal fa-signal-stream text-yellow-300"></i>

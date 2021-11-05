@@ -34,6 +34,9 @@ export default function App() {
         <Route exact path="/home1">
           <Home />
         </Route>
+        <Route exact path="/surface">
+          <Scene2 />
+        </Route>
         <Route exact path="/home2">
           <Home2 />
         </Route>

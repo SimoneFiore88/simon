@@ -359,6 +359,8 @@ export default function Scene2() {
       /* console.log(elapsedTime);
       if (elapsedTime > 10) scene.remove(plane); */
 
+      /* console.log(scene.children[6]); */
+
       controls.update();
 
       // Render

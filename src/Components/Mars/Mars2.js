@@ -7,8 +7,11 @@ import Intro2 from "./../Intro2/Intro2";
 
 import gsap from "gsap";
 
-import color from "./map2k.jpg";
+/* import color from "./map2k.jpg";
 import height from "./bump2k.jpg";
+ */
+import color from "./moonmap4k.jpg";
+import height from "./moonbump4k.jpg";
 
 import circle from "./mark.png";
 
@@ -117,7 +120,6 @@ export default function Mars2() {
         })[0];
 
         if (res && res.object) {
-          alert(res.object);
           gsap.to(camera.position, {
             duration: 1.5,
             delay: 0.2,
@@ -206,7 +208,7 @@ export default function Mars2() {
     controls.dampingFactor = 0.05;
 
     //controls.minDistance = 12;
-    //controls.minDistance = 8;
+    controls.minDistance = 8;
 
     controls.maxDistance = 60;
     controls.enablePan = false;

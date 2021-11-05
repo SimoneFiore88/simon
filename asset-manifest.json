@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/simon/static/css/main.30d604fe.chunk.css",
-    "main.js": "/simon/static/js/main.fc301278.chunk.js",
-    "main.js.map": "/simon/static/js/main.fc301278.chunk.js.map",
+    "main.js": "/simon/static/js/main.7d221091.chunk.js",
+    "main.js.map": "/simon/static/js/main.7d221091.chunk.js.map",
     "runtime-main.js": "/simon/static/js/runtime-main.47f4ccbb.js",
     "runtime-main.js.map": "/simon/static/js/runtime-main.47f4ccbb.js.map",
     "static/js/2.53806ee2.chunk.js": "/simon/static/js/2.53806ee2.chunk.js",
@@ -33,14 +33,15 @@
     "static/media/mark.f5bfd803.png": "/simon/static/media/mark.f5bfd803.png",
     "static/media/mount.1db678b9.jpeg": "/simon/static/media/mount.1db678b9.jpeg",
     "static/media/normal.0fef54b0.glb": "/simon/static/media/normal.0fef54b0.glb",
-    "static/media/outpost.7f98af68.glb": "/simon/static/media/outpost.7f98af68.glb",
+    "static/media/outpost.6d1eea0b.glb": "/simon/static/media/outpost.6d1eea0b.glb",
     "static/media/right.96ce15c9.png": "/simon/static/media/right.96ce15c9.png",
+    "static/media/t.beacc54e.png": "/simon/static/media/t.beacc54e.png",
     "static/media/top.e23bc447.png": "/simon/static/media/top.e23bc447.png"
   },
   "entrypoints": [
     "static/js/runtime-main.47f4ccbb.js",
     "static/js/2.53806ee2.chunk.js",
     "static/css/main.30d604fe.chunk.css",
-    "static/js/main.fc301278.chunk.js"
+    "static/js/main.7d221091.chunk.js"
   ]
 }

@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/simon/static/css/main.6db35074.chunk.css",
-    "main.js": "/simon/static/js/main.acbead85.chunk.js",
-    "main.js.map": "/simon/static/js/main.acbead85.chunk.js.map",
+    "main.js": "/simon/static/js/main.200f7710.chunk.js",
+    "main.js.map": "/simon/static/js/main.200f7710.chunk.js.map",
     "runtime-main.js": "/simon/static/js/runtime-main.47f4ccbb.js",
     "runtime-main.js.map": "/simon/static/js/runtime-main.47f4ccbb.js.map",
     "static/js/2.56893d8f.chunk.js": "/simon/static/js/2.56893d8f.chunk.js",
@@ -30,6 +30,8 @@
     "static/media/left.ae1d9773.png": "/simon/static/media/left.ae1d9773.png",
     "static/media/map2k.501e4320.jpg": "/simon/static/media/map2k.501e4320.jpg",
     "static/media/mark.f5bfd803.png": "/simon/static/media/mark.f5bfd803.png",
+    "static/media/moonbump4k.450f7ec5.jpg": "/simon/static/media/moonbump4k.450f7ec5.jpg",
+    "static/media/moonmap4k.7fd77d89.jpg": "/simon/static/media/moonmap4k.7fd77d89.jpg",
     "static/media/mount.1db678b9.jpeg": "/simon/static/media/mount.1db678b9.jpeg",
     "static/media/normal.0fef54b0.glb": "/simon/static/media/normal.0fef54b0.glb",
     "static/media/outpost.6d1eea0b.glb": "/simon/static/media/outpost.6d1eea0b.glb",
@@ -43,6 +45,6 @@
     "static/js/runtime-main.47f4ccbb.js",
     "static/js/2.56893d8f.chunk.js",
     "static/css/main.6db35074.chunk.css",
-    "static/js/main.acbead85.chunk.js"
+    "static/js/main.200f7710.chunk.js"
   ]
 }

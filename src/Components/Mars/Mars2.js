@@ -74,15 +74,19 @@ export default function Mars2() {
     const points = [
       {
         position: new THREE.Vector3(5.5, 0, 0),
+        title: "lorem 1",
       },
       {
         position: new THREE.Vector3(0, 0, 5.5),
+        title: "lorem 2",
       },
       {
         position: new THREE.Vector3(-3, 4.4, 2),
+        title: "lorem 3",
       },
       {
         position: new THREE.Vector3(2, -4, 3.5),
+        title: "lorem 4",
       },
     ];
 
@@ -96,6 +100,7 @@ export default function Mars2() {
       const sprite = new THREE.Sprite(spriteMaterial);
       sprite.position.set(...point.position);
       sprite.scale.set(0.8, 0.8, 0.8);
+      sprite.name = point.title;
       group.add(sprite);
     }
 
@@ -112,6 +117,7 @@ export default function Mars2() {
         })[0];
 
         if (res && res.object) {
+          alert(res.object);
           gsap.to(camera.position, {
             duration: 1.5,
             delay: 0.2,

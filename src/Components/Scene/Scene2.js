@@ -129,7 +129,7 @@ export default function Scene2() {
 
             child.material.wireframe = true;
 
-            child.material.color = new THREE.Color("#14496c");
+            child.material.color = new THREE.Color("#cccccc");
           }
         }
       });
@@ -148,9 +148,9 @@ export default function Scene2() {
 
     const light1 = new THREE.PointLight(0xffffff, 1);
     light1.position.set(0, 15, 0);
-    scene.add(light1);
+    //scene.add(light1);
 
-    const light = new THREE.AmbientLight(0xffffff, 0.5); // soft white light
+    const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
     scene.add(light);
 
     const camera = new THREE.PerspectiveCamera(
@@ -205,7 +205,7 @@ export default function Scene2() {
       alphaMap: alphaMat,
       depthWrite: false,
       //color: "#559cc5",
-      color: "#BB430E",
+      //color: "#BB430E",
       //color: "#F19D00",
       //wireframe: true,
     });

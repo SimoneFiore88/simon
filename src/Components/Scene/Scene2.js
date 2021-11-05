@@ -219,16 +219,16 @@ export default function Scene2() {
 
     //const controls = new OrbitControls(camera, renderer.domElement);
     const controls = new OrbitControls(camera, labelRenderer.domElement);
-    /* controls.minDistance = 20;
-    controls.maxDistance = 60;
+    controls.minDistance = 5;
+    controls.maxDistance = 2000;
     controls.minPolarAngle = Math.PI / 4;
-    controls.maxPolarAngle = (Math.PI * 3) / 8; */
+    controls.maxPolarAngle = (Math.PI * 3) / 8;
 
     controls.target.set(0, 0, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     //controls.enableZoom = false;
-    //controls.enablePan = false;
+    controls.enablePan = false;
     //controls.enableRotate = false
     /**
      * Points of interest

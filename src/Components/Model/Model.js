@@ -93,7 +93,7 @@ export default function Model() {
 
           child.material.wireframe = true;
 
-          child.material.color = new THREE.Color("rgb(0, 255, 255)");
+          child.material.color = new THREE.Color("#71B2E2");
         }
       });
     };

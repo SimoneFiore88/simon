@@ -10,8 +10,12 @@ import gsap from "gsap";
 /* import color from "./map2k.jpg";
 import height from "./bump2k.jpg";
  */
-import color from "./moonmap4k.jpg";
-import height from "./moonbump4k.jpg";
+/* import color from "./moonmap4k.jpg";
+import height from "./moonbump4k.jpg"; */
+
+import color from "./8kcolor.jpeg";
+import height from "./8knormal.jpg";
+import ground from "./moonbump4k.jpg";
 
 import circle from "./mark.png";
 
@@ -208,7 +212,7 @@ export default function Mars2() {
     controls.dampingFactor = 0.05;
 
     //controls.minDistance = 12;
-    controls.minDistance = 8;
+    controls.minDistance = 12;
 
     controls.maxDistance = 60;
     controls.enablePan = false;
@@ -216,15 +220,24 @@ export default function Mars2() {
 
     const textureLoader = new THREE.TextureLoader(loadingManager);
     const colorMat = textureLoader.load(color);
-    const groundMat = textureLoader.load(height);
+    const normalMat = textureLoader.load(height);
+    const groundMat = textureLoader.load(ground);
 
     const geometry = new THREE.SphereGeometry(5, 128, 128);
-    const material = new THREE.MeshStandardMaterial({
+    /*     const material = new THREE.MeshStandardMaterial({
       map: colorMat,
       displacementMap: groundMat,
       bumpMap: groundMat,
       bumpScale: 0.05,
       displacementScale: 0.1,
+      //wireframe: true,
+    }); */
+
+    const material = new THREE.MeshStandardMaterial({
+      map: colorMat,
+      normalMap: normalMat,
+      bumpMap: groundMat,
+      bumpScale: 0.05,
       //wireframe: true,
     });
     const sphere = new THREE.Mesh(geometry, material);
@@ -246,8 +259,8 @@ export default function Mars2() {
 
       //group.children.forEach((el) => (el.material.rotation = elapsedTime));
       // Go through each point
-      light1.position.x = 130 * Math.cos(elapsedTime * 0.2);
-      light1.position.z = 130 * Math.sin(elapsedTime * 0.2);
+      light1.position.x = 130 * Math.cos(elapsedTime * 0.5);
+      light1.position.z = 130 * Math.sin(elapsedTime * 0.5);
 
       controls.update();
 

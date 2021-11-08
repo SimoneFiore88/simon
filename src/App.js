@@ -20,6 +20,7 @@ import Info from "./Components/Info/Info";
 import { useState } from "react";
 import Topbar from "./Components/Topbar/Topbar";
 import Model from "./Components/Model/Model";
+import In from "./Components/Mars/In";
 
 export default function App() {
   return (
@@ -29,7 +30,8 @@ export default function App() {
       <Switch>
         <Route exact path="/">
           {/* <Model /> */}
-          <Mars2 />
+          {/* <Mars2 /> */}
+          <In />
         </Route>
         <Route exact path="/home1">
           <Home />
@@ -45,7 +47,9 @@ export default function App() {
         </Route>
         <Route exact path="/mars2">
           {/* <Home3 /> */}
-          <Mars2 />
+          {/* <Mars2 /> */}
+          {/* <Earth /> */}
+          <Mars />
         </Route>
         <Route exact path="/model">
           {/* <Home3 /> */}

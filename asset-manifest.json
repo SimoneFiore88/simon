@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/simon/static/css/main.6db35074.chunk.css",
-    "main.js": "/simon/static/js/main.ebe390c2.chunk.js",
-    "main.js.map": "/simon/static/js/main.ebe390c2.chunk.js.map",
+    "main.css": "/simon/static/css/main.29e9d03f.chunk.css",
+    "main.js": "/simon/static/js/main.3a35b704.chunk.js",
+    "main.js.map": "/simon/static/js/main.3a35b704.chunk.js.map",
     "runtime-main.js": "/simon/static/js/runtime-main.47f4ccbb.js",
     "runtime-main.js.map": "/simon/static/js/runtime-main.47f4ccbb.js.map",
-    "static/js/2.56893d8f.chunk.js": "/simon/static/js/2.56893d8f.chunk.js",
-    "static/js/2.56893d8f.chunk.js.map": "/simon/static/js/2.56893d8f.chunk.js.map",
+    "static/js/2.043673ca.chunk.js": "/simon/static/js/2.043673ca.chunk.js",
+    "static/js/2.043673ca.chunk.js.map": "/simon/static/js/2.043673ca.chunk.js.map",
     "static/js/3.4d3ac789.chunk.js": "/simon/static/js/3.4d3ac789.chunk.js",
     "static/js/3.4d3ac789.chunk.js.map": "/simon/static/js/3.4d3ac789.chunk.js.map",
     "index.html": "/simon/index.html",
-    "static/css/main.6db35074.chunk.css.map": "/simon/static/css/main.6db35074.chunk.css.map",
-    "static/js/2.56893d8f.chunk.js.LICENSE.txt": "/simon/static/js/2.56893d8f.chunk.js.LICENSE.txt",
+    "static/css/main.29e9d03f.chunk.css.map": "/simon/static/css/main.29e9d03f.chunk.css.map",
+    "static/js/2.043673ca.chunk.js.LICENSE.txt": "/simon/static/js/2.043673ca.chunk.js.LICENSE.txt",
     "static/media/4kcolor.cee049b6.jpeg": "/simon/static/media/4kcolor.cee049b6.jpeg",
     "static/media/4kdis.9a5c566f.jpeg": "/simon/static/media/4kdis.9a5c566f.jpeg",
     "static/media/8kcolor.d0ff8b43.jpeg": "/simon/static/media/8kcolor.d0ff8b43.jpeg",
     "static/media/8knormal.2b228cf0.jpg": "/simon/static/media/8knormal.2b228cf0.jpg",
-    "static/media/index.css": "/simon/static/media/marker-right.57516a4d.png",
+    "static/media/index.css": "/simon/static/media/scope2.77c5caaf.png",
     "static/media/back.54a3ba0f.png": "/simon/static/media/back.54a3ba0f.png",
     "static/media/bkg1_back.73473fd5.png": "/simon/static/media/bkg1_back.73473fd5.png",
     "static/media/bkg1_bot.119f7d6f.png": "/simon/static/media/bkg1_bot.119f7d6f.png",
@@ -44,8 +44,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.47f4ccbb.js",
-    "static/js/2.56893d8f.chunk.js",
-    "static/css/main.6db35074.chunk.css",
-    "static/js/main.ebe390c2.chunk.js"
+    "static/js/2.043673ca.chunk.js",
+    "static/css/main.29e9d03f.chunk.css",
+    "static/js/main.3a35b704.chunk.js"
   ]
 }

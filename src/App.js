@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
-//import Scene from "./Components/Scene/Scene";
+import Box from "./Components/Box/Box";
+import Scene from "./Components/Scene/Scene";
 /* import Scene1 from "./Components/Scene/Scene1";
 import Test from "./Components/Test/Test";
-import Cube from "./Components/Cube/Cube";
+
 import Moon from "./Components/Moon/Moon"; */
 import Mars from "./Components/Mars/Mars";
 /* import Mars2 from "./Components/Mars/Mars2";
@@ -22,6 +23,7 @@ import Model from "./Components/Model/Model";
 /* import In from "./Components/Mars/In"; */
 
 import Main from "./Components/Main/Main";
+import Main2 from "./Components/Surf/Surf";
 
 export default function App() {
   return (
@@ -39,7 +41,8 @@ export default function App() {
           <Home />
         </Route>
         <Route exact path="/surface">
-          <Scene2 />
+          {/* <Scene2 /> */}
+          <Main2 />
         </Route>
         <Route exact path="/home2">
           <Home2 />

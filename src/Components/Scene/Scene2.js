@@ -11,8 +11,8 @@ import {
   CSS2DObject,
 } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 
-import color from "./../../textures/grass/mount.jpeg";
 /* import displacement from "./../../textures/grass/height.gif"; */
+import color from "./../../textures/grass/mount.jpeg";
 import displacement from "./t.png";
 
 import alpha from "./../../textures/grass/opacity.png";

@@ -22,6 +22,7 @@ import bkg1_right from "./right.png";
 import bkg1_bot from "./bottom.png";
 
 import sound from "./sound2.wav";
+import Left from "../Left/Left";
 
 export default function Main() {
   const mount = useRef(null);
@@ -77,7 +78,7 @@ export default function Main() {
         text: "I don't think we've met. \nMy name is Simone Fiore, but everyone calls me Fiore.",
       },
       {
-        position: new THREE.Vector3(0, 5.1, 2),
+        position: new THREE.Vector3(5.1, 0, 2),
         icon: "<i class='fal fa-code'></i>",
 
         name: "Occupation",
@@ -280,7 +281,7 @@ export default function Main() {
         />
       )}
       {info >= 0 && <Info id={info} setInfo={setInfo} />}
-
+      <Left />
       <div className="" ref={mount} />
     </>
   );

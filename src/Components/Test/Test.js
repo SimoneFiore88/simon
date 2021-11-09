@@ -1,165 +1,288 @@
-import { useEffect, useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-
-import color from "./../../textures/grass/mount.jpeg";
-import displacement from "./../../textures/grass/height.gif";
-import alpha from "./../../textures/grass/opacity.png";
-
+import {
+  CSS2DRenderer,
+  CSS2DObject,
+} from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import gsap from "gsap";
+import Intro2 from "./../Intro2/Intro2";
 
-const Test = () => {
-  const otherRef = useRef(null);
+import color from "./8kcolor.jpeg";
+import normal from "./8knormal.jpg";
+import ground from "./moonbump4k.jpg";
+
+import Info from "../Info/Info";
+
+import bkg1_front from "./front.png";
+import bkg1_back from "./back.png";
+import bkg1_top from "./top.png";
+import bkg1_left from "./left.png";
+import bkg1_right from "./right.png";
+import bkg1_bot from "./bottom.png";
+
+import sound from "./sound2.wav";
+import Left from "../Left/Left";
+
+export default function Main2() {
+  const mount = useRef(null);
+
+  const [info, setInfo] = useState(-1);
+  const [loaded, setLoaded] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    let temp = otherRef.current;
+    let canvas = mount.current;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let frameId;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000,
+
+    const raycaster = new THREE.Raycaster();
+
+    const loadingManager = new THREE.LoadingManager(
+      // Loaded
+      () => {
+        // Wait a little
+        window.setTimeout(() => setLoaded(true), 2000);
+      },
+
+      // Progress
+      (itemUrl, itemsLoaded, itemsTotal) => {
+        // Calculate the progress and update the loadingBarElement
+        const progressRatio = itemsLoaded / itemsTotal;
+        setProgress(Math.round(progressRatio * 100));
+      },
     );
-    const renderer = new THREE.WebGLRenderer();
 
-    const axesHelper = new THREE.AxesHelper(5);
-    scene.add(axesHelper);
+    {
+      const loader = new THREE.CubeTextureLoader(loadingManager);
+      const texture = loader.load([
+        bkg1_front,
+        bkg1_back,
+        bkg1_top,
+        bkg1_bot,
+        bkg1_left,
+        bkg1_right,
+      ]);
+      scene.background = texture;
+    }
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 0, 0);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-
-    console.log(controls);
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    otherRef.current.appendChild(renderer.domElement);
-
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
-
-    scene.add(cube);
-
-    const textureLoader = new THREE.TextureLoader();
-    const groundDisplacement = textureLoader.load(displacement);
-    const alphaMat = textureLoader.load(alpha);
-    const colorMat = textureLoader.load(color);
-
-    const planeGeometry = new THREE.PlaneBufferGeometry(60, 60, 80, 80);
-    const planeMaterial = new THREE.MeshPhongMaterial({
-      //map: colorMat,
-      displacementMap: groundDisplacement,
-      displacementScale: 1,
-      //bumpMap: groundDisplacement,
-      //bumpScale: 1,
-      transparent: true,
-      alphaMap: alphaMat,
-      wireframe: false,
-      depthWrite: false,
-      color: "cyan",
-    });
-    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.rotation.x = -Math.PI * 0.5;
-
-    scene.add(plane);
-
-    const light = new THREE.AmbientLight(0xffffff, 30, 50);
-    light.position.set(0, 20, 0);
-
-    scene.add(light);
-
-    camera.position.set(22, 10, 28);
-
-    const points = [
+    let points = [
       {
-        position: new THREE.Vector3(16, 12, 16),
-        element: document.querySelector(".point-0"),
+        position: new THREE.Vector3(0, 0, 5.1),
+        icon: "<i class='fal fa-user'></i>",
+        name: "Bio",
+        text: "I don't think we've met. \nMy name is Simone Fiore, but everyone calls me Fiore.",
       },
       {
-        position: new THREE.Vector3(-15, 9, 10),
-        element: document.querySelector(".point-1"),
+        position: new THREE.Vector3(5.1, 0, 2),
+        icon: "<i class='fal fa-code'></i>",
+
+        name: "Occupation",
+        text: "Frontend developer and teacher.",
       },
       {
-        position: new THREE.Vector3(8, 9, -10),
-        element: document.querySelector(".point-2"),
+        position: new THREE.Vector3(-3, 4, 2),
+        icon: "<i class='fal fa-telescope'></i>",
+
+        name: "Hobbies",
+        text: "CS, Space&Science and many other things.",
+      },
+      {
+        position: new THREE.Vector3(2, -4, 3),
+        icon: "<i class='fab fa-node-js'></i>",
+
+        name: "JavaScript",
+        text: "Everywhere!",
       },
     ];
 
-    gsap.to(plane.material, { duration: 2, delay: 1, displacementScale: 12 });
-    const animate = function () {
-      for (const point of points) {
-        const screenPosition = point.position.clone();
-        screenPosition.project(camera);
-        const translateX = screenPosition.x * window.innerWidth * 0.5;
-        const translateY = -screenPosition.y * window.innerHeight * 0.5;
-        point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
-      }
+    const cubeLabel = [];
 
-      controls.update();
+    const geometry1 = new THREE.SphereGeometry(0.05, 8, 6);
+    const material1 = new THREE.MeshBasicMaterial({
+      color: 0x2696e7,
+      wireframe: true,
+    });
+    points.forEach((point, i) => {
+      const cube = new THREE.Mesh(geometry1, material1);
+      cube.position.set(...point.position);
+      scene.add(cube);
+
+      const div = document.createElement("div");
+      div.classList = "mark";
+
+      const icon = document.createElement("div");
+      icon.classList = "mark-icon";
+      icon.innerHTML = point.icon;
+
+      div.appendChild(icon);
+
+      const label = new CSS2DObject(div);
+
+      label.position.set(point.position.x, point.position.y, point.position.z);
+      scene.add(label);
+
+      cubeLabel.push([cube, label]);
+
+      icon.addEventListener("pointerdown", () => {
+        new Audio(sound).play();
+        gsap.to(camera.position, {
+          duration: 1.2,
+          delay: 0,
+          x: point.position.x * 3,
+          y: point.position.y * 3,
+          z: point.position.z * 3,
+        });
+
+        setInfo(i);
+      });
+    });
+
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.set(15, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    canvas.appendChild(renderer.domElement);
+
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    labelRenderer.domElement.style.position = "absolute";
+    labelRenderer.domElement.style.top = "0px";
+    canvas.appendChild(labelRenderer.domElement);
+
+    // controls
+    const controls = new OrbitControls(camera, labelRenderer.domElement);
+    //controls.target.set(10, 15, 80);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.enablePan = false;
+    //controls.enableZoom = false;
+    controls.minDistance = 10;
+    controls.maxDistance = 25;
+
+    const textureLoader = new THREE.TextureLoader(loadingManager);
+    const colorMat = textureLoader.load(color);
+    const normalMat = textureLoader.load(normal);
+    const groundMat = textureLoader.load(ground);
+
+    const geometry = new THREE.SphereGeometry(5, 128, 128);
+    const material = new THREE.MeshStandardMaterial({
+      map: colorMat,
+      normalMap: normalMat,
+      bumpMap: groundMat,
+      bumpScale: 0.05,
+      //wireframe: true,
+    });
+    const sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+
+    const light1 = new THREE.PointLight(0xffffff, 1);
+    light1.position.set(0, 0, -130);
+    scene.add(light1);
+
+    const light = new THREE.AmbientLight(0xffffff, 0.1); // soft white light
+    scene.add(light);
+
+    const renderScene = () => {
       renderer.render(scene, camera);
-
-      requestAnimationFrame(animate);
-      /*       cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01; */
+      labelRenderer.render(scene, camera);
     };
 
-    let onWindowResize = function () {
-      camera.aspect = window.innerWidth / window.innerHeight;
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderScene();
     };
 
-    window.addEventListener("resize", onWindowResize, false);
+    function getScreenPos(object) {
+      const pos = object.position.clone();
+      camera.updateMatrixWorld();
+      pos.project(camera);
+      return new THREE.Vector2(pos.x, pos.y);
+    }
 
-    animate();
+    function isOccluded(object) {
+      raycaster.setFromCamera(getScreenPos(object), camera);
+      const intersects = raycaster.intersectObjects(scene.children);
+      if (intersects[0] && intersects[0].object === object) {
+        return false;
+      } else {
+        return true;
+      }
+    }
 
-    //return () => temp.current.removeChild(renderer.domElement);
+    const clock = new THREE.Clock();
+
+    const tick = () => {
+      controls.update();
+
+      const elapsedTime = clock.getElapsedTime();
+      light1.position.x = 130 * Math.cos(elapsedTime * 0.2);
+      light1.position.z = 130 * Math.sin(elapsedTime * 0.2);
+
+      cubeLabel.forEach((el) => {
+        if (isOccluded(el[0])) {
+          el[1].visible = false;
+        } else {
+          el[1].visible = true;
+        }
+      });
+
+      renderScene();
+      frameId = window.requestAnimationFrame(tick);
+    };
+
+    const start = () => {
+      if (!frameId) {
+        frameId = requestAnimationFrame(tick);
+      }
+    };
+
+    const stop = () => {
+      cancelAnimationFrame(frameId);
+      frameId = null;
+    };
+
+    window.addEventListener("resize", handleResize);
+    start();
+
     return () => {
-      console.log("remove");
-      temp.removeChild(renderer.domElement);
-      console.log(document.querySelectorAll(".marker"));
-      document
-        .querySelectorAll(".marker")
-        .forEach((e) => e.parentElement.removeChild(e));
+      stop();
+      window.removeEventListener("resize", handleResize);
+      canvas.removeChild(renderer.domElement);
+      canvas.removeChild(labelRenderer.domElement);
+
+      scene.remove(sphere);
+      scene.children = null;
+      geometry.dispose();
+      material.dispose();
     };
   }, []);
 
   return (
-    <div>
-      <div className="point point-0">
-        <div className="label">
-          <i className="fal fa-home"></i>
-        </div>
-        <div className="text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
-          exercitationem corrupti incidunt quis atque consequatur,
-          necessitatibus mollitia unde accusantium harum consequuntur
-          voluptatibus molestiae veritatis error. Ipsa alias inventore ut
-          dolorem.
-        </div>
-      </div>
-      <div className="point point-1">
-        <div className="label">
-          <i className="fal fa-arrow-to-bottom"></i>
-        </div>
-        <div className="text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
-          exercitationem.
-        </div>
-      </div>
-      <div className="point point-2">
-        <div className="label">
-          <i className="fal fa-map-marker-exclamation"></i>
-        </div>
-        <div className="text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </div>
-      </div>
-      <div ref={otherRef}></div>
-    </div>
+    <>
+      {visible && (
+        <Intro2
+          loaded={loaded}
+          setLoaded={setLoaded}
+          visible={visible}
+          setVisible={setVisible}
+          progress={progress}
+        />
+      )}
+      {info >= 0 && <Info id={info} setInfo={setInfo} />}
+      <Left />
+      <div className="" ref={mount} />
+    </>
   );
-};
-
-export default Test;
+}

@@ -52,6 +52,8 @@ export default function Scene2() {
 
   useEffect(() => {
     let canvas = mountRef.current;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
     const scene = new THREE.Scene();
 
     let frameId;
@@ -59,26 +61,17 @@ export default function Scene2() {
     let notTouched = true;
 
     const pointer = new THREE.Vector2();
-    document.addEventListener("mousemove", onPointerMove);
+    window.addEventListener("mousemove", onPointerMove);
     function onPointerMove(event) {
       pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
       pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
     }
-
-    /*     {
-      const color = 0x333333;
-      const near = 4;
-      const far = 100;
-      scene.fog = new THREE.Fog(color, near, far);
-    } */
 
     const loadingManager = new THREE.LoadingManager(
       // Loaded
       () => {
         // Wait a little
         setTimeout(() => {
-          console.log("loaded");
-          console.log(overlay.current.style);
           overlay.current.style.opacity = 0;
           overlay.current.style.zIndex = -1;
 
@@ -106,7 +99,7 @@ export default function Scene2() {
       (itemUrl, itemsLoaded, itemsTotal) => {
         // Calculate the progress and update the loadingBarElement
         const progressRatio = itemsLoaded / itemsTotal;
-        console.log(Math.round(progressRatio * 100));
+
         overlayText.current.textContent = Math.round(progressRatio * 100) + "%";
       },
     );
@@ -153,13 +146,9 @@ export default function Scene2() {
     const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
     scene.add(light);
 
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      //100,
-      1000,
-    );
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+
+    camera.position.set(600, 255, 40);
 
     {
       const loader = new THREE.CubeTextureLoader(loadingManager);
@@ -174,22 +163,20 @@ export default function Scene2() {
       //scene.background = texture;
     }
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    mountRef.current.appendChild(renderer.domElement);
-
-    //renderer.setClearColor("#111");
+    let renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    canvas.appendChild(renderer.domElement);
 
     const labelRenderer = new CSS2DRenderer();
-    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     labelRenderer.domElement.style.position = "absolute";
     labelRenderer.domElement.style.top = "0px";
-    mountRef.current.appendChild(labelRenderer.domElement);
+    canvas.appendChild(labelRenderer.domElement);
 
     const axesHelper = new THREE.AxesHelper(5);
     //scene.add(axesHelper);
-
-    camera.position.set(600, 255, 40);
 
     const textureLoader = new THREE.TextureLoader(loadingManager);
     const groundDisplacement = textureLoader.load(displacement);
@@ -224,7 +211,6 @@ export default function Scene2() {
     controls.minPolarAngle = Math.PI / 4;
     controls.maxPolarAngle = (Math.PI * 3) / 8;
 
-    controls.target.set(0, 0, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     //controls.enableZoom = false;
@@ -337,6 +323,7 @@ export default function Scene2() {
     });
 
     window.addEventListener("resize", onWindowResize, false);
+
     function onWindowResize() {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -345,7 +332,10 @@ export default function Scene2() {
       labelRenderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    window.addEventListener("pointerdown", () => (notTouched = false));
+    window.addEventListener("pointerdown", down);
+    function down() {
+      notTouched = false;
+    }
 
     /*     gsap.to(camera.position, { duration: 2, delay: 0, x: 22, y: 15, z: 28 });
     gsap.to(plane.material, { duration: 2, delay: 1, displacementScale: 12 });
@@ -378,37 +368,19 @@ export default function Scene2() {
       frameId = null;
       canvas.removeChild(renderer.domElement);
       canvas.removeChild(labelRenderer.domElement);
-    };
+      window.removeEventListener("resize", onWindowResize);
+      window.removeEventListener("pointerdown", down);
+      window.removeEventListener("mousemove", onPointerMove);
 
-    /*     return () => {
-      console.log("remove");
-      canvas.removeChild(renderer.domElement);
-      console.log(document.querySelectorAll(".marker"));
-      document
-        .querySelectorAll(".marker")
-        .forEach((e) => e.parentElement.removeChild(e));
-      console.log(mountRef);
-    }; */
+      scene.remove(plane);
+      planeGeometry.dispose();
+      planeMaterial.dispose();
+      scene.children = null;
+    };
   }, []);
 
   return (
     <>
-      {/*       <div className="w-screen h-16 fixed flex items-center px-2 z-50 justify-between navbar">
-        <Link to="/surface" className={classes.btn + " font-electrolize "}>
-          <span className="text-yellow-300">SimoneFiore</span>
-        </Link>
-        <div className="flex flex-col h-32 w-20 justify-between self-start pt-4">
-          <Link to="/home2" className={classes.btn}>
-            <i className="fal fa-signal-stream text-yellow-300"></i>2
-          </Link>
-          <Link to="/" className={classes.btn}>
-            <i className="fal fa-user text-yellow-300"></i>1
-          </Link>
-          <button to="/surface" className={classes.btn}>
-            <i className="fal fa-cube text-yellow-300"></i>
-          </button>
-        </div>
-      </div> */}
       <div className="overlay" ref={overlay}>
         <img src={loader} className="loader" alt="" />
         <div className="absolute">

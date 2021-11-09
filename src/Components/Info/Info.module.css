@@ -1,5 +1,5 @@
 .bg {
-  border-image-source: url("../../Assets/border-yellow.png");
+  border-image-source: url("../../Assets/border-blue.png");
   border-image-slice: 15% fill;
   border-image-width: 19px;
   border-image-repeat: repeat stretch;

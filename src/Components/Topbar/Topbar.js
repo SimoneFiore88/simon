@@ -1,8 +1,6 @@
 import classes from "./Topbar.module.css";
 import { Link } from "react-router-dom";
 
-import { useState, useContext } from "react";
-
 export default function Topbar() {
   return (
     <div
@@ -26,25 +24,6 @@ export default function Topbar() {
       <Link to="/surface" className={classes.btn + " mx-10"}>
         <i className="fal fa-location text-white"></i>
       </Link>
-      {/* <div className="flex flex-col h-32 w-20 justify-between self-start pt-4 hidden ">
-        <Link to="/home1" className={classes.btn}>
-          <i className="fal fa-signal-stream text-yellow-300"></i>
-        </Link>
-        <Link to="/home2" className={classes.btn}>
-          <i className="fal fa-user text-yellow-300"></i>
-        </Link>
-        <Link to="/home3" className={classes.btn}>
-          <i className="fal fa-cube text-yellow-300"></i>
-        </Link>
-        <Link to="/mars2" className={classes.btn}>
-          <i className="fal fa-cube text-yellow-300"></i>
-        </Link>
-      </div> */}
     </div>
-    /*     <nav className={"h-40 w-screen bg-red-500 " + classes.navbar}>
-      <div className="container-fluid">
-        <div className={classes.navLogo}></div>
-      </div>
-    </nav> */
   );
 }

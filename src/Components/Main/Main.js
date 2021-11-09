@@ -75,7 +75,7 @@ export default function Main() {
         text: "I don't think we've met. \nMy name is Simone Fiore, but everyone calls me Fiore.",
       },
       {
-        position: new THREE.Vector3(5.1, 0, 0),
+        position: new THREE.Vector3(0, 5.1, 0),
         icon: "<i class='fal fa-code'></i>",
 
         name: "Occupation",
@@ -258,6 +258,7 @@ export default function Main() {
       canvas.removeChild(labelRenderer.domElement);
 
       scene.remove(sphere);
+      scene.children = null;
       geometry.dispose();
       material.dispose();
     };

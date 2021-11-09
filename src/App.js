@@ -22,6 +22,8 @@ import Topbar from "./Components/Topbar/Topbar";
 import Model from "./Components/Model/Model";
 import In from "./Components/Mars/In";
 
+import Main from "./Components/Main/Main";
+
 export default function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
@@ -31,7 +33,8 @@ export default function App() {
         <Route exact path="/">
           {/* <Model /> */}
           {/* <Mars2 /> */}
-          <In />
+          {/* <In /> */}
+          <Main />
         </Route>
         <Route exact path="/home1">
           <Home />
@@ -54,6 +57,9 @@ export default function App() {
         <Route exact path="/model">
           {/* <Home3 /> */}
           <Model />
+        </Route>
+        <Route exact path="/main">
+          <Main />
         </Route>
       </Switch>
     </Router>

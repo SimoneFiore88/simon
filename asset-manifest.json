@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/simon/static/css/main.d97e564b.chunk.css",
-    "main.js": "/simon/static/js/main.7d661ec5.chunk.js",
-    "main.js.map": "/simon/static/js/main.7d661ec5.chunk.js.map",
+    "main.js": "/simon/static/js/main.5bb2b22c.chunk.js",
+    "main.js.map": "/simon/static/js/main.5bb2b22c.chunk.js.map",
     "runtime-main.js": "/simon/static/js/runtime-main.d124a0cb.js",
     "runtime-main.js.map": "/simon/static/js/runtime-main.d124a0cb.js.map",
     "static/js/2.19d3b365.chunk.js": "/simon/static/js/2.19d3b365.chunk.js",
@@ -35,6 +35,7 @@
     "static/media/outpost.6d1eea0b.glb": "/simon/static/media/outpost.6d1eea0b.glb",
     "static/media/right.96ce15c9.png": "/simon/static/media/right.96ce15c9.png",
     "static/media/Intro2.module.css": "/simon/static/media/scope.e812fbeb.png",
+    "static/media/sound2.ecf423ae.wav": "/simon/static/media/sound2.ecf423ae.wav",
     "static/media/start-quiz.301180ae.png": "/simon/static/media/start-quiz.301180ae.png",
     "static/media/t.beacc54e.png": "/simon/static/media/t.beacc54e.png",
     "static/media/top.e23bc447.png": "/simon/static/media/top.e23bc447.png"
@@ -43,6 +44,6 @@
     "static/js/runtime-main.d124a0cb.js",
     "static/js/2.19d3b365.chunk.js",
     "static/css/main.d97e564b.chunk.css",
-    "static/js/main.7d661ec5.chunk.js"
+    "static/js/main.5bb2b22c.chunk.js"
   ]
 }

@@ -21,6 +21,8 @@ import bkg1_left from "./left.png";
 import bkg1_right from "./right.png";
 import bkg1_bot from "./bottom.png";
 
+import sound from "./sound2.wav";
+
 export default function Main() {
   const mount = useRef(null);
 
@@ -75,7 +77,7 @@ export default function Main() {
         text: "I don't think we've met. \nMy name is Simone Fiore, but everyone calls me Fiore.",
       },
       {
-        position: new THREE.Vector3(0, 5.1, 0),
+        position: new THREE.Vector3(0, 5.1, 2),
         icon: "<i class='fal fa-code'></i>",
 
         name: "Occupation",
@@ -126,6 +128,7 @@ export default function Main() {
       cubeLabel.push([cube, label]);
 
       icon.addEventListener("pointerdown", () => {
+        new Audio(sound).play();
         gsap.to(camera.position, {
           duration: 1.2,
           delay: 0,
@@ -223,8 +226,9 @@ export default function Main() {
       controls.update();
 
       const elapsedTime = clock.getElapsedTime();
-      light1.position.x = 130 * Math.cos(elapsedTime * 0.5);
-      light1.position.z = 130 * Math.sin(elapsedTime * 0.5);
+      light1.position.x = 130 * Math.cos(elapsedTime * 0.2);
+      light1.position.z = 130 * Math.sin(elapsedTime * 0.2);
+
       cubeLabel.forEach((el) => {
         if (isOccluded(el[0])) {
           el[1].visible = false;

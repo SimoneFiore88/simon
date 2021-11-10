@@ -260,7 +260,6 @@ export default function Main() {
       stop();
       window.removeEventListener("resize", handleResize);
       renderer.dispose();
-
       canvas.removeChild(renderer.domElement);
       canvas.removeChild(labelRenderer.domElement);
       scene.remove(sphere);

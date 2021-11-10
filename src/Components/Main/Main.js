@@ -259,9 +259,10 @@ export default function Main() {
     return () => {
       stop();
       window.removeEventListener("resize", handleResize);
+      renderer.dispose();
+
       canvas.removeChild(renderer.domElement);
       canvas.removeChild(labelRenderer.domElement);
-
       scene.remove(sphere);
       scene.children = null;
       geometry.dispose();

@@ -23,7 +23,7 @@ import Model from "./Components/Model/Model";
 /* import In from "./Components/Mars/In"; */
 
 import Main from "./Components/Main/Main";
-import Main2 from "./Components/Surf/Surf";
+import Surf from "./Components/Surf/Surf";
 
 export default function App() {
   return (
@@ -42,7 +42,7 @@ export default function App() {
         </Route>
         <Route exact path="/surface">
           {/* <Scene2 /> */}
-          <Main2 />
+          <Surf />
         </Route>
         <Route exact path="/home2">
           <Home2 />

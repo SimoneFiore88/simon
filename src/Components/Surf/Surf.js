@@ -38,8 +38,6 @@ export default function Surf() {
 
     const scene = new THREE.Scene();
 
-    const raycaster = new THREE.Raycaster();
-
     const loadingManager = new THREE.LoadingManager(
       // Loaded
       () => {
@@ -162,8 +160,8 @@ export default function Surf() {
     return () => {
       stop();
       window.removeEventListener("resize", handleResize);
+      renderer.dispose();
       canvas.removeChild(renderer.domElement);
-
       scene.remove(plane);
       scene.children = null;
       planeGeometry.dispose();
@@ -173,17 +171,6 @@ export default function Surf() {
 
   return (
     <>
-      {/* {visible && (
-        <Intro2
-          loaded={loaded}
-          setLoaded={setLoaded}
-          visible={visible}
-          setVisible={setVisible}
-          progress={progress}
-        />
-      )} */}
-      {info >= 0 && <Info id={info} setInfo={setInfo} />}
-
       <div className="" ref={mount} />
     </>
   );

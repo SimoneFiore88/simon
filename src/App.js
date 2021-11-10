@@ -24,6 +24,7 @@ import Model from "./Components/Model/Model";
 
 import Main from "./Components/Main/Main";
 import Surf from "./Components/Surf/Surf";
+import Plane from "./Components/Plane/Plane";
 
 export default function App() {
   return (
@@ -36,6 +37,9 @@ export default function App() {
           {/* <Mars2 /> */}
           {/* <In /> */}
           <Main />
+        </Route>
+        <Route exact path="/plane">
+          <Plane />
         </Route>
         <Route exact path="/home1">
           <Home />

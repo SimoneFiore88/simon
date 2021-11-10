@@ -38,23 +38,8 @@ export default function Surf() {
 
     const scene = new THREE.Scene();
 
-    const loadingManager = new THREE.LoadingManager(
-      // Loaded
-      () => {
-        // Wait a little
-        window.setTimeout(() => setLoaded(true), 2000);
-      },
-
-      // Progress
-      (itemUrl, itemsLoaded, itemsTotal) => {
-        // Calculate the progress and update the loadingBarElement
-        const progressRatio = itemsLoaded / itemsTotal;
-        setProgress(Math.round(progressRatio * 100));
-      },
-    );
-
     {
-      const loader = new THREE.CubeTextureLoader(loadingManager);
+      const loader = new THREE.CubeTextureLoader();
       const texture = loader.load([
         bkg1_front,
         bkg1_back,
@@ -81,26 +66,25 @@ export default function Surf() {
     controls.dampingFactor = 0.05;
     controls.enablePan = false;
     //controls.enableZoom = false;
-    controls.minDistance = 10;
-    controls.maxDistance = 25;
 
-    const textureLoader = new THREE.TextureLoader(loadingManager);
-    const groundDisplacement = textureLoader.load(displacement);
-    const alphaMat = textureLoader.load(alpha);
+    const light = new THREE.AmbientLight(0xffffff, 1); // soft white light
+    scene.add(light);
+
+    const textureLoader = new THREE.TextureLoader();
     const colorMat = textureLoader.load(color);
+    const groundDisplacement = textureLoader.load(displacement);
 
-    const planeGeometry = new THREE.PlaneBufferGeometry(120, 120, 60, 60);
+    const planeGeometry = new THREE.PlaneBufferGeometry(60, 60, 60, 60);
     const planeMaterial = new THREE.MeshStandardMaterial({
       map: colorMat,
       displacementMap: groundDisplacement,
-      displacementScale: 15,
+      displacementScale: 5,
       transparent: true,
-      alphaMap: alphaMat,
-      depthWrite: false,
+      alphaMap: groundDisplacement,
       //color: "#559cc5",
       color: "#F19D00",
       color: "#dddddd",
-      wireframe: true,
+      //wireframe: true,
     });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
@@ -109,13 +93,6 @@ export default function Surf() {
     plane.rotation.x = -Math.PI * 0.5;
     plane.position.y = 0;
     scene.add(plane);
-
-    const light1 = new THREE.PointLight(0xffffff, 1);
-    light1.position.set(0, 40, 0);
-    scene.add(light1);
-
-    const light = new THREE.AmbientLight(0xffffff, 0.1); // soft white light
-    scene.add(light);
 
     const renderScene = () => {
       renderer.render(scene, camera);
@@ -130,14 +107,8 @@ export default function Surf() {
       renderScene();
     };
 
-    const clock = new THREE.Clock();
-
     const tick = () => {
       controls.update();
-
-      const elapsedTime = clock.getElapsedTime();
-      light1.position.x = 130 * Math.cos(elapsedTime * 0.2);
-      light1.position.z = 130 * Math.sin(elapsedTime * 0.2);
 
       renderScene();
       frameId = window.requestAnimationFrame(tick);
@@ -150,7 +121,7 @@ export default function Surf() {
     };
 
     const stop = () => {
-      cancelAnimationFrame(frameId);
+      window.cancelAnimationFrame(frameId);
       frameId = null;
     };
 
@@ -163,7 +134,7 @@ export default function Surf() {
       renderer.dispose();
       canvas.removeChild(renderer.domElement);
       scene.remove(plane);
-      scene.children = null;
+
       planeGeometry.dispose();
       planeMaterial.dispose();
     };

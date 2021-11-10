@@ -134,7 +134,7 @@ export default function Model() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputEncoding = THREE.sRGBEncoding;
 
-    mountRef.current.appendChild(renderer.domElement);
+    canvas.appendChild(renderer.domElement);
 
     const axesHelper = new THREE.AxesHelper(55);
     //scene.add(axesHelper);

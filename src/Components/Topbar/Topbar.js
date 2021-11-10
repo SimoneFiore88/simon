@@ -24,6 +24,9 @@ export default function Topbar() {
       <Link to="/surface" className={classes.btn + " mx-10"}>
         <i className="fal fa-location text-white"></i>
       </Link>
+      <Link to="/plane" className={classes.btn + " mx-10"}>
+        <i className="fal fa-cube text-white"></i>
+      </Link>
     </div>
   );
 }

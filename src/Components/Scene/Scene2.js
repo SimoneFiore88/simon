@@ -372,10 +372,10 @@ export default function Scene2() {
       window.removeEventListener("pointerdown", down);
       window.removeEventListener("mousemove", onPointerMove);
 
-      scene.remove(plane);
+      /*       scene.remove(plane);
       planeGeometry.dispose();
       planeMaterial.dispose();
-      scene.children = null;
+      scene.children = null; */
     };
   }, []);
 

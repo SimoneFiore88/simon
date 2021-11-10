@@ -45,8 +45,8 @@ export default function App() {
           <Home />
         </Route>
         <Route exact path="/surface">
-          {/* <Scene2 /> */}
-          <Surf />
+          <Scene2 />
+          {/* <Surf /> */}
         </Route>
         <Route exact path="/home2">
           <Home2 />
